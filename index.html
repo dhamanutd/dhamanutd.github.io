@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhanial Rizky Wira Putra - Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/timeline.css">
+    
+    <!-- Animate On Scroll Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Dhanial Rizky Wira Putra</h1>
+        <p>Product-minded Software Developer with 7+ years of experience in full-stack development</p>
+        <!-- Dark mode toggle button with icons -->
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="theme-toggle">
+                <input type="checkbox" id="theme-toggle" />
+                <span class="slider round"></span>
+            </label>
+            <span class="theme-label">Dark Mode</span>
+        </div>
+    </header>
+    
+    <section id="experience">
+        <h2 data-aos="fade-up">Experience Timeline</h2>
+        <p class="timeline-intro" data-aos="fade-up" data-aos-delay="100">
+            Scroll horizontally to explore my professional journey.
+            <span><i class="fas fa-long-arrow-alt-right"></i></span>
+        </p>
+        <div class="timeline">
+            <!-- Timeline items will be dynamically generated -->
+        </div>
+    </section>
+    
+    <section id="projects">
+        <h2 data-aos="fade-up">Personal Projects</h2>
+        <div class="project-list">
+            <!-- Project content will be dynamically generated -->
+        </div>
+    </section>
+    
+    <section id="hobbies">
+        <h2 data-aos="fade-up">Hobbies</h2>
+        <div id="hobbies-animation" data-aos="zoom-in"></div>
+    </section>
+    
+    <div id="particles-js"></div>
+    <div id="programming-animation"></div>
+
+    <script src="js/main.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/dark-mode.js"></script>
+    <script src="js/timeline.js"></script>
+</body>
+</html>

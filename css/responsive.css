@@ -1,0 +1,102 @@
+@media (max-width: 1200px) {
+    body {
+        font-size: 16px;
+    }
+
+    .section {
+        padding: 40px 20px;
+    }
+
+    .introduction {
+        text-align: center;
+    }
+
+    .experience-timeline {
+        flex-direction: column;
+    }
+
+    .project-list {
+        grid-template-columns: 1fr;
+    }
+
+    .hobbies {
+        text-align: center;
+    }
+    
+    .theme-switch-wrapper {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .introduction h1 {
+        font-size: 2.5em;
+    }
+
+    .experience-item {
+        margin-bottom: 20px;
+    }
+
+    .project-item, .project {
+        margin: 10px 0;
+        width: 100%;
+    }
+
+    .hobby-item {
+        margin: 10px 0;
+    }
+    
+    header {
+        padding: 15px 10px;
+    }
+    
+    .theme-switch {
+        height: 28px;
+        width: 50px;
+    }
+    
+    .slider:before {
+        height: 20px;
+        width: 20px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    input:checked + .slider:before {
+        transform: translateX(22px);
+    }
+}
+
+@media (max-width: 480px) {
+    .introduction p {
+        font-size: 1em;
+    }
+
+    .experience-item h3,
+    .project-item h3,
+    .hobby-item h3,
+    .project h3 {
+        font-size: 1.2em;
+    }
+    
+    h1 {
+        font-size: 2em;
+    }
+    
+    h2 {
+        font-size: 1.7em;
+    }
+    
+    .theme-label {
+        font-size: 12px;
+    }
+}
+
+/* Dark mode responsive adjustments */
+@media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) {
+        /* This will apply dark theme based on system preference if no theme is manually selected */
+        background-color: var(--primary-bg);
+        color: var(--text-color);
+    }
+}
