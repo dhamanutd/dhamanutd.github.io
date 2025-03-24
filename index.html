@@ -26,46 +26,165 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    
+    <!-- Added smooth scroll behavior -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Dhanial Rizky Wira Putra</h1>
-        <p>Product-minded Software Developer with 7+ years of experience in full-stack development</p>
-        <!-- Dark mode toggle button with icons -->
-        <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="theme-toggle">
-                <input type="checkbox" id="theme-toggle" />
-                <span class="slider round"></span>
-            </label>
-            <span class="theme-label">Dark Mode</span>
+    <!-- Fixed Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">DR</a>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#hobbies" class="nav-link">Hobbies</a>
+            </div>
+            
+            <!-- Theme toggle moved to navigation -->
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" />
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Page indicators -->
+    <div class="page-indicators">
+        <a href="#home" class="indicator active" data-section="home"></a>
+        <a href="#experience" class="indicator" data-section="experience"></a>
+        <a href="#projects" class="indicator" data-section="projects"></a>
+        <a href="#hobbies" class="indicator" data-section="hobbies"></a>
+    </div>
+    
+    <!-- Enhanced header as first full viewport section -->
+    <header id="home" class="section-full">
+        <!-- Moved particles.js here to scope it to home section only -->
+        <div id="particles-js" class="home-particles"></div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Dhanial Rizky Wira Putra</h1>
+                <p class="hero-subtitle">Product-minded Software Developer with 7+ years of experience in full-stack development</p>
+                
+                <div class="hero-cta">
+                    <a href="mailto:palest-amoebic-5d@icloud.com" class="cta-button outline">Contact Me</a>
+                </div>
+            </div>
+            <div id="programming-animation" class="hero-animation"></div>
+        </div>
+        <div class="scroll-indicator">
+            <a href="#experience">
+                <span>Scroll Down</span>
+                <i class="fas fa-chevron-down"></i>
+            </a>
         </div>
     </header>
     
-    <section id="experience">
-        <h2 data-aos="fade-up">Experience Timeline</h2>
-        <p class="timeline-intro" data-aos="fade-up" data-aos-delay="100">
-            Scroll horizontally to explore my professional journey.
-            <span><i class="fas fa-long-arrow-alt-right"></i></span>
-        </p>
-        <div class="timeline">
-            <!-- Timeline items will be dynamically generated -->
+    <section id="experience" class="section-full">
+        <div class="section-container">
+            <h2 class="section-title" data-aos="fade-up">Experience Timeline</h2>
+            <p class="timeline-intro" data-aos="fade-up" data-aos-delay="100">
+                Scroll horizontally to explore my professional journey.
+                <span><i class="fas fa-long-arrow-alt-right"></i></span>
+            </p>
+            <div class="timeline">
+                <!-- Timeline items will be dynamically generated -->
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <a href="#projects">
+                <span>Continue</span>
+                <i class="fas fa-chevron-down"></i>
+            </a>
         </div>
     </section>
     
-    <section id="projects">
-        <h2 data-aos="fade-up">Personal Projects</h2>
-        <div class="project-list">
-            <!-- Project content will be dynamically generated -->
+    <section id="projects" class="section-full">
+        <div class="section-container">
+            <h2 class="section-title" data-aos="fade-up">Personal Projects</h2>
+            <div class="project-list">
+                <!-- Project content will be dynamically generated -->
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <a href="#hobbies">
+                <span>Discover More</span>
+                <i class="fas fa-chevron-down"></i>
+            </a>
         </div>
     </section>
     
-    <section id="hobbies">
-        <h2 data-aos="fade-up">Hobbies</h2>
-        <div id="hobbies-animation" data-aos="zoom-in"></div>
+    <section id="hobbies" class="section-full">
+        <div class="section-container">
+            <h2 class="section-title" data-aos="fade-up">Hobbies</h2>
+            <div class="hobbies-slideshow fullscreen">
+                <div class="slide-container">
+                    <div class="slide active" data-hobby="football" data-index="0">
+                        <div class="slide-content">
+                            <h3>Football</h3>
+                            <div class="hobby-canvas-container">
+                                <canvas class="hobby-canvas" id="football-canvas"></canvas>
+                            </div>
+                            <p>Passionate about playing and watching football. Always up for a match with friends or cheering for my favorite team.</p>
+                        </div>
+                    </div>
+                    <div class="slide" data-hobby="gaming" data-index="1">
+                        <div class="slide-content">
+                            <h3>Gaming</h3>
+                            <div class="hobby-canvas-container">
+                                <canvas class="hobby-canvas" id="gaming-canvas"></canvas>
+                            </div>
+                            <p>Enjoy immersing myself in video games, exploring virtual worlds, and connecting with friends through online gaming.</p>
+                        </div>
+                    </div>
+                    <div class="slide" data-hobby="jogging" data-index="2">
+                        <div class="slide-content">
+                            <h3>Jogging</h3>
+                            <div class="hobby-canvas-container">
+                                <canvas class="hobby-canvas" id="jogging-canvas"></canvas>
+                            </div>
+                            <p>Love starting my day with a refreshing jog, keeping fit while enjoying the outdoors and clearing my mind.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slideshow-nav">
+                    <button class="nav-btn prev-btn" aria-label="Previous hobby">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="slide-indicators">
+                        <span class="indicator active" data-slide="0">
+                            <i class="fas fa-futbol"></i>
+                            <span class="indicator-tooltip">Love Football</span>
+                        </span>
+                        <span class="indicator" data-slide="1">
+                            <i class="fas fa-gamepad"></i>
+                            <span class="indicator-tooltip">Like Playing Games</span>
+                        </span>
+                        <span class="indicator" data-slide="2">
+                            <i class="fas fa-running"></i>
+                            <span class="indicator-tooltip">Love Jogging</span>
+                        </span>
+                    </div>
+                    <button class="nav-btn next-btn" aria-label="Next hobby">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </section>
     
-    <div id="particles-js"></div>
-    <div id="programming-animation"></div>
 
     <script src="js/main.js"></script>
     <script src="js/particles.js"></script>
@@ -73,5 +192,6 @@
     <script src="js/projects.js"></script>
     <script src="js/dark-mode.js"></script>
     <script src="js/timeline.js"></script>
+    <script src="js/hobbies.js"></script>
 </body>
 </html>

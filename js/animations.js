@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
         item.style.setProperty('--i', index);
     });
     
-    // Parallax effect for timeline items
+    // Modified parallax effect for timeline items to prevent conflicts with 3D canvases
     window.addEventListener('scroll', function() {
         timelineItems.forEach(item => {
             const speed = 0.2;
@@ -39,8 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (isInView) {
                 const yPos = -(window.scrollY * speed);
-                const parallaxTransform = `translateY(${yPos}px)`;
-                item.style.transform = parallaxTransform;
+                // Only apply transform if it doesn't already have a transform from another source
+                if (!item.style.transform.includes('rotate') && !item.style.transform.includes('scale')) {
+                    item.style.transform = `translateY(${yPos}px)`;
+                }
                 
                 // Add visible class for fade in effect
                 item.classList.add('visible');

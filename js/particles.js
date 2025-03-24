@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     !localStorage.getItem('theme'));
   
   // Set particle color based on theme
-  const particleColor = isDarkMode ? "#888888" : "#333333";
+  const particleColor = isDarkMode ? "#FFF" : "#ccc";
 
   particlesJS('particles-js', {
     particles: {

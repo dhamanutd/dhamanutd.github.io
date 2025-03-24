@@ -1,23 +1,90 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('section');
-    const options = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+    // Navigation and section highlighting
+    const sections = document.querySelectorAll('section, header');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const pageIndicators = document.querySelectorAll('.page-indicators .indicator');
+    const navBar = document.querySelector('.main-nav');
+    
+    // Function to update active navigation based on scroll position
+    const updateActiveNav = () => {
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+        
+        // Update navigation links
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Update page indicators
+        pageIndicators.forEach(indicator => {
+            indicator.classList.remove('active');
+            if (indicator.getAttribute('data-section') === currentSection) {
+                indicator.classList.add('active');
+            }
+        });
+        
+        // Add scrolled class to navbar when scrolled
+        if (window.scrollY > 100) {
+            navBar.classList.add('scrolled');
+        } else {
+            navBar.classList.remove('scrolled');
+        }
     };
-
+    
+    // Listen for scroll events
+    window.addEventListener('scroll', updateActiveNav);
+    
+    // Initial call to set active nav on page load
+    updateActiveNav();
+    
+    // Enhance section visibility for AOS
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-            } else {
-                entry.target.classList.remove('visible');
+                
+                // Refresh AOS when section becomes visible
+                if (typeof AOS !== 'undefined') {
+                    AOS.refresh();
+                }
             }
         });
-    }, options);
+    }, { threshold: 0.2 });
 
     sections.forEach(section => {
         observer.observe(section);
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // Scroll to the target element
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+                
+                // Update URL without scrolling (for browser history)
+                history.pushState(null, null, targetId);
+            }
+        });
     });
 
     // Create embedded animation data from the JSON files to avoid CORS issues

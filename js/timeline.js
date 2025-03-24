@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Timeline data from CV - reorganized in chronological order
     const timelineData = [
         {
-            id: 1,
             date: "2013 - 2017",
             company: "Universitas Amikom",
             position: "Bachelor's Degree in System Information",
@@ -15,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#4285F4"
         },
         {
-            id: 2,
             date: "2018 - 2024",
             company: "Refactory",
             position: "Senior Principal",
@@ -30,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#4285F4"
         },
         {
-            id: 3,
             date: "2018 - 2019",
             company: "Atenda",
             position: "Software Engineer",
@@ -43,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#FBBC05"
         },
         {
-            id: 4,
             date: "2018 - 2019",
             company: "Yabaik",
             position: "Software Engineer",
@@ -56,48 +52,42 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#EA4335"
         },
         {
-            id: 5,
             date: "2019 - 2020",
             company: "Keller Williams",
             position: "Software Engineer",
             location: "Austin, Texas",
-            description: "Maintained and enhanced reporting and notification systems for a major real estate company.",
-            skills: ["Next.js", "NestJS", "PHP Lumens", "Redis", "Google PubSub", "BigQuery", "MongoDB"],
+            description: "Developing goals and reports for agent performance, developing task automation integration for agent leads and contacts",
+            skills: ["Next.js", "PHP Lumens", "Redis", "Google PubSub", "Zapier"],
             highlights: [
-                "Maintained and migrated Agent's Reporting System and Legacy Notification Service"
+                "Developing Zapier integration for Keller Williams Agents and building goals and reporting system",
             ],
             timelineColor: "#34A853"
         },
         {
-            id: 6,
             date: "2019 - 2020",
             company: "Berlian Sistem Informasi",
             position: "Software Engineer",
             location: "Jakarta, Indonesia",
             description: "Developed mobile applications and management systems for automotive industry.",
-            skills: ["Flutter", "Vue.js", "C#", "K2 Workflow"],
+            skills: ["Flutter", "Vue.js", "C#"],
             highlights: [
-                "Developed Mitsubishi Sales Agent App using Flutter & Vue.js",
-                "Created Approval Management System and Car Pool Management using C# & K2 Workflow"
+                "Developed Mitsubishi Sales Agent App using C#, Flutter & Vue.js",
             ],
             timelineColor: "#FBBC05"
         },
         {
-            id: 7,
             date: "2020 - 2021",
             company: "Telkomsel",
             position: "Software Engineer",
             location: "Jakarta, Indonesia",
-            description: "Built chat systems and data package management solutions for Indonesia's largest telecommunications provider.",
-            skills: ["Kotlin", "Node.js", "React.js", "RabbitMQ", "Redis", "Amazon SQS/SNS"],
+            description: "Built chat systems for one of Telkomsel business products",
+            skills: ["Kotlin"],
             highlights: [
                 "Developed Dunia Games Chat System (like Discord) using Kotlin",
-                "Built Enterprise Data Package Management with Node.js, React.js, RabbitMQ, Redis, Amazon SQS/SNS"
             ],
             timelineColor: "#EA4335"
         },
         {
-            id: 8,
             date: "2020 - 2021",
             company: "Lionparcel",
             position: "Software Engineer",
@@ -111,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#4285F4"
         },
         {
-            id: 9,
             date: "2020 - 2021",
             company: "Lauretta",
             position: "Software Engineer",
@@ -125,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#34A853"
         },
         {
-            id: 10,
             date: "2021 - 2022",
             company: "E-Sidig",
             position: "Lead Principal",
@@ -138,21 +126,18 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#4285F4"
         },
         {
-            id: 11,
             date: "2021 - 2022",
             company: "MNC",
             position: "Software Engineer",
             location: "Jakarta, Indonesia",
-            description: "Led development of travel services and technology stack migration.",
-            skills: ["Node.js", "React.js", "Golang", "Next.js", "MySQL", "PostgreSQL", "PHP Magento"],
+            description: "Led development of travel services.",
+            skills: ["Node.js", "Vue.js", "MySQL", "AWS Amplify", "AWS Lambda"],
             highlights: [
-                "Led MisterAladin Explore & B2B service development (Node.js, React.js)",
-                "Migrated ETL & technology stack from MySQL (EAV) to PostgreSQL, PHP Magento to Golang & Next.js"
+                "Led MisterAladin Explore & B2B service development of new features on existing system",
             ],
             timelineColor: "#FBBC05"
         },
         {
-            id: 12,
             date: "2021 - 2023",
             company: "Keller Williams",
             position: "Software Engineer",
@@ -161,12 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
             skills: ["Next.js", "NestJS", "PHP Lumens", "Redis", "Google PubSub", "BigQuery", "MongoDB"],
             highlights: [
                 "Further improved Agent's Reporting System and Legacy Notification Service",
-                "Implemented new features and system optimizations"
+                "Implemented new features and system optimizations",
+                "Data aggregating and reporting for Keller Williams Agents",
             ],
             timelineColor: "#34A853"
         },
         {
-            id: 13,
             date: "2022 - 2023",
             company: "IDN Media",
             position: "Software Engineer",
@@ -179,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#EA4335"
         },
         {
-            id: 14,
             date: "2022 - 2023",
             company: "Biofarma",
             position: "Software Engineer",
@@ -193,35 +177,34 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#34A853"
         },
         {
-            id: 15,
             date: "2022 - 2023",
             company: "Telkomsel",
             position: "Software Engineer",
             location: "Jakarta, Indonesia",
             description: "Rejoined to expand and enhance telecommunications systems.",
-            skills: ["Kotlin", "Node.js", "React.js", "RabbitMQ", "Redis", "Amazon SQS/SNS"],
+            skills: ["Node.js", "React.js", "RabbitMQ", "Redis", "Amazon SQS/SNS"],
             highlights: [
-                "Enhanced Dunia Games Chat System with new features",
-                "Implemented system improvements for Enterprise Data Package Management"
+                "Develop enterprise data package management solutions for Indonesia's largest telecommunications provider.",
+                "Implemented system improvements for Enterprise Data Package Management",
+                "Applying High Availability architecture"
             ],
             timelineColor: "#EA4335"
         },
         {
-            id: 16,
             date: "2023",
             company: "MNC",
             position: "Software Engineer",
             location: "Jakarta, Indonesia",
-            description: "Rejoined to support additional travel service features and refinements.",
-            skills: ["Node.js", "React.js", "Golang", "Next.js"],
+            description: "Rejoined to support big migration of the e-commerce system.",
+            skills: ["React.js", "Golang", "Next.js", "PostgreSQL", "MySQL", "Magento"],
             highlights: [
+                "Migrated ETL & technology stack from MySQL (EAV) to PostgreSQL, PHP Magento to Golang & Next.js",
                 "Enhanced MisterAladin platform with new functionalities",
                 "Optimized performance of previously migrated systems"
             ],
             timelineColor: "#FBBC05"
         },
         {
-            id: 17,
             date: "2023",
             company: "MulaiKelola",
             position: "Software Engineer",
@@ -234,7 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#34A853"
         },
         {
-            id: 18,
             date: "2023 - 2024",
             company: "Gaya Motor",
             position: "Software Engineer",
@@ -247,21 +229,19 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#4285F4"
         },
         {
-            id: 19,
             date: "2023 - 2024",
             company: "Berlian Sistem Informasi",
             position: "Software Engineer",
             location: "Jakarta, Indonesia",
-            description: "Rejoined to enhance automotive industry applications and develop new systems.",
-            skills: ["Flutter", "Vue.js", "C#", "K2 Workflow"],
+            description: "Rejoined to develop on the old systems.",
+            skills: ["C#", "K2 Workflow", "React.js"],
             highlights: [
-                "Enhanced Mitsubishi Sales Agent App with new features",
-                "Further developed management systems with additional functionalities"
+                "Created Approval Management System using C# & K2 Workflow",
+                "Developed Car Pool Management System using React.js"
             ],
             timelineColor: "#FBBC05"
         },
         {
-            id: 20,
             date: "2023 - 2024",
             company: "Lauretta",
             position: "Software Engineer",
@@ -275,7 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#34A853"
         },
         {
-            id: 21,
             date: "2024",
             company: "WTF",
             position: "Software Engineer",
@@ -288,7 +267,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#FBBC05"
         },
         {
-            id: 22,
             date: "2024",
             company: "Paper Indonesia",
             position: "Software Engineer",
@@ -301,7 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#EA4335"
         },
         {
-            id: 23,
             date: "2024",
             company: "Cellcast",
             position: "Software Engineer",
@@ -314,7 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#3898ec"
         },
         {
-            id: 24,
             date: "2024",
             company: "Berlian Sistem Informasi",
             position: "Software Engineer",
@@ -327,7 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#FBBC05"
         },
         {
-            id: 25,
             date: "2025 - Present",
             company: "Peek & Cloppenburg",
             position: "Software Engineer",
@@ -391,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             timelineItem.innerHTML = `
                 <div class="timeline-date">${item.date}</div>
-                <div class="timeline-content" id="timeline-content-${item.id}">
+                <div class="timeline-content" id="timeline-content-${index+1}">
                     <div class="timeline-info">
                         <h3>${item.position}</h3>
                         <h4>${item.company}</h4>
@@ -405,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <ul class="timeline-highlights">
                             ${item.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
                         </ul>
-                        <button class="timeline-expand-btn" aria-label="Expand details" data-content-id="timeline-content-${item.id}">
+                        <button class="timeline-expand-btn" aria-label="Expand details" data-content-id="timeline-content-${index+1}">
                             <i class="fas fa-chevron-down"></i>
                         </button>
                     </div>
