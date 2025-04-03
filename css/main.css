@@ -1794,6 +1794,7 @@ header.section-full {
     width: 80px; /* Increased size */
     height: 200px; /* Increased size */
     transition: transform 0.5s ease;
+    z-index: 3; /* Add z-index to make rocket appear above the land */
 }
 
 .rocket-body {
@@ -1887,6 +1888,7 @@ header.section-full {
     width: 100%;
     height: 50px;
     pointer-events: none;
+    z-index: 3; /* Make particles appear above the land */
 }
 
 /* Launch Button */
@@ -2098,7 +2100,7 @@ header.section-full {
 
 /* Sky variations for light/dark mode */
 [data-theme="light"] .rocket-launch-container {
-    background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+    background: linear-gradient(to bottom, #64b5f6 0%, #bbdefb 50%, #e3f2fd 100%); /* Enhanced vibrant daytime blue sky */
 }
 
 [data-theme="dark"] .rocket-launch-container {
@@ -2110,23 +2112,24 @@ header.section-full {
     position: absolute;
     width: 100%;
     height: 100%;
+    display: block;
+    z-index: 1;
     background-image: 
         radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
         radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
         radial-gradient(2px 2px at 50px 160px, #ffffff, rgba(0,0,0,0)),
         radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)),
         radial-gradient(2px 2px at 130px 80px, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 160px 120px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 160px 120px, #ffffff, rgba(0,0,0,0)),
         radial-gradient(1.5px 1.5px at 200px 20px, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 300px 180px, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(1.5px 1.5px at 400px 40px, #ffffff, rgba(0,0,0,0));
+        radial-gradient(1.5px 1.5px at 300px 180px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 400px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 250px 220px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 350px 280px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 450px 150px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 500px 100px, #ffffff, rgba(0,0,0,0));
     background-size: 500px 500px;
     animation: twinkle 5s ease-in-out infinite;
-}
-
-@keyframes twinkle {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; }
 }
 
 /* Enhanced land styling */
@@ -2188,6 +2191,7 @@ header.section-full {
     pointer-events: none;
     will-change: transform, opacity;
     box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.1);
+    z-index: 4; /* Make sure smoke is above everything */
 }
 
 /* Update Launch Button */

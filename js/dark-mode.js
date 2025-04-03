@@ -66,3 +66,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
     updateRocketLaunchTheme(isDarkMode);
 });
+
+// Trigger the theme update immediately after page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if we're already past DOMContentLoaded
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        updateRocketLaunchTheme(document.documentElement.getAttribute('data-theme') === 'dark');
+    }
+});
