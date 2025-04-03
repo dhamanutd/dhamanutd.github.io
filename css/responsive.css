@@ -26,6 +26,15 @@
     .theme-switch-wrapper {
         margin-top: 15px;
     }
+    
+    /* Cape Canaveral scene adjustments */
+    .palm-tree-1 {
+        left: 5%;
+    }
+    
+    .palm-tree-2 {
+        right: 5%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -65,6 +74,31 @@
     input:checked + .slider:before {
         transform: translateX(22px);
     }
+    
+    /* Project section responsive adjustments */
+    .coming-soon-title {
+        font-size: 1.8rem;
+        top: 7%;
+        z-index: 10;
+    }
+    
+    .coming-soon-description {
+        font-size: 1rem;
+        top: 13%;
+        z-index: 10;
+    }
+    
+    /* Make sure projects section respects viewport height on mobile */
+    .projects-coming-soon {
+        height: 100vh;
+        min-height: 500px;
+    }
+    
+    /* Ensure the rocket launch container fills the screen */
+    .rocket-launch-container {
+        height: 100%;
+        min-height: 100vh;
+    }
 }
 
 @media (max-width: 480px) {
@@ -90,6 +124,17 @@
     .theme-label {
         font-size: 12px;
     }
+    
+    /* Cape Canaveral scene text color for better visibility */
+    [data-theme="light"] .coming-soon-title {
+        color: var(--accent-color);
+        text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+    }
+    
+    [data-theme="light"] .coming-soon-description {
+        color: #333;
+        text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+    }
 }
 
 /* Dark mode responsive adjustments */
@@ -98,5 +143,54 @@
         /* This will apply dark theme based on system preference if no theme is manually selected */
         background-color: var(--primary-bg);
         color: var(--text-color);
+    }
+    
+    /* Ensure starry sky fills the entire background on all devices */
+    .starry-sky {
+        background-size: 300px 300px;
+    }
+}
+
+/* Portrait vs Landscape specific adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+    .projects-coming-soon {
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .coming-soon-title {
+        top: 10%;
+    }
+    
+    .coming-soon-description {
+        top: 25%;
+    }
+    
+    /* Fix for smaller landscape screens */
+    #launch-button {
+        bottom: 10%;
+        transform: translateX(0);
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+}
+
+/* Handle tall, narrow mobile devices */
+@media (min-height: 800px) and (max-width: 480px) {
+    .launch-area {
+        height: 10%;
+    }
+    
+    [data-theme="light"] .rocket {
+        bottom: 10%;
+    }
+    
+    [data-theme="light"] .launch-platform,
+    [data-theme="light"] .support {
+        bottom: 10%;
+    }
+    
+    #launch-button {
+        bottom: 18%;
     }
 }

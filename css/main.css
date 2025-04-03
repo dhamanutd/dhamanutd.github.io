@@ -2755,3 +2755,272 @@ header.section-full {
         transparent 100%);
     mix-blend-mode: normal;
 }
+
+/* Cape Canaveral beach scene responsive styles */
+@media (max-width: 768px) {
+    .morning-sun {
+        width: 80px;
+        height: 80px;
+        top: 20px;
+        left: 10%;
+        box-shadow: 0 0 60px 30px rgba(255, 230, 150, 0.7);
+    }
+    
+    .cloud-1 {
+        width: 100px;
+        height: 30px;
+    }
+    
+    .cloud-3 {
+        width: 120px;
+        height: 35px;
+    }
+    
+    .ocean {
+        height: 20%;
+    }
+    
+    .beach {
+        height: 12%;
+        border-top-left-radius: 10% 60px;
+        border-top-right-radius: 8% 50px;
+    }
+    
+    .launch-area {
+        left: 20%;
+        width: 60%;
+        height: 15%;
+        border-top-left-radius: 30% 70px;
+        border-top-right-radius: 20% 50px;
+    }
+    
+    .palm-tree-1 {
+        left: 5%;
+        transform: scale(0.6);
+    }
+    
+    .palm-tree-2 {
+        right: 5%;
+        transform: scale(0.6);
+    }
+    
+    .wave {
+        height: 20px;
+    }
+    
+    .wave-1 {
+        bottom: 20%;
+    }
+    
+    .wave-2 {
+        bottom: 19%;
+    }
+    
+    .wave-3 {
+        bottom: 18%;
+    }
+    
+    /* Position the rocket on mobile */
+    [data-theme="light"] .rocket {
+        bottom: 15%;
+    }
+    
+    [data-theme="light"] .launch-platform {
+        bottom: 15%;
+    }
+    
+    [data-theme="light"] .support {
+        bottom: 15%;
+    }
+}
+
+@media (max-width: 480px) {
+    .morning-sun {
+        width: 60px;
+        height: 60px;
+        top: 15px;
+        left: 8%;
+        box-shadow: 0 0 40px 20px rgba(255, 230, 150, 0.6);
+    }
+    
+    .ocean {
+        height: 18%;
+    }
+    
+    .beach {
+        height: 10%;
+    }
+    
+    .launch-area {
+        left: 15%;
+        width: 70%;
+        height: 12%;
+    }
+    
+    .palm-tree-1 {
+        display: none; /* Hide one palm tree on very small screens */
+    }
+    
+    .palm-tree-2 {
+        right: 5%;
+        transform: scale(0.5);
+    }
+    
+    /* Adjust clouds on small screens */
+    .cloud-2, .cloud-4 {
+        display: none; /* Hide some clouds to reduce visual clutter */
+    }
+    
+    /* Adjust launch button position for better thumb reach on mobile */
+    #launch-button {
+        font-size: 1rem;
+        padding: 12px 25px;
+        bottom: 20%;
+    }
+    
+    /* Position the rocket on small mobile */
+    [data-theme="light"] .rocket {
+        bottom: 12%;
+        transform: translateX(-50%) scale(0.9);
+    }
+    
+    [data-theme="light"] .launch-platform {
+        bottom: 12%;
+        width: 90px;
+    }
+    
+    [data-theme="light"] .support {
+        bottom: 12%;
+    }
+    
+    /* Make countdown text smaller on mobile */
+    .countdown {
+        font-size: 1.5rem;
+    }
+    
+    .launch-message {
+        font-size: 1.2rem;
+    }
+}
+
+/* Improve responsive layout for landscape mode */
+@media (max-height: 500px) and (orientation: landscape) {
+    .morning-sun {
+        top: 10px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .ocean {
+        height: 30%;
+    }
+    
+    .beach {
+        height: 20%;
+    }
+    
+    .launch-area {
+        height: 25%;
+    }
+    
+    .palm-tree-1, .palm-tree-2 {
+        transform: scale(0.5);
+    }
+    
+    /* Position the rocket for landscape */
+    [data-theme="light"] .rocket {
+        bottom: 25%;
+        transform: translateX(-50%) scale(0.8);
+    }
+    
+    [data-theme="light"] .launch-platform {
+        bottom: 25%;
+    }
+    
+    [data-theme="light"] .support {
+        bottom: 25%;
+    }
+    
+    /* Better position for launch button in landscape */
+    #launch-button {
+        bottom: 8%;
+    }
+    
+    /* Smoke particles need to be visible above the ground */
+    .particle-container {
+        bottom: 80px;
+    }
+}
+
+/* Ensure flame effect remains visible on all screen sizes */
+@media (max-width: 768px) {
+    .exhaust-flame.active {
+        height: 50px;
+    }
+    
+    @keyframes flameFlicker {
+        0% { height: 30px; }
+        50% { height: 50px; }
+        100% { height: 40px; }
+    }
+}
+
+/* Improve the rocket launch animation for all screen sizes */
+@media (max-width: 768px) {
+    @keyframes rocketLaunch {
+        0% {
+            bottom: 15%;
+            transform: translateX(-50%) scale(1);
+        }
+        20% {
+            bottom: 25%;
+            transform: translateX(-50%) scale(0.9);
+        }
+        100% {
+            bottom: 120%;
+            transform: translateX(-50%) scale(0.1) rotate(5deg);
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    @keyframes rocketLaunch {
+        0% {
+            bottom: 12%;
+            transform: translateX(-50%) scale(0.9);
+        }
+        20% {
+            bottom: 25%;
+            transform: translateX(-50%) scale(0.8);
+        }
+        100% {
+            bottom: 120%;
+            transform: translateX(-50%) scale(0.08) rotate(5deg);
+        }
+    }
+}
+
+/* Fix for theme switch visibility on small screens */
+@media (max-width: 480px) {
+    .theme-switch-wrapper {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .theme-switch {
+        width: 50px;
+        height: 28px;
+    }
+    
+    .slider:before {
+        width: 20px;
+        height: 20px;
+        bottom: 4px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    
+    input:checked + .slider:before {
+        transform: translateX(22px);
+    }
+}
