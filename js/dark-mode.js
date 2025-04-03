@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', newTheme);
         if (themeLabel) themeLabel.textContent = this.checked ? 'Light Mode' : 'Dark Mode';
         updateParticlesColor(this.checked);
+        updateRocketLaunchTheme(this.checked);
     });
     
     function updateParticlesColor(isDarkMode) {
@@ -48,4 +49,20 @@ document.addEventListener('DOMContentLoaded', () => {
             window.pJSDom[0].pJS.fn.particlesRefresh();
         }
     }
+
+    // Add function to update rocket launch theme
+    function updateRocketLaunchTheme(isDarkMode) {
+        const starrySkies = document.querySelectorAll('.starry-sky');
+        starrySkies.forEach(sky => {
+            if (isDarkMode) {
+                sky.style.display = 'block';
+            } else {
+                sky.style.display = 'none';
+            }
+        });
+    }
+    
+    // Initialize rocket launch theme based on current mode
+    const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+    updateRocketLaunchTheme(isDarkMode);
 });

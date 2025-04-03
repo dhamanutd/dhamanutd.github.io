@@ -1642,3 +1642,589 @@ header.section-full {
         font-size: 0.7rem;
     }
 }
+
+/* Projects Coming Soon Styles */
+.projects-coming-soon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.coming-soon-title {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    z-index: 2;
+}
+
+.coming-soon-description {
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    z-index: 2;
+}
+
+/* Rocket Launch Container */
+.rocket-launch-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Sky variations */
+@media (prefers-color-scheme: light) {
+    .rocket-launch-container {
+        background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .rocket-launch-container {
+        background: linear-gradient(to bottom, #0B1026 0%, #1B2559 100%);
+    }
+    
+    .starry-sky {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                         radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+                         radial-gradient(2px 2px at 50px 160px, #ffffff, rgba(0,0,0,0)),
+                         radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+                         radial-gradient(2px 2px at 130px 80px, #ffffff, rgba(0,0,0,0));
+        background-size: 200px 200px;
+        animation: twinkle 5s ease-in-out infinite;
+    }
+}
+
+/* Enhanced smoke particle */
+.smoke-particle {
+    position: absolute;
+    background: radial-gradient(circle at center, 
+        rgba(255,255,255,0.8) 0%,
+        rgba(200,200,200,0.3) 70%,
+        transparent 100%);
+    mix-blend-mode: screen;
+    will-change: transform;
+}
+
+/* Launch site enhancements */
+.launch-platform {
+    background: linear-gradient(90deg, #444 0%, #666 50%, #444 100%);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.support {
+    background: linear-gradient(to bottom, #888, #666);
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Animations */
+@keyframes twinkle {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+/* Launch Pad */
+.launch-pad {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 30px;
+}
+
+.launch-platform {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10px;
+    background-color: #555;
+    border-radius: 2px;
+}
+
+.launch-supports {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.support {
+    position: absolute;
+    bottom: 10px;
+    width: 10px;
+    height: 50px;
+    background-color: #777;
+}
+
+.support.left {
+    left: 30px;
+    transform: rotate(-15deg);
+}
+
+.support.right {
+    right: 30px;
+    transform: rotate(15deg);
+}
+
+/* Rocket */
+.rocket {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px; /* Increased size */
+    height: 200px; /* Increased size */
+    transition: transform 0.5s ease;
+}
+
+.rocket-body {
+    position: absolute;
+    bottom: 30px;
+    width: 60px;
+    height: 100px;
+    background: linear-gradient(90deg, #d13434 0%, #e74c3c 50%, #d13434 100%);
+    border-radius: 50% 50% 30% 30%;
+}
+
+.rocket-nose {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 60px;
+    background-color: #e74c3c;
+    border-radius: 50% 50% 0 0;
+}
+
+.rocket-window {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background-color: #3498db;
+    border: 3px solid #2c3e50;
+    border-radius: 50%;
+    z-index: 3;
+}
+
+.rocket-fins {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    bottom: -100px;
+}
+
+.fin {
+    position: absolute;
+    bottom: 0;
+    width: 20px;
+    height: 30px;
+    background-color: #c0392b;
+}
+
+.fin.left {
+    left: -15px;
+    transform: skewY(30deg);
+}
+
+.fin.right {
+    right: -15px;
+    transform: skewY(-30deg);
+}
+
+.rocket-exhaust {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 20px;
+    background-color: #7f8c8d;
+    border-radius: 0 0 50% 50%;
+    overflow: hidden;
+}
+
+.exhaust-flame {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 0;
+    background: linear-gradient(to top, #f39c12, #e74c3c, transparent);
+    border-radius: 50% 50% 20% 20%;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* Particle container */
+.particle-container {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    pointer-events: none;
+}
+
+/* Launch Button */
+#launch-button {
+    position: absolute;
+    bottom: 10%;
+    left: 10%; /* Changed from 50% to 10% to move it to the left side */
+    transform: translateX(0); /* Remove the -50% translation */
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+#launch-button:hover {
+    transform: scale(1.05); /* Updated to only scale without translation */
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .coming-soon-title {
+        font-size: 2rem;
+        top: 8%;
+    }
+    
+    .coming-soon-description {
+        font-size: 1rem;
+        top: 15%;
+        width: 90%;
+        text-align: center;
+    }
+    
+    .rocket {
+        width: 60px;
+        height: 160px;
+    }
+    
+    #launch-button {
+        bottom: 15%;
+        left: 50%; /* Center it on mobile */
+        transform: translateX(-50%); /* Center it on mobile */
+    }
+}
+
+/* Launch Status */
+.launch-status {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+}
+
+.countdown {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.launch-message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2ecc71;
+    margin-top: 1rem;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Rocket launch animation classes */
+.rocket.launching {
+    animation: rocketLaunch 4s ease-in forwards;
+}
+
+.exhaust-flame.active {
+    height: 60px;
+    top: 0;
+    opacity: 1;
+    animation: flameFlicker 0.1s infinite;
+}
+
+@keyframes rocketLaunch {
+    0% {
+        bottom: 15%;
+        transform: translateX(-50%) scale(1);
+    }
+    20% {
+        bottom: 25%;
+        transform: translateX(-50%) scale(1);
+    }
+    100% {
+        bottom: 120%; /* Launch beyond viewport */
+        transform: translateX(-50%) scale(0.1) rotate(5deg);
+    }
+}
+
+@keyframes flameFlicker {
+    0% { height: 40px; }
+    50% { height: 60px; }
+    100% { height: 50px; }
+}
+
+/* Smoke particle styles */
+.smoke-particle {
+    position: absolute;
+    background-color: rgba(200, 200, 200, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .coming-soon-title {
+        font-size: 2rem;
+        top: 8%;
+    }
+    
+    .coming-soon-description {
+        font-size: 1rem;
+        top: 15%;
+        width: 90%;
+        text-align: center;
+    }
+    
+    .rocket {
+        width: 60px;
+        height: 160px;
+    }
+    
+    #launch-button {
+        bottom: 15%;
+        left: 50%; /* Center it on mobile */
+        transform: translateX(-50%); /* Center it on mobile */
+    }
+}
+
+/* Sky and Space Environment */
+.skybox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #000033 0%, #000066 100%);
+    overflow: hidden;
+}
+
+.space-station {
+    position: absolute;
+    top: 15%;
+    right: 20%;
+    width: 120px;
+    height: 40px;
+    z-index: 2;
+}
+
+.station-body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #cccccc;
+    border-radius: 10px;
+}
+
+.solar-panels {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.panel {
+    position: absolute;
+    width: 80px;
+    height: 20px;
+    background: #4a90e2;
+    border: 2px solid #2c3e50;
+}
+
+.panel.left {
+    left: -85px;
+    top: 10px;
+}
+
+.panel.right {
+    right: -85px;
+    top: 10px;
+}
+
+.land {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, #4a4a4a 0%, #2d2d2d 100%);
+    z-index: 1;
+}
+
+/* Enhanced smoke particle styles */
+.smoke-particle {
+    background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    position: absolute;
+    pointer-events: none;
+}
+
+/* Sky variations for light/dark mode */
+[data-theme="light"] .rocket-launch-container {
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+}
+
+[data-theme="dark"] .rocket-launch-container {
+    background: linear-gradient(to bottom, #0B1026 0%, #1B2559 100%);
+}
+
+/* Enhanced starry sky for dark mode */
+[data-theme="dark"] .starry-sky {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 50px 160px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 130px 80px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 160px 120px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 200px 20px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 300px 180px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 400px 40px, #ffffff, rgba(0,0,0,0));
+    background-size: 500px 500px;
+    animation: twinkle 5s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+/* Enhanced land styling */
+.land {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 15%;
+    background: linear-gradient(to bottom, #4a4a4a 0%, #2d2d2d 100%);
+    border-top: 2px solid #555;
+    z-index: 1;
+}
+
+/* Enhanced launch platform */
+.launch-platform {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 10px;
+    background: linear-gradient(90deg, #444 0%, #666 50%, #444 100%);
+    border-radius: 3px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+/* Enhanced supports */
+.support {
+    position: absolute;
+    bottom: 0;
+    width: 12px;
+    height: 15%;
+    background: linear-gradient(to bottom, #888, #666);
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+.support.left {
+    left: 42%;
+    transform: rotate(-15deg);
+}
+
+.support.right {
+    right: 42%;
+    transform: rotate(15deg);
+}
+
+/* Enhanced smoke particle for more realistic effect */
+.smoke-particle {
+    position: absolute;
+    background: radial-gradient(circle at center, 
+        rgba(255,255,255,0.95) 0%,
+        rgba(200,200,200,0.5) 40%,
+        rgba(150,150,150,0.3) 70%,
+        transparent 100%);
+    mix-blend-mode: screen;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform, opacity;
+    box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Update Launch Button */
+#launch-button {
+    position: absolute;
+    bottom: 10%;
+    left: 10%; 
+    transform: translateX(0);
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 10;
+    background: linear-gradient(145deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+#launch-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+}
+
+/* Make rocket scene responsive */
+@media (max-width: 768px) {
+    .land {
+        height: 10%;
+    }
+    
+    .launch-platform {
+        width: 90px;
+    }
+    
+    .support {
+        width: 8px;
+    }
+}

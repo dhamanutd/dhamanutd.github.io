@@ -214,17 +214,56 @@
     </section>
     
     <section id="projects" class="section-full">
-        <div class="section-container">
-            <h2 class="section-title" data-aos="fade-up">Personal Projects</h2>
-            <div class="project-list">
-                <!-- Project content will be dynamically generated -->
+        <div class="projects-coming-soon">
+            <h3 class="coming-soon-title">Projects Coming Soon</h3>
+            <p class="coming-soon-description">I'm working on something exciting! Stay tuned for my latest projects.</p>
+            
+            <div class="rocket-launch-container">
+                <div class="starry-sky"></div>
+                <div class="launch-scene">
+                    <div class="skybox">
+                        <div class="space-station">
+                            <div class="station-body"></div>
+                            <div class="solar-panels">
+                                <div class="panel left"></div>
+                                <div class="panel right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="land">
+                        <div class="launch-platform"></div>
+                        <div class="launch-supports">
+                            <div class="support left"></div>
+                            <div class="support right"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="rocket">
+                    <div class="rocket-body">
+                        <div class="rocket-window"></div>
+                    </div>
+                    <div class="rocket-fins">
+                        <div class="fin left"></div>
+                        <div class="fin right"></div>
+                    </div>
+                    <div class="rocket-nose"></div>
+                    <div class="rocket-exhaust">
+                        <div class="exhaust-flame"></div>
+                    </div>
+                </div>
+                
+                <div class="particle-container"></div>
+                
+                <button id="launch-button" class="cta-button primary">
+                    <i class="fas fa-rocket"></i> Launch Rocket
+                </button>
+                
+                <div class="launch-status">
+                    <div class="countdown hidden">T-<span id="countdown-timer">10</span></div>
+                    <div class="launch-message hidden"></div>
+                </div>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <a href="#hobbies">
-                <span>Discover More</span>
-                <i class="fas fa-chevron-down"></i>
-            </a>
         </div>
     </section>
     
@@ -261,7 +300,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="slideshow-nav">
                     <button class="nav-btn prev-btn" aria-label="Previous hobby">
                         <i class="fas fa-chevron-left"></i>
@@ -296,6 +334,8 @@
     <script src="js/dark-mode.js"></script>
     <script src="js/timeline.js"></script>
     <script src="js/hobbies.js"></script>
+    <!-- Add Rocket Launch Animation Script -->
+    <script src="js/rocket-launch.js"></script>
     <!-- Add Space Animation Script -->
     <script src="js/space-animation.js"></script>
 </body>
