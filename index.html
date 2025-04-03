@@ -114,27 +114,83 @@
         <a href="#hobbies" class="indicator" data-section="hobbies"></a>
     </div>
     
-    <!-- Enhanced header as first full viewport section -->
-    <header id="home" class="section-full">
-        <!-- Moved particles.js here to scope it to home section only -->
-        <div id="particles-js" class="home-particles"></div>
+    <!-- Enhanced Space-Themed Hero Section -->
+    <header id="home" class="section-full hero-section">
+        <!-- Space Animation Canvas -->
+        <canvas id="space-animation" class="space-canvas"></canvas>
         
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">Dhanial Rizky Wira Putra</h1>
-                <p class="hero-subtitle">Product-minded Software Developer with 7+ years of experience in full-stack development</p>
+        <!-- Hero Content with Enhanced Visual Hierarchy -->
+        <div class="hero-container">
+            <div class="hero-text-container">
+                <div class="hero-greeting">Hello, I'm</div>
+                <h1 class="hero-name">Dhanial Rizky</h1>
+                <div class="hero-title-wrapper">
+                    <span class="hero-title-prefix">I build </span>
+                    <span class="hero-title-dynamic" id="dynamic-text">web applications</span>
+                </div>
+                <p class="hero-description">
+                    Product-minded Full-Stack Developer with 7+ years of experience crafting elegant solutions to complex problems.
+                    Specializing in creating scalable applications with modern technologies.
+                </p>
                 
-                <div class="hero-cta">
+                <div class="hero-cta-group">
+                    <a href="#projects" class="cta-button primary">View My Work</a>
                     <a href="mailto:palest-amoebic-5d@icloud.com" class="cta-button outline">Contact Me</a>
                 </div>
+                
+                <div class="hero-tech-stack">
+                    <div class="tech-label">Tech Stack</div>
+                    <div class="tech-icons">
+                        <!-- Frontend -->
+                        <i class="fab fa-react" title="React"></i>
+                        <i class="fab fa-vuejs" title="Vue.js"></i>
+                        <i class="fab fa-js" title="JavaScript"></i>
+                        <i class="fab fa-html5" title="HTML5"></i>
+                        <i class="fab fa-css3-alt" title="CSS3"></i>
+                        
+                        <!-- Backend -->
+                        <i class="fab fa-node-js" title="Node.js"></i>
+                        <i class="fa-brands fa-golang" title="Golang"></i>
+                        <i class="fab fa-python" title="Python"></i>
+                        <i class="fab fa-microsoft" title=".NET C#"></i>
+                        <i class="fab fa-php" title="PHP"></i>
+                        
+                        <!-- Database -->
+                        <span class="tech-icon-text" title="PostgreSQL">
+                            <i class="fas fa-database"></i>
+                            <span>Pg</span>
+                        </span>
+                        <span class="tech-icon-text" title="MySQL">
+                            <i class="fas fa-database"></i>
+                            <span>My</span>
+                        </span>
+                        <span class="tech-icon-text" title="MongoDB">
+                            <i class="fas fa-database"></i>
+                            <span>Mo</span>
+                        </span>
+                        
+                        <!-- DevOps & Tools -->
+                        <i class="fab fa-aws" title="AWS"></i>
+                        <i class="fab fa-docker" title="Docker"></i>
+                        <i class="fab fa-git-alt" title="Git"></i>
+                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <a href="#experience" aria-label="Scroll to Experience section">
+                        <span>Explore My Journey</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                </div>
             </div>
-            <div id="programming-animation" class="hero-animation"></div>
-        </div>
-        <div class="scroll-indicator">
-            <a href="#experience">
-                <span>Scroll Down</span>
-                <i class="fas fa-chevron-down"></i>
-            </a>
+            
+            <div class="hero-visual">
+                <div class="orbit-container">
+                    <div class="orbit-circle"></div>
+                    <div class="orbit-planet planet-1"></div>
+                    <div class="orbit-planet planet-2"></div>
+                    <div class="orbit-planet planet-3"></div>
+                </div>
+            </div>
         </div>
     </header>
     
@@ -240,5 +296,7 @@
     <script src="js/dark-mode.js"></script>
     <script src="js/timeline.js"></script>
     <script src="js/hobbies.js"></script>
+    <!-- Add Space Animation Script -->
+    <script src="js/space-animation.js"></script>
 </body>
 </html>
