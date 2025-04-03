@@ -14,10 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle.checked = true;
         if (themeLabel) themeLabel.textContent = 'Light Mode';
         updateParticlesColor(true);
+        updateRocketLaunchTheme(true);
+        updateHeroSectionTheme(true);
     } else if (userSetTheme === 'light' || (!systemPrefersDark && !userSetTheme)) {
         document.documentElement.setAttribute('data-theme', 'light');
         themeToggle.checked = false;
         updateParticlesColor(false);
+        updateRocketLaunchTheme(false);
+        updateHeroSectionTheme(false);
     }
     
     // Listen for system preference changes
@@ -28,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.setAttribute('data-theme', newIsDark ? 'dark' : 'light');
             themeToggle.checked = newIsDark;
             updateParticlesColor(newIsDark);
+            updateRocketLaunchTheme(newIsDark);
+            updateHeroSectionTheme(newIsDark);
         }
     });
     
@@ -39,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (themeLabel) themeLabel.textContent = this.checked ? 'Light Mode' : 'Dark Mode';
         updateParticlesColor(this.checked);
         updateRocketLaunchTheme(this.checked);
+        updateHeroSectionTheme(this.checked);
     });
     
     function updateParticlesColor(isDarkMode) {
@@ -53,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add function to update rocket launch theme
     function updateRocketLaunchTheme(isDarkMode) {
         const starrySkies = document.querySelectorAll('.starry-sky');
+        const capeCanaveralScene = document.querySelector('.cape-canaveral-scene');
+        
         starrySkies.forEach(sky => {
             if (isDarkMode) {
                 sky.style.display = 'block';
@@ -60,17 +69,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 sky.style.display = 'none';
             }
         });
+        
+        if (capeCanaveralScene) {
+            if (isDarkMode) {
+                capeCanaveralScene.style.display = 'none';
+            } else {
+                capeCanaveralScene.style.display = 'block';
+            }
+        }
+    }
+    
+    // Add function to update hero section theme
+    function updateHeroSectionTheme(isDarkMode) {
+        const spaceCanvas = document.getElementById('space-animation');
+        if (spaceCanvas) {
+            if (isDarkMode) {
+                spaceCanvas.style.display = 'block';
+            } else {
+                spaceCanvas.style.display = 'none';
+            }
+        }
     }
     
     // Initialize rocket launch theme based on current mode
     const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
     updateRocketLaunchTheme(isDarkMode);
+    updateHeroSectionTheme(isDarkMode);
 });
 
 // Trigger the theme update immediately after page load
 document.addEventListener('DOMContentLoaded', () => {
     // Check if we're already past DOMContentLoaded
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        updateRocketLaunchTheme(document.documentElement.getAttribute('data-theme') === 'dark');
+        const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+        updateRocketLaunchTheme(isDarkMode);
+        updateHeroSectionTheme(isDarkMode);
     }
 });

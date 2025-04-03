@@ -2132,69 +2132,277 @@ header.section-full {
     animation: twinkle 5s ease-in-out infinite;
 }
 
-/* Enhanced land styling */
-.land {
+/* Light mode elements for hero section */
+[data-theme="light"] .starry-sky {
+    display: none;
+}
+
+.daytime-elements {
     position: absolute;
-    bottom: 0;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 15%;
-    background: linear-gradient(to bottom, #4a4a4a 0%, #2d2d2d 100%);
-    border-top: 2px solid #555;
+    height: 100%;
+    overflow: hidden;
     z-index: 1;
+    display: none;
 }
 
-/* Enhanced launch platform */
-.launch-platform {
+[data-theme="light"] .daytime-elements {
+    display: block;
+}
+
+/* Sun element */
+.sun {
     position: absolute;
-    bottom: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 10px;
-    background: linear-gradient(90deg, #444 0%, #666 50%, #444 100%);
-    border-radius: 3px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    top: 60px;
+    right: 15%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle at center, #FFD700, #FF8C00);
+    border-radius: 50%;
+    box-shadow: 0 0 60px 30px rgba(255, 215, 0, 0.4);
     z-index: 2;
+    animation: glow 8s infinite alternate;
 }
 
-/* Enhanced supports */
-.support {
+/* Layered mountains */
+.mountains {
     position: absolute;
     bottom: 0;
-    width: 12px;
-    height: 15%;
-    background: linear-gradient(to bottom, #888, #666);
-    box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    line-height: 0;
+}
+
+.mountain-layer-1 {
+    height: 150px;
+    background: linear-gradient(to top, #3a6186 0%, #89b7e8 100%);
+    clip-path: polygon(0% 100%, 0% 60%, 5% 70%, 10% 55%, 15% 65%, 20% 50%, 25% 60%, 30% 40%, 35% 50%, 40% 30%, 45% 40%, 50% 25%, 55% 40%, 60% 30%, 65% 45%, 70% 35%, 75% 50%, 80% 40%, 85% 55%, 90% 40%, 95% 50%, 100% 30%, 100% 100%);
+}
+
+.mountain-layer-2 {
+    height: 120px;
+    background: linear-gradient(to top, #4b7f52 0%, #6a9279 100%);
+    clip-path: polygon(0% 100%, 0% 50%, 5% 60%, 10% 45%, 15% 55%, 20% 40%, 25% 50%, 30% 35%, 35% 45%, 40% 30%, 45% 40%, 50% 25%, 55% 35%, 60% 20%, 65% 30%, 70% 25%, 75% 35%, 80% 30%, 85% 45%, 90% 35%, 95% 45%, 100% 20%, 100% 100%);
+    margin-top: -40px;
+}
+
+.mountain-layer-3 {
+    height: 100px;
+    background: linear-gradient(to top, #2ecc71 0%, #55c57a 100%);
+    clip-path: polygon(0% 100%, 0% 40%, 5% 50%, 10% 35%, 15% 45%, 20% 30%, 25% 40%, 30% 25%, 35% 35%, 40% 20%, 45% 30%, 50% 15%, 55% 25%, 60% 10%, 65% 20%, 70% 15%, 75% 25%, 80% 20%, 85% 35%, 90% 25%, 95% 35%, 100% 10%, 100% 100%);
+    margin-top: -30px;
+    opacity: 0.9;
+}
+
+/* Add the land/field below mountains */
+.land-field {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to bottom, #7cb342, #558b2f);
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Rice terraces on the field */
+.rice-terraces {
+    position: absolute;
+    width: 100%;
+    height: 120px;
+    bottom: 0;
+    left: 0;
     z-index: 2;
 }
 
-.support.left {
-    left: 42%;
-    transform: rotate(-15deg);
-}
-
-.support.right {
-    right: 42%;
-    transform: rotate(15deg);
-}
-
-/* Enhanced smoke particle for more realistic effect */
-.smoke-particle {
+.terrace {
     position: absolute;
-    background: radial-gradient(circle at center, 
-        rgba(255,255,255,0.95) 0%,
-        rgba(200,200,200,0.5) 40%,
-        rgba(150,150,150,0.3) 70%,
-        transparent 100%);
-    mix-blend-mode: screen;
-    border-radius: 50%;
-    pointer-events: none;
-    will-change: transform, opacity;
-    box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.1);
-    z-index: 4; /* Make sure smoke is above everything */
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to right, #8bc34a, #9ccc65, #8bc34a);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    z-index: 2;
 }
 
-/* Update Launch Button */
+.terrace-1 {
+    bottom: 0;
+    height: 40px;
+}
+
+.terrace-2 {
+    bottom: 40px;
+    height: 30px;
+}
+
+.terrace-3 {
+    bottom: 70px;
+    height: 25px;
+}
+
+.terrace-4 {
+    bottom: 95px;
+    height: 25px;
+}
+
+/* Add subtle texture to the terraces */
+.terrace::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.1) 20px,
+        rgba(255, 255, 255, 0) 20px,
+        rgba(255, 255, 255, 0) 40px
+    );
+}
+
+/* Flying birds */
+.bird-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70%; /* Increased height to accommodate lower birds */
+    z-index: 3;
+    pointer-events: none;
+}
+
+.bird {
+    position: absolute;
+    background: transparent;
+    z-index: 3;
+}
+
+.bird-shape {
+    width: 15px;
+    height: 3px;
+    position: relative;
+}
+
+.bird-shape::before,
+.bird-shape::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 10px;
+    height: 4px;
+    background: #333; /* For dark birds - default */
+    transform-origin: 0% 50%;
+}
+
+/* Make birds darker against light sky for better visibility */
+[data-theme="light"] .bird-shape::before,
+[data-theme="light"] .bird-shape::after {
+    background: #222; /* Darker birds for light mode */
+}
+
+/* Bird animations */
+.bird-1 {
+    top: 35%; /* Adjusted lower */
+    left: 10%;
+    animation: fly-right-one 20s linear infinite;
+}
+
+.bird-2 {
+    top: 30%; /* Adjusted lower */
+    left: 20%;
+    animation: fly-right-two 17s linear infinite;
+    animation-delay: 4s;
+}
+
+.bird-3 {
+    top: 40%; /* Adjusted lower */
+    left: 30%;
+    animation: fly-right-one 15s linear infinite;
+    animation-delay: 7s;
+}
+
+.bird-4 {
+    top: 25%; /* Adjusted lower */
+    left: 5%;
+    animation: fly-right-two 22s linear infinite;
+    animation-delay: 2s;
+}
+
+.bird-5 {
+    top: 45%; /* Adjusted lower */
+    left: 15%;
+    animation: fly-right-one 18s linear infinite;
+    animation-delay: 8s;
+}
+
+.bird-group {
+    position: absolute;
+    animation: bird-group-fly 30s linear infinite;
+}
+
+/* Bird colony movement */
+@keyframes bird-group-fly {
+    0% {
+        left: -10%;
+        transform: translateY(0) scale(0.8);
+    }
+    50% {
+        transform: translateY(30px) scale(1);
+    }
+    100% {
+        left: 120%;
+        transform: translateY(0) scale(0.8);
+    }
+}
+
+@keyframes fly-right-one {
+    0% { transform: translateY(0) translateX(0) scale(0.3); }
+    10% { transform: translateY(5px) translateX(10px) scale(0.3); }
+    20% { transform: translateY(-5px) translateX(20px) scale(0.3); }
+    30% { transform: translateY(5px) translateX(30px) scale(0.3); }
+    40% { transform: translateY(-5px) translateX(40px) scale(0.3); }
+    50% { transform: translateY(5px) translateX(50px) scale(0.3); }
+    60% { transform: translateY(-5px) translateX(60px) scale(0.3); }
+    100% { transform: translateY(0) translateX(100px) scale(0.3); }
+}
+
+@keyframes fly-right-two {
+    0% { transform: translateY(0) translateX(0) scale(0.2); }
+    10% { transform: translateY(10px) translateX(10px) scale(0.2); }
+    20% { transform: translateY(0px) translateX(20px) scale(0.2); }
+    30% { transform: translateY(-10px) translateX(30px) scale(0.2); }
+    40% { transform: translateY(10px) translateX(40px) scale(0.2); }
+    50% { transform: translateY(0px) translateX(50px) scale(0.2); }
+    60% { transform: translateY(-10px) translateX(60px) scale(0.2); }
+    100% { transform: translateY(0) translateX(100px) scale(0.2); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 60px 30px rgba(255, 215, 0, 0.4); }
+    50% { box-shadow: 0 0 80px 40px rgba(255, 215, 0, 0.6); }
+    100% { box-shadow: 0 0 60px 30px rgba(255, 215, 0, 0.4); }
+}
+
+/* Theme-specific hero section styles */
+[data-theme="light"] .hero-section {
+    background: linear-gradient(135deg, #87CEEB 0%, #E0F6FF 100%);
+}
+
+[data-theme="dark"] .hero-section {
+    background: linear-gradient(135deg, var(--hero-gradient-1) 0%, var(--hero-gradient-2) 100%);
+}
+
+/* Particles display based on theme */
+[data-theme="light"] #space-animation {
+    display: none;
+}
+
+/* Launch Button */
 #launch-button {
     position: absolute;
     bottom: 10%;
@@ -2231,4 +2439,319 @@ header.section-full {
     .support {
         width: 8px;
     }
+}
+
+/* Text color adjustments for light mode */
+[data-theme="light"] .hero-greeting,
+[data-theme="light"] .hero-title-wrapper,
+[data-theme="light"] .hero-description {
+    color: #222; /* Darker text for light mode */
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5); /* Add subtle text shadow for better readability */
+}
+
+[data-theme="light"] .hero-name {
+    background: linear-gradient(90deg, #222 0%, var(--accent-color) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
+[data-theme="light"] .hero-title-dynamic {
+    color: var(--accent-color-hover); /* Darker accent for better contrast */
+}
+
+[data-theme="light"] .tech-label {
+    color: #333;
+}
+
+[data-theme="light"] .tech-icons i,
+[data-theme="light"] .tech-icon-text {
+    color: #222;
+}
+
+[data-theme="light"] .cta-button.outline {
+    color: #222;
+    border-color: #222;
+}
+
+[data-theme="light"] .scroll-indicator a {
+    color: #222;
+}
+
+/* Cape Canaveral beach scene for light mode rocket section */
+.cape-canaveral-scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+[data-theme="light"] .cape-canaveral-scene {
+    display: block;
+}
+
+.morning-sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 60%, #FDFCFB 100%);
+    z-index: 1;
+}
+
+.clouds {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50px;
+    opacity: 0.8;
+    filter: blur(3px);
+}
+
+.cloud-1 {
+    width: 150px;
+    height: 40px;
+    top: 15%;
+    left: 10%;
+    animation: float-right 120s linear infinite;
+}
+
+.cloud-2 {
+    width: 100px;
+    height: 30px;
+    top: 10%;
+    left: 30%;
+    animation: float-right 80s linear infinite;
+    animation-delay: 10s;
+}
+
+.cloud-3 {
+    width: 200px;
+    height: 50px;
+    top: 20%;
+    left: 60%;
+    animation: float-right 150s linear infinite;
+    animation-delay: 30s;
+}
+
+.cloud-4 {
+    width: 120px;
+    height: 35px;
+    top: 25%;
+    left: 80%;
+    animation: float-right 100s linear infinite;
+    animation-delay: 20s;
+}
+
+.morning-sun {
+    position: absolute;
+    top: 30px;
+    left: 15%;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at center, #FFF8DC, #FFD700);
+    border-radius: 50%;
+    box-shadow: 0 0 80px 40px rgba(255, 230, 150, 0.8);
+    z-index: 2;
+    animation: morning-glow 10s infinite alternate;
+}
+
+.ocean {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(to bottom, #1E90FF, #0078C8);
+    z-index: 1;
+}
+
+.beach {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    background: linear-gradient(to bottom, #F0E68C, #DEB887);
+    border-top-left-radius: 20% 100px;
+    border-top-right-radius: 10% 80px;
+    z-index: 2;
+}
+
+.launch-area {
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    width: 40%;
+    height: 18%;
+    background: linear-gradient(to bottom, #B8B8B8, #A9A9A9);
+    border-top-left-radius: 50% 100px;
+    border-top-right-radius: 30% 80px;
+    z-index: 3;
+}
+
+.palm-tree {
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.palm-trunk {
+    position: absolute;
+    width: 15px;
+    height: 100px;
+    background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+    transform: rotate(5deg);
+    bottom: 0;
+}
+
+.palm-leaves {
+    position: absolute;
+    width: 20px;
+    height: 80px;
+    background: #228B22;
+    border-radius: 50% 50% 0 0;
+    transform-origin: bottom center;
+}
+
+.palm-leaf-1 {
+    transform: rotate(-60deg) translateX(10px);
+    bottom: 80px;
+}
+
+.palm-leaf-2 {
+    transform: rotate(-30deg) translateX(5px);
+    bottom: 85px;
+}
+
+.palm-leaf-3 {
+    transform: rotate(0deg);
+    bottom: 90px;
+}
+
+.palm-leaf-4 {
+    transform: rotate(30deg) translateX(-5px);
+    bottom: 85px;
+}
+
+.palm-leaf-5 {
+    transform: rotate(60deg) translateX(-10px);
+    bottom: 80px;
+}
+
+.palm-tree-1 {
+    left: 10%;
+    bottom: 15%;
+    transform: scale(0.8);
+}
+
+.palm-tree-2 {
+    right: 15%;
+    bottom: 15%;
+}
+
+@keyframes morning-glow {
+    0% { box-shadow: 0 0 80px 40px rgba(255, 230, 150, 0.7); }
+    50% { box-shadow: 0 0 100px 50px rgba(255, 225, 140, 0.8); }
+    100% { box-shadow: 0 0 80px 40px rgba(255, 230, 150, 0.7); }
+}
+
+@keyframes float-right {
+    0% { transform: translateX(-150px); }
+    100% { transform: translateX(calc(100vw + 150px)); }
+}
+
+/* Wave effect on water */
+.wave {
+    position: absolute;
+    width: 200%;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    bottom: 25%;
+    left: -50%;
+    border-radius: 100%;
+    z-index: 3;
+}
+
+.wave-1 {
+    animation: wave-move 12s linear infinite;
+}
+
+.wave-2 {
+    bottom: 23%;
+    animation: wave-move 8s linear infinite;
+    animation-delay: 2s;
+    opacity: 0.6;
+}
+
+.wave-3 {
+    bottom: 21%;
+    animation: wave-move 10s linear infinite;
+    animation-delay: 4s;
+    opacity: 0.4;
+}
+
+@keyframes wave-move {
+    0% { transform: translateX(-25%) scale(1, 0.2); }
+    50% { transform: translateX(0) scale(1, 0.3); }
+    100% { transform: translateX(25%) scale(1, 0.2); }
+}
+
+/* Update light mode rocket scene */
+[data-theme="light"] .skybox {
+    display: none;
+}
+
+[data-theme="light"] .land {
+    display: none;
+}
+
+[data-theme="light"] .rocket-launch-container {
+    background: transparent;
+}
+
+/* Position the rocket properly on the launch area */
+[data-theme="light"] .rocket {
+    bottom: 18%;
+    z-index: 5;
+}
+
+[data-theme="light"] .launch-platform {
+    bottom: 18%;
+    background: #888888;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 4;
+}
+
+[data-theme="light"] .support {
+    bottom: 18%;
+    z-index: 4;
+}
+
+/* Enhance support contrast in light mode */
+[data-theme="light"] .support {
+    background: linear-gradient(to bottom, #666, #555);
+}
+
+/* Make smoke more visible in light mode */
+[data-theme="light"] .smoke-particle {
+    background: radial-gradient(circle at center, 
+        rgba(150,150,150,0.9) 0%,
+        rgba(150,150,150,0.5) 40%,
+        rgba(150,150,150,0.2) 70%,
+        transparent 100%);
+    mix-blend-mode: normal;
 }
