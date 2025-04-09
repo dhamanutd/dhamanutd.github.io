@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             timelineColor: "#FBBC05"
         },
         {
-            date: "2020 - 2021",
+            date: "2019 - 2020",
             company: "Telkomsel",
             position: "Software Engineer",
             location: "Jakarta, Indonesia",
