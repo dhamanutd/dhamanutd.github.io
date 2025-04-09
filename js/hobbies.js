@@ -1,700 +1,517 @@
 document.addEventListener('DOMContentLoaded', function() {
-    if (!window.THREE) {
-        console.warn('Three.js not loaded, skipping 3D hobby visualizations');
-        return;
+    // Core elements
+    const hobbyPanels = document.querySelectorAll('.hobby-panel');
+    const hobbyContents = document.querySelectorAll('.hobby-content');
+    const hobbyNavButtons = document.querySelectorAll('.hobby-nav-btn');
+    
+    // State variables
+    let currentIndex = 0;
+    const totalHobbies = hobbyPanels.length;
+    let isAnimating = false;
+    
+    // Position hobby nav buttons in the center between columns
+    function positionHobbyNav() {
+        const hobbyNav = document.querySelector('.hobby-nav');
+        if (!hobbyNav) return;
+        
+        const hobbiesInfo = document.querySelector('.hobbies-info');
+        const hobbiesVisual = document.querySelector('.hobbies-visual');
+        
+        if (!hobbiesInfo || !hobbiesVisual) return;
+        
+        // Position the nav element absolutely
+        hobbyNav.style.position = 'absolute';
+        hobbyNav.style.zIndex = '20';
+        
+        // Calculate the position - align exactly with column border
+        const infoRect = hobbiesInfo.getBoundingClientRect();
+        const visualRect = hobbiesVisual.getBoundingClientRect();
+        
+        // The exact border position is where the info column ends
+        const borderX = infoRect.right;
+        
+        // Set horizontal position (center on the border)
+        const navWidth = hobbyNav.offsetWidth;
+        hobbyNav.style.left = `${borderX - navWidth / 2}px`;
+        
+        // Set vertical position (middle of the section)
+        const hobbiesSection = document.querySelector('.hobbies-section');
+        const sectionRect = hobbiesSection.getBoundingClientRect();
+        const centerY = sectionRect.top + (sectionRect.height / 2);
+        const navHeight = hobbyNav.offsetHeight;
+        
+        hobbyNav.style.top = `${centerY - navHeight / 2}px`;
+        
+        // Adjust for mobile view
+        if (window.innerWidth < 992) {
+            // Switch to horizontal layout for mobile
+            hobbyNav.style.flexDirection = 'row';
+            hobbyNav.style.top = `${infoRect.bottom - navHeight - 30}px`;
+            hobbyNav.style.left = '50%';
+            hobbyNav.style.transform = 'translateX(-50%)';
+        } else {
+            // Switch back to vertical layout for desktop
+            hobbyNav.style.flexDirection = 'column';
+            hobbyNav.style.transform = 'none';
+        }
     }
-
-    // Theme-aware color management
-    const getThemeColors = () => {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        return {
-            background: isDark ? '#2c2c2c' : '#ffffff',
-            primary: isDark ? '#888888' : '#333333',
-            secondary: isDark ? '#64b5f6' : '#2196F3',
-            accent: isDark ? '#f1c40f' : '#f39c12'
-        };
-    };
-
-    // Slideshow functionality
-    const initSlideshow = () => {
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
-        const indicators = document.querySelectorAll('.indicator');
+    
+    function switchHobby(index) {
+        if (isAnimating || index === currentIndex) return;
         
-        if (!slides.length || !prevBtn || !nextBtn) return;
+        isAnimating = true;
         
-        let currentSlide = 0;
-        let isAnimating = false;
-        const animationDelay = 800; // Match with CSS transition duration
+        // Calculate new index with wrap-around
+        const newIndex = ((index % totalHobbies) + totalHobbies) % totalHobbies;
         
-        const goToSlide = (index) => {
-            if (isAnimating || index === currentSlide) return;
-            isAnimating = true;
-            
-            // Remove active class from current slide and indicator
-            slides[currentSlide].classList.remove('active');
-            indicators[currentSlide]?.classList.remove('active');
-            
-            // Update current slide index
-            currentSlide = index;
-            
-            // Handle wrapping
-            if (currentSlide >= slides.length) currentSlide = 0;
-            if (currentSlide < 0) currentSlide = slides.length - 1;
-            
-            // Add active class to new slide and indicator
-            slides[currentSlide].classList.add('active');
-            indicators[currentSlide]?.classList.add('active');
-            
-            // Reset animation flag after transition completes
-            setTimeout(() => {
-                isAnimating = false;
+        // Remove active classes from current elements
+        hobbyPanels[currentIndex].classList.remove('active');
+        hobbyContents[currentIndex].classList.remove('active');
+        hobbyNavButtons[currentIndex].classList.remove('active');
+        
+        // Add active classes to new elements
+        currentIndex = newIndex;
+        hobbyPanels[currentIndex].classList.add('active');
+        hobbyContents[currentIndex].classList.add('active');
+        hobbyNavButtons[currentIndex].classList.add('active');
+        
+        // Trigger animations for new panel
+        animateVisualContent(hobbyPanels[currentIndex]);
+        animateTextContent(hobbyContents[currentIndex]);
+        
+        // Reset animation flag after transition completes
+        setTimeout(() => isAnimating = false, 800);
+    }
+    
+    function animateTextContent(element) {
+        // Animate heading
+        const heading = element.querySelector('h3');
+        gsap.fromTo(heading, 
+            { opacity: 0, y: 20 }, 
+            { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+        );
+        
+        // Animate paragraph with slight delay
+        const paragraph = element.querySelector('p');
+        gsap.fromTo(paragraph, 
+            { opacity: 0, y: 20 }, 
+            { opacity: 1, y: 0, duration: 0.6, delay: 0.2, ease: 'power2.out' }
+        );
+    }
+    
+    function animateVisualContent(panel) {
+        const hobbyType = panel.id.replace('-hobby', '');
+        const container = panel.querySelector('.hobby-animation-container');
+        
+        // Clear previous animation
+        container.innerHTML = '';
+        
+        // Create appropriate animation
+        switch(hobbyType) {
+            case 'football': createFootballAnimation(container); break;
+            case 'gaming': createGamingAnimation(container); break;
+            case 'jogging': createJoggingAnimation(container); break;
+        }
+        
+        // Add entrance animation for container
+        gsap.fromTo(container, 
+            { scale: 0.8, opacity: 0 }, 
+            { scale: 1, opacity: 1, duration: 0.8, ease: 'elastic.out(1, 0.5)' }
+        );
+    }
+    
+    function createFootballAnimation(container) {
+        container.innerHTML = `
+            <div class="football-animation">
+                <div class="grass-surface"></div>
+                <svg viewBox="0 0 100 100" class="football">
+                    <!-- Classic soccer ball pattern with hexagons and pentagons -->
+                    <circle cx="50" cy="50" r="40" fill="#fff" stroke="#333" stroke-width="1" />
+                    <!-- Pentagon at the top -->
+                    <polygon points="50,10 65,20 60,40 40,40 35,20" fill="#333" />
+                    <!-- Hexagons and pentagons around the ball -->
+                    <polygon points="30,15 45,15 50,30 40,45 25,40 20,25" fill="#333" />
+                    <polygon points="70,15 85,25 80,40 65,45 55,30 60,15" fill="#333" />
+                    <polygon points="15,35 25,25 40,30 45,50 30,65 15,55" fill="#333" />
+                    <polygon points="85,35 90,50 80,65 60,65 50,50 65,35" fill="#333" />
+                    <polygon points="35,70 50,75 65,70 70,85 50,90 30,85" fill="#333" />
+                </svg>
+                <div class="ball-shadow"></div>
+            </div>
+        `;
+        
+        // Add CSS for grass surface
+        const style = document.createElement('style');
+        style.textContent = `
+            .football-animation {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
+            .grass-surface {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 30px;
+                background: linear-gradient(to bottom, #4caf50, #2e7d32);
+                border-top-left-radius: 50%;
+                border-top-right-radius: 50%;
+            }
+            .football {
+                width: 80px;
+                height: 80px;
+                position: relative;
+                z-index: 2;
+            }
+            .ball-shadow {
+                position: absolute;
+                bottom: 25px;
+                width: 60px;
+                height: 10px;
+                background: rgba(0,0,0,0.3);
+                border-radius: 50%;
+                filter: blur(3px);
+            }
+        `;
+        container.appendChild(style);
+        
+        // Create rolling animation
+        const timeline = gsap.timeline({
+            repeat: -1,
+            defaults: { ease: "none" }
+        });
+        
+        // Ball starts from left
+        gsap.set(container.querySelector('.football'), {
+            x: -100,
+            y: -20
+        });
+        
+        gsap.set(container.querySelector('.ball-shadow'), {
+            x: -100,
+            scale: 0.8,
+            opacity: 0.7
+        });
+        
+        // Roll the ball across the grass
+        timeline.to(container.querySelector('.football'), {
+            x: 150,
+            rotation: 360 * 3, // 3 full rotations
+            duration: 4,
+            ease: "power1.inOut"
+        });
+        
+        // Move the shadow along with the ball
+        timeline.to(container.querySelector('.ball-shadow'), {
+            x: 150,
+            duration: 4,
+            ease: "power1.inOut"
+        }, "<"); // Start at the same time as the ball animation
+        
+        // Add a slight bounce effect
+        timeline.to(container.querySelector('.football'), {
+            y: -30,
+            duration: 0.5,
+            repeat: 7,
+            yoyo: true,
+            ease: "power1.inOut"
+        }, "<");
+        
+        // Sync shadow size with bounce height
+        timeline.to(container.querySelector('.ball-shadow'), {
+            scale: 0.6,
+            opacity: 0.5,
+            duration: 0.5,
+            repeat: 7,
+            yoyo: true,
+            ease: "power1.inOut"
+        }, "<");
+    }
+    
+    function createGamingAnimation(container) {
+        container.innerHTML = `
+            <div class="gaming-animation">
+                <svg viewBox="0 0 100 60" class="controller">
+                    <rect x="20" y="10" rx="15" ry="15" width="60" height="40" class="controller-body" />
+                    <circle cx="35" cy="30" r="8" class="controller-button left-pad" />
+                    <circle cx="65" cy="30" r="8" class="controller-button right-pad" />
+                    <rect x="45" y="20" rx="2" ry="2" width="10" height="5" class="controller-button center-button" />
+                    <rect x="38" y="40" rx="5" ry="5" width="24" height="3" class="controller-detail" />
+                    <path d="M10 25 C5 30, 5 35, 10 40 L20 40 L20 25 Z" class="controller-grip" />
+                    <path d="M90 25 C95 30, 95 35, 90 40 L80 40 L80 25 Z" class="controller-grip" />
+                </svg>
+                <div class="controller-shadow"></div>
+            </div>
+        `;
+        
+        // Button animations with GSAP timeline
+        const timeline = gsap.timeline({repeat: -1, repeatDelay: 1});
+        
+        // Left button
+        timeline.to(container.querySelector('.left-pad'), {
+            scale: 0.85,
+            fill: '#f1c40f',
+            duration: 0.2
+        });
+        
+        timeline.to(container.querySelector('.left-pad'), {
+            scale: 1,
+            fill: '#555',
+            duration: 0.2
+        });
+        
+        // Right button
+        timeline.to(container.querySelector('.right-pad'), {
+            scale: 0.85,
+            fill: '#f1c40f',
+            duration: 0.2
+        }, "+=0.3");
+        
+        timeline.to(container.querySelector('.right-pad'), {
+            scale: 1,
+            fill: '#555',
+            duration: 0.2
+        });
+        
+        // Center button
+        timeline.to(container.querySelector('.center-button'), {
+            scale: 0.85,
+            fill: '#f1c40f',
+            duration: 0.2
+        }, "+=0.3");
+        
+        timeline.to(container.querySelector('.center-button'), {
+            scale: 1,
+            fill: '#555',
+            duration: 0.2
+        });
+        
+        // Make controller float
+        gsap.to(container.querySelector('.controller'), {
+            y: -10,
+            rotation: 5,
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+    }
+    
+    function createJoggingAnimation(container) {
+        container.innerHTML = `
+            <div class="jogging-animation">
+                <div class="runner">
+                    <div class="runner-head"></div>
+                    <div class="runner-body"></div>
+                    <div class="runner-arm runner-arm-left"></div>
+                    <div class="runner-arm runner-arm-right"></div>
+                    <div class="runner-leg runner-leg-left"></div>
+                    <div class="runner-leg runner-leg-right"></div>
+                </div>
+                <div class="track">
+                    <div class="track-line"></div>
+                    <div class="tree tree-1"></div>
+                    <div class="tree tree-2"></div>
+                    <div class="tree tree-3"></div>
+                </div>
+            </div>
+        `;
+        
+        // Animate runner
+        gsap.to(container.querySelector('.runner'), {
+            y: -5,
+            duration: 0.4,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut"
+        });
+        
+        // Animate runner arms and legs
+        gsap.to(container.querySelector('.runner-arm-left'), {
+            rotation: 30,
+            transformOrigin: "top",
+            duration: 0.4,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut"
+        });
+        
+        gsap.to(container.querySelector('.runner-arm-right'), {
+            rotation: -30,
+            transformOrigin: "top",
+            duration: 0.4,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+            delay: 0.2
+        });
+        
+        gsap.to(container.querySelector('.runner-leg-left'), {
+            rotation: 30,
+            transformOrigin: "top",
+            duration: 0.4,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut"
+        });
+        
+        gsap.to(container.querySelector('.runner-leg-right'), {
+            rotation: -30,
+            transformOrigin: "top",
+            duration: 0.4,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+            delay: 0.2
+        });
+        
+        // Animate trees moving
+        gsap.to([
+            container.querySelector('.tree-1'),
+            container.querySelector('.tree-2'),
+            container.querySelector('.tree-3')
+        ], {
+            x: -300,
+            duration: 4,
+            repeat: -1,
+            ease: "none",
+            stagger: 1.3
+        });
+    }
+    
+    function initParallaxEffect() {
+        document.querySelectorAll('.hobby-bg').forEach(bg => {
+            bg.addEventListener('mousemove', e => {
+                const rect = bg.getBoundingClientRect();
+                const xPercent = (e.clientX - rect.left) / rect.width;
+                const yPercent = (e.clientY - rect.top) / rect.height;
                 
-                // Make sure scenes are properly sized after slide change
-                refreshAllScenes();
-            }, animationDelay);
-        };
-        
-        // Set up event listeners
-        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
-        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
-        
-        // Set up indicator event listeners
-        indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', () => goToSlide(index));
+                gsap.to(bg, {
+                    backgroundPosition: `${50 + (xPercent - 0.5) * 10}% ${50 + (yPercent - 0.5) * 10}%`,
+                    duration: 1
+                });
+            });
+        });
+    }
+    
+    function setupEventListeners() {
+        // Hobby nav buttons - these will be the only way to switch slides now
+        hobbyNavButtons.forEach((button, index) => {
+            button.addEventListener('click', () => switchHobby(index));
         });
         
-        // Add keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
-            if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+        // Keyboard navigation
+        document.addEventListener('keydown', e => {
+            // Only when hobbies section is visible
+            const hobbiesSection = document.getElementById('hobbies');
+            const rect = hobbiesSection.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+            
+            if (!isVisible) return;
+            
+            if (e.key === 'ArrowLeft') switchHobby(currentIndex - 1);
+            if (e.key === 'ArrowRight') switchHobby(currentIndex + 1);
         });
         
-        // Add swipe navigation for mobile
+        // Touch swipe support
+        const hobbiesSection = document.querySelector('.hobbies-section');
         let touchStartX = 0;
-        let touchEndX = 0;
         
-        const slideContainer = document.querySelector('.slide-container');
-        
-        slideContainer.addEventListener('touchstart', (e) => {
+        hobbiesSection.addEventListener('touchstart', e => {
             touchStartX = e.changedTouches[0].screenX;
         }, { passive: true });
         
-        slideContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, { passive: true });
-        
-        const handleSwipe = () => {
+        hobbiesSection.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].screenX;
             const swipeThreshold = 50;
+            
             if (touchEndX < touchStartX - swipeThreshold) {
-                // Swipe left, go to next slide
-                goToSlide(currentSlide + 1);
+                switchHobby(currentIndex + 1); // Next
             } else if (touchEndX > touchStartX + swipeThreshold) {
-                // Swipe right, go to previous slide
-                goToSlide(currentSlide - 1);
+                switchHobby(currentIndex - 1); // Previous
             }
-        };
-        
-        return { goToSlide };
-    };
-
-    // Reusable scene setup
-    const createScene = (canvasId) => {
-        const canvas = document.getElementById(canvasId);
-        if (!canvas) return null;
-
-        const colors = getThemeColors();
-        
-        // Initialize renderer
-        const renderer = new THREE.WebGLRenderer({ 
-            canvas,
-            antialias: true,
-            alpha: true
-        });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-        
-        // Create scene
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(colors.background);
-        
-        // Create camera
-        const camera = new THREE.PerspectiveCamera(
-            50, 
-            canvas.clientWidth / canvas.clientHeight, 
-            0.1, 
-            1000
-        );
-        camera.position.z = 5;
-        
-        // Add orbit controls for interaction
-        const controls = new THREE.OrbitControls(camera, canvas);
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
-        controls.rotateSpeed = 0.7;
-        controls.enableZoom = false;
-        
-        // Add lights
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
-        
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        directionalLight.position.set(5, 5, 5);
-        scene.add(directionalLight);
-        
-        return { renderer, scene, camera, controls };
-    };
-
-    // Store all scenes for refreshing
-    const scenes = {};
-
-    // Create football visualization
-    const initFootballScene = () => {
-        const setup = createScene('football-canvas');
-        if (!setup) return;
-        
-        const { renderer, scene, camera, controls } = setup;
-        scenes.football = setup;
-        
-        const colors = getThemeColors();
-        
-        // Create a football (soccer ball)
-        const ballGeometry = new THREE.SphereGeometry(1, 32, 32);
-        
-        // Create basic material
-        const ballMaterial = new THREE.MeshStandardMaterial({
-            color: 0xffffff,
-            roughness: 0.2,
-            metalness: 0.1
-        });
-        
-        const ball = new THREE.Mesh(ballGeometry, ballMaterial);
-        scene.add(ball);
-        
-        // Add pentagon patterns to the ball
-        const pentagonGeometry = new THREE.CircleGeometry(0.3, 5);
-        const pentagonMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
-        
-        // Create and position 12 pentagons around the ball
-        for (let i = 0; i < 12; i++) {
-            const pentagon = new THREE.Mesh(pentagonGeometry, pentagonMaterial);
-            
-            // Position pentagons evenly around the sphere
-            const phi = Math.acos(-1 + (2 * i) / 12);
-            const theta = Math.sqrt(12 * Math.PI) * phi;
-            
-            pentagon.position.x = 1.01 * Math.cos(theta) * Math.sin(phi);
-            pentagon.position.y = 1.01 * Math.sin(theta) * Math.sin(phi);
-            pentagon.position.z = 1.01 * Math.cos(phi);
-            
-            // Orient pentagon to face outward
-            pentagon.lookAt(0, 0, 0);
-            pentagon.rotateZ(Math.random() * Math.PI);
-            
-            ball.add(pentagon);
-        }
-
-        // Add subtle auto-rotation
-        const animate = () => {
-            requestAnimationFrame(animate);
-            
-            ball.rotation.y += 0.005;
-            ball.rotation.x += 0.002;
-            
-            controls.update();
-            renderer.render(scene, camera);
-        };
-        
-        animate();
-        
-        // Handle resize
-        const resizeScene = () => {
-            if (renderer.domElement.clientWidth === 0) return;
-            
-            camera.aspect = renderer.domElement.clientWidth / renderer.domElement.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
-        };
-        
-        window.addEventListener('resize', resizeScene);
-        
-        // Store resize function
-        scenes.football.resize = resizeScene;
-        
-        // Handle theme changes
-        document.getElementById('theme-toggle').addEventListener('change', () => {
-            const newColors = getThemeColors();
-            scene.background = new THREE.Color(newColors.background);
-        });
-    };
-
-    // Create gaming visualization
-    const initGamingScene = () => {
-        const setup = createScene('gaming-canvas');
-        if (!setup) return;
-        
-        const { renderer, scene, camera, controls } = setup;
-        scenes.gaming = setup;
-        
-        const colors = getThemeColors();
-        
-        // Create a game controller
-        const controllerGroup = new THREE.Group();
-        scene.add(controllerGroup);
-        
-        // Controller body
-        const bodyGeometry = new THREE.BoxGeometry(3, 1.2, 0.5);
-        const bodyMaterial = new THREE.MeshPhongMaterial({ 
-            color: colors.primary,
-            shininess: 30
-        });
-        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
-        controllerGroup.add(body);
-        
-        // Controller grips (left and right)
-        const gripGeometry = new THREE.CylinderGeometry(0.4, 0.4, 1.2, 32);
-        const gripMaterial = new THREE.MeshPhongMaterial({
-            color: colors.primary,
-            shininess: 30
-        });
-        
-        const leftGrip = new THREE.Mesh(gripGeometry, gripMaterial);
-        leftGrip.rotation.x = Math.PI / 2;
-        leftGrip.position.set(-1.2, -0.4, 0);
-        controllerGroup.add(leftGrip);
-        
-        const rightGrip = new THREE.Mesh(gripGeometry, gripMaterial);
-        rightGrip.rotation.x = Math.PI / 2;
-        rightGrip.position.set(1.2, -0.4, 0);
-        controllerGroup.add(rightGrip);
-        
-        // D-pad
-        const dpadGroup = new THREE.Group();
-        dpadGroup.position.set(-0.8, 0.1, 0.3);
-        
-        const dpadMaterial = new THREE.MeshPhongMaterial({
-            color: colors.secondary, 
-            shininess: 50
-        });
-        
-        const dpadCenter = new THREE.Mesh(
-            new THREE.BoxGeometry(0.2, 0.2, 0.1),
-            dpadMaterial
-        );
-        dpadCenter.position.z = 0.05;
-        dpadGroup.add(dpadCenter);
-        
-        const dpadUp = new THREE.Mesh(
-            new THREE.BoxGeometry(0.2, 0.3, 0.1),
-            dpadMaterial
-        );
-        dpadUp.position.y = 0.25;
-        dpadUp.position.z = 0.05;
-        dpadGroup.add(dpadUp);
-        
-        const dpadDown = new THREE.Mesh(
-            new THREE.BoxGeometry(0.2, 0.3, 0.1),
-            dpadMaterial
-        );
-        dpadDown.position.y = -0.25;
-        dpadDown.position.z = 0.05;
-        dpadGroup.add(dpadDown);
-        
-        const dpadLeft = new THREE.Mesh(
-            new THREE.BoxGeometry(0.3, 0.2, 0.1),
-            dpadMaterial
-        );
-        dpadLeft.position.x = -0.25;
-        dpadLeft.position.z = 0.05;
-        dpadGroup.add(dpadLeft);
-        
-        const dpadRight = new THREE.Mesh(
-            new THREE.BoxGeometry(0.3, 0.2, 0.1),
-            dpadMaterial
-        );
-        dpadRight.position.x = 0.25;
-        dpadRight.position.z = 0.05;
-        dpadGroup.add(dpadRight);
-        
-        controllerGroup.add(dpadGroup);
-        
-        // Buttons
-        const buttonGeometry = new THREE.CircleGeometry(0.15, 32);
-        const buttonMaterial = new THREE.MeshPhongMaterial({ 
-            color: colors.accent,
-            shininess: 80
-        });
-        
-        const buttons = new THREE.Group();
-        buttons.position.set(0.8, 0.1, 0.3);
-        
-        const buttonPositions = [
-            { x: 0, y: 0.3 },  // Top
-            { x: 0.3, y: 0 },  // Right
-            { x: 0, y: -0.3 }, // Bottom
-            { x: -0.3, y: 0 }  // Left
-        ];
-        
-        buttonPositions.forEach(pos => {
-            const button = new THREE.Mesh(buttonGeometry, buttonMaterial);
-            button.position.set(pos.x, pos.y, 0.05);
-            button.rotation.x = -Math.PI / 2;
-            buttons.add(button);
-        });
-        
-        controllerGroup.add(buttons);
-        
-        // Animation
-        const animate = () => {
-            requestAnimationFrame(animate);
-            
-            controllerGroup.rotation.y += 0.01;
-            
-            // Make controller float up and down
-            const time = Date.now() * 0.001;
-            controllerGroup.position.y = Math.sin(time) * 0.1;
-            
-            controls.update();
-            renderer.render(scene, camera);
-        };
-        
-        animate();
-        
-        // Handle resize
-        const resizeScene = () => {
-            if (renderer.domElement.clientWidth === 0) return;
-            
-            camera.aspect = renderer.domElement.clientWidth / renderer.domElement.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
-        };
-        
-        window.addEventListener('resize', resizeScene);
-        
-        // Store resize function
-        scenes.gaming.resize = resizeScene;
-        
-        // Update colors on theme change
-        document.getElementById('theme-toggle').addEventListener('change', () => {
-            const newColors = getThemeColors();
-            scene.background = new THREE.Color(newColors.background);
-            bodyMaterial.color.set(newColors.primary);
-            gripMaterial.color.set(newColors.primary);
-            dpadMaterial.color.set(newColors.secondary);
-            buttonMaterial.color.set(newColors.accent);
-        });
-    };
-
-    // Create jogging visualization
-    const initJoggingScene = () => {
-        const setup = createScene('jogging-canvas');
-        if (!setup) return;
-        
-        const { renderer, scene, camera, controls } = setup;
-        scenes.jogging = setup;
-        
-        const colors = getThemeColors();
-        
-        // Create a ground
-        const groundGeometry = new THREE.PlaneGeometry(10, 10);
-        const groundMaterial = new THREE.MeshStandardMaterial({
-            color: 0x7CFC00,
-            roughness: 0.8,
-            metalness: 0.2,
-            side: THREE.DoubleSide
-        });
-        const ground = new THREE.Mesh(groundGeometry, groundMaterial);
-        ground.rotation.x = -Math.PI / 2;
-        ground.position.y = -1;
-        scene.add(ground);
-        
-        // Create a running track
-        const trackGeometry = new THREE.TorusGeometry(3, 0.3, 16, 100);
-        const trackMaterial = new THREE.MeshStandardMaterial({
-            color: 0xFF4500,
-            roughness: 0.5,
-            metalness: 0
-        });
-        const track = new THREE.Mesh(trackGeometry, trackMaterial);
-        track.rotation.x = Math.PI / 2;
-        track.position.y = -0.9;
-        scene.add(track);
-        
-        // Create a simple runner figure
-        const runnerGroup = new THREE.Group();
-        
-        // Head
-        const headGeometry = new THREE.SphereGeometry(0.2, 32, 32);
-        const bodyMaterial = new THREE.MeshPhongMaterial({ 
-            color: colors.primary
-        });
-        const head = new THREE.Mesh(headGeometry, bodyMaterial);
-        head.position.y = 0.7;
-        runnerGroup.add(head);
-        
-        // Body
-        const torsoGeometry = new THREE.CylinderGeometry(0.15, 0.2, 0.5, 32);
-        const torso = new THREE.Mesh(torsoGeometry, bodyMaterial);
-        torso.position.y = 0.25;
-        runnerGroup.add(torso);
-        
-        // Arms
-        const armGeometry = new THREE.CylinderGeometry(0.05, 0.05, 0.4, 16);
-        const leftArm = new THREE.Mesh(armGeometry, bodyMaterial);
-        leftArm.position.set(0.25, 0.3, 0);
-        leftArm.rotation.z = -Math.PI / 4;
-        runnerGroup.add(leftArm);
-        
-        const rightArm = new THREE.Mesh(armGeometry, bodyMaterial);
-        rightArm.position.set(-0.25, 0.3, 0);
-        rightArm.rotation.z = Math.PI / 4;
-        runnerGroup.add(rightArm);
-        
-        // Legs
-        const legGeometry = new THREE.CylinderGeometry(0.07, 0.05, 0.5, 16);
-        const leftLeg = new THREE.Mesh(legGeometry, bodyMaterial);
-        leftLeg.position.set(0.1, -0.2, 0);
-        runnerGroup.add(leftLeg);
-        
-        const rightLeg = new THREE.Mesh(legGeometry, bodyMaterial);
-        rightLeg.position.set(-0.1, -0.2, 0);
-        runnerGroup.add(rightLeg);
-        
-        // Position the runner on the track
-        runnerGroup.position.set(0, -0.5, 3);
-        scene.add(runnerGroup);
-        
-        // Create trees for scenery
-        const createTree = (x, z) => {
-            const treeGroup = new THREE.Group();
-            
-            // Tree trunk
-            const trunkGeometry = new THREE.CylinderGeometry(0.1, 0.15, 0.8, 16);
-            const trunkMaterial = new THREE.MeshStandardMaterial({
-                color: 0x8B4513,
-                roughness: 1
-            });
-            const trunk = new THREE.Mesh(trunkGeometry, trunkMaterial);
-            trunk.position.y = 0.4;
-            treeGroup.add(trunk);
-            
-            // Tree top
-            const topGeometry = new THREE.ConeGeometry(0.5, 1, 8);
-            const topMaterial = new THREE.MeshStandardMaterial({
-                color: 0x006400,
-                roughness: 0.8
-            });
-            const top = new THREE.Mesh(topGeometry, topMaterial);
-            top.position.y = 1.3;
-            treeGroup.add(top);
-            
-            treeGroup.position.set(x, -1, z);
-            return treeGroup;
-        };
-        
-        // Add several trees around the scene
-        const treePositions = [
-            { x: 4, z: 4 },
-            { x: -4, z: 4 },
-            { x: 4, z: -4 },
-            { x: -4, z: -4 },
-            { x: 0, z: 5 },
-            { x: 5, z: 0 },
-            { x: 0, z: -5 },
-            { x: -5, z: 0 }
-        ];
-        
-        treePositions.forEach(pos => {
-            scene.add(createTree(pos.x, pos.z));
-        });
-        
-        // Set initial camera position
-        camera.position.set(0, 2, 7);
-        camera.lookAt(0, 0, 0);
-        
-        // Animation variables
-        let runnerAngle = 0;
-        let runnerLegAngle = 0;
-        
-        // Animation
-        const animate = () => {
-            requestAnimationFrame(animate);
-            
-            // Move runner around the track
-            runnerAngle += 0.01;
-            runnerGroup.position.x = Math.sin(runnerAngle) * 3;
-            runnerGroup.position.z = Math.cos(runnerAngle) * 3;
-            
-            // Rotate runner to face the direction of movement
-            runnerGroup.rotation.y = runnerAngle + Math.PI / 2;
-            
-            // Animate the runner's legs and arms
-            runnerLegAngle += 0.1;
-            const legMovement = Math.sin(runnerLegAngle) * 0.2;
-            
-            leftLeg.rotation.x = legMovement;
-            rightLeg.rotation.x = -legMovement;
-            
-            leftArm.rotation.x = -legMovement;
-            rightArm.rotation.x = legMovement;
-            
-            controls.update();
-            renderer.render(scene, camera);
-        };
-        
-        animate();
-        
-        // Handle resize
-        const resizeScene = () => {
-            if (renderer.domElement.clientWidth === 0) return;
-            
-            camera.aspect = renderer.domElement.clientWidth / renderer.domElement.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(renderer.domElement.clientWidth, renderer.domElement.clientHeight);
-        };
-        
-        window.addEventListener('resize', resizeScene);
-        
-        // Store resize function
-        scenes.jogging.resize = resizeScene;
-        
-        // Handle theme changes
-        document.getElementById('theme-toggle').addEventListener('change', () => {
-            const newColors = getThemeColors();
-            scene.background = new THREE.Color(newColors.background);
-            bodyMaterial.color.set(newColors.primary);
-        });
-    };
+        }, { passive: true });
+    }
     
-    // Refresh all scenes (useful after slide changes)
-    const refreshAllScenes = () => {
-        for (const sceneName in scenes) {
-            if (scenes[sceneName].resize) {
-                scenes[sceneName].resize();
-            }
-        }
-    };
-
-    // Add a new function to center and resize the hobbies slideshow
-    const optimizeHobbiesLayout = () => {
-        const hobbiesSection = document.getElementById('hobbies');
-        const slideshow = hobbiesSection.querySelector('.hobbies-slideshow');
-        const slideContainer = slideshow.querySelector('.slide-container');
-        const slides = slideshow.querySelectorAll('.slide');
+    function setupAutoAdvance() {
+        let autoAdvanceTimer;
         
-        // Set the height based on viewport
-        const viewportHeight = window.innerHeight;
-        const headerHeight = document.querySelector('.main-nav').offsetHeight;
-        const titleHeight = hobbiesSection.querySelector('h2').offsetHeight;
-        const navHeight = slideshow.querySelector('.slideshow-nav').offsetHeight;
-        
-        // Calculate optimal height
-        const optimalHeight = viewportHeight - headerHeight - titleHeight - navHeight - 120; // Extra padding
-        
-        slides.forEach(slide => {
-            const canvasContainer = slide.querySelector('.hobby-canvas-container');
-            if (canvasContainer) {
-                // Set appropriate height
-                canvasContainer.style.height = `${optimalHeight}px`;
-            }
-        });
-        
-        // Force resize canvases after layout changes
-        setTimeout(refreshAllScenes, 100);
-    };
-
-    // Initialize all scenes and slideshow
-    const initializeHobbies = () => {
-        // First initialize the slideshow
-        const slideshow = initSlideshow();
-        
-        // Then initialize the 3D scenes
-        initFootballScene();
-        initGamingScene();
-        initJoggingScene();
-        
-        // Force resize of all scenes after a short delay
-        setTimeout(refreshAllScenes, 500);
-        
-        // Refresh scenes when window resizes
-        window.addEventListener('resize', refreshAllScenes);
-        
-        // Observe resizing of containers to refresh canvases
-        if (window.ResizeObserver) {
-            const resizeObserver = new ResizeObserver(refreshAllScenes);
-            document.querySelectorAll('.hobby-canvas-container').forEach(container => {
-                resizeObserver.observe(container);
-            });
-        }
-        
-        // Handle theme change refreshing for fullscreen slides
-        document.getElementById('theme-toggle').addEventListener('change', () => {
-            // Short delay to allow theme variables to update
-            setTimeout(refreshAllScenes, 100);
-        });
-        
-        // Auto-advance slideshow every 12 seconds (longer for fullscreen experience)
-        let autoAdvanceInterval;
-        
-        const startAutoAdvance = () => {
+        function startAutoAdvance() {
             stopAutoAdvance();
-            autoAdvanceInterval = setInterval(() => {
-                const activeSlide = document.querySelector('.slide.active');
-                if (activeSlide) {
-                    const activeIndex = parseInt(activeSlide.dataset.index || 0);
-                    slideshow?.goToSlide((activeIndex + 1) % 3);
-                }
-            }, 12000);
-        };
+            autoAdvanceTimer = setInterval(() => switchHobby(currentIndex + 1), 8000);
+        }
         
-        const stopAutoAdvance = () => {
-            if (autoAdvanceInterval) {
-                clearInterval(autoAdvanceInterval);
-            }
-        };
+        function stopAutoAdvance() {
+            clearInterval(autoAdvanceTimer);
+        }
         
-        // Pause auto-advance when user interacts with slideshow
-        document.querySelector('.hobbies-slideshow').addEventListener('mouseenter', stopAutoAdvance);
-        document.querySelector('.hobbies-slideshow').addEventListener('touchstart', stopAutoAdvance, { passive: true });
+        // Start auto-advance
+        startAutoAdvance();
         
-        document.querySelector('.hobbies-slideshow').addEventListener('mouseleave', startAutoAdvance);
-        document.querySelector('.hobbies-slideshow').addEventListener('touchend', (e) => {
-            // Only restart auto-advance if touch end is on the slideshow, not a control
-            if (!e.target.closest('.nav-btn') && !e.target.closest('.indicator')) {
+        // Pause on interaction
+        const hobbiesSection = document.querySelector('.hobbies-section');
+        hobbiesSection.addEventListener('mouseenter', stopAutoAdvance);
+        hobbiesSection.addEventListener('mouseleave', startAutoAdvance);
+        hobbiesSection.addEventListener('touchstart', stopAutoAdvance, { passive: true });
+        
+        // Resume auto-advance after touch ends if not on hobby navigation buttons
+        hobbiesSection.addEventListener('touchend', e => {
+            if (!e.target.closest('.hobby-nav-btn')) {
                 startAutoAdvance();
             }
         }, { passive: true });
-        
-        // Start auto-advancing
-        startAutoAdvance();
-
-        // Optimize layout for full viewport
-        optimizeHobbiesLayout();
-        
-        // Add section transition handling
-        document.querySelectorAll('a[href="#hobbies"]').forEach(link => {
-            link.addEventListener('click', () => {
-                // Wait for scroll to complete then refresh the scenes
-                setTimeout(() => {
-                    refreshAllScenes();
-                    
-                    // Make sure the active scene is properly sized
-                    const activeSlide = document.querySelector('.slide.active');
-                    if (activeSlide) {
-                        const activeIndex = parseInt(activeSlide.dataset.index || 0);
-                        slideshow?.goToSlide(activeIndex);
-                    }
-                }, 1000);
-            });
-        });
-    };
+    }
     
-    // Call the function on load and resize
-    window.addEventListener('resize', optimizeHobbiesLayout);
-    window.addEventListener('orientationchange', optimizeHobbiesLayout);
-
-    // Initialize with a delay to ensure DOM is fully ready
-    setTimeout(initializeHobbies, 500);
+    function handleResponsiveLayout() {
+        const updateLayout = () => {
+            const isMobile = window.innerWidth < 992;
+            
+            if (isMobile) {
+                document.querySelectorAll('.hobby-tooltip').forEach(tooltip => {
+                    tooltip.style.left = '50%';
+                    tooltip.style.top = '-30px';
+                    tooltip.style.transform = 'translateX(-50%)';
+                });
+            } else {
+                document.querySelectorAll('.hobby-tooltip').forEach(tooltip => {
+                    tooltip.style.left = '70px';
+                    tooltip.style.top = '50%';
+                    tooltip.style.transform = 'translateY(-50%)';
+                });
+            }
+            
+            // Position hobby nav between columns
+            positionHobbyNav();
+        };
+        
+        // Initialize and listen for changes
+        updateLayout();
+        window.addEventListener('resize', updateLayout);
+        
+        // Also reposition when images might load and change layout
+        window.addEventListener('load', updateLayout);
+    }
+    
+    // Initialize everything
+    function initialize() {
+        // First animation
+        animateTextContent(hobbyContents[currentIndex]);
+        animateVisualContent(hobbyPanels[currentIndex]);
+        
+        // Setup all interactions and effects
+        setupEventListeners();
+        initParallaxEffect();
+        setupAutoAdvance();
+        handleResponsiveLayout();
+        
+        // Ensure positioning happens after initial render
+        setTimeout(positionHobbyNav, 100);
+    }
+    
+    // Start the module
+    initialize();
 });
