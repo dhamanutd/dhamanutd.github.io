@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/timeline.css">
+    <link rel="stylesheet" href="css/cookie-consent.css">
     
     <!-- Animate On Scroll Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -48,14 +49,13 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV6961LE0F"></script>
+    <!-- Google Analytics placeholder - will be initialized after consent -->
     <script>
+        // Set up a placeholder gtag function until consent is given
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag(){window.dataLayer.push(arguments);}
         gtag('js', new Date());
-
-        gtag('config', 'G-KV6961LE0F');
+        // Actual configuration will happen after consent
     </script>
     
     <!-- JavaScript Libraries -->
@@ -412,7 +412,26 @@
         </div>
     </div>
 </section>
-    
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="cookie-consent">
+        <div class="cookie-text">
+            <h3 class="cookie-title">Cookie Consent</h3>
+            <p class="cookie-description">
+                This site uses Google Analytics to understand visitor interactions and improve your experience.
+                No personal data is collected. Analytics helps make this site better for everyone.
+                You can decline if you prefer not to be counted in site statistics.
+            </p>
+        </div>
+        <div class="cookie-buttons">
+            <button id="accept-cookies" class="cookie-btn cookie-btn-accept">
+                <i class="fas fa-check-circle"></i> Accept
+            </button>
+            <button id="decline-cookies" class="cookie-btn cookie-btn-decline">
+                <i class="fas fa-times-circle"></i> Decline
+            </button>
+        </div>
+    </div>
 
     <script src="js/main.js"></script>
     <script src="js/particles.js"></script>
@@ -421,9 +440,9 @@
     <script src="js/dark-mode.js"></script>
     <script src="js/timeline.js"></script>
     <script src="js/hobbies.js"></script>
-    <!-- Add Rocket Launch Animation Script -->
     <script src="js/rocket-launch.js"></script>
-    <!-- Add Space Animation Script -->
     <script src="js/space-animation.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/cookie-consent.js"></script>
 </body>
 </html>

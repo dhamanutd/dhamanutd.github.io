@@ -1,0 +1,113 @@
+.cookie-consent {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  background-color: var(--card-bg, rgba(255, 255, 255, 0.9));
+  color: var(--text-color, #333);
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: bottom 0.5s ease, background-color 0.3s ease, color 0.3s ease;
+  border-top: 1px solid var(--card-border, rgba(0, 0, 0, 0.1));
+  backdrop-filter: blur(10px);
+}
+
+/* Remove media queries based on prefers-color-scheme */
+
+.cookie-consent.show {
+    bottom: 0;
+}
+
+.cookie-text {
+    flex: 1;
+    margin-right: 2rem;
+}
+
+.cookie-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.cookie-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+.cookie-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cookie-btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cookie-btn-accept {
+    background-color: var(--accent-color, #4285F4);
+    color: white;
+}
+
+.cookie-btn-accept:hover {
+    background-color: var(--accent-color-hover, #3367d6);
+    transform: translateY(-2px);
+}
+
+.cookie-btn-decline {
+    background-color: transparent;
+    color: var(--text-color, #333);
+    border: 1px solid var(--card-border, rgba(0, 0, 0, 0.2));
+}
+
+/* Remove body.dark-mode selector in favor of data-theme attribute */
+[data-theme="dark"] .cookie-btn-decline {
+    color: var(--text-color, #f0f0f0);
+    border-color: var(--card-border, rgba(255, 255, 255, 0.2));
+}
+
+.cookie-btn-decline:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+[data-theme="dark"] .cookie-btn-decline:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.privacy-policy-link {
+    color: var(--accent-color, #4285F4);
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .cookie-consent {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cookie-text {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .cookie-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+}
