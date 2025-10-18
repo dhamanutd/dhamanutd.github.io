@@ -136,18 +136,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    // Initialize tracking if GA is loaded
-    if (typeof window.gtag === 'function') {
-        sectionVisibilityTracker();
-    } else {
-        // Wait for GA to load - listen for both load event and custom gtagLoaded event
-        const initTracker = () => {
-            if (typeof window.gtag === 'function') {
-                sectionVisibilityTracker();
-            }
-        };
+    // Initialize tracking when consent is granted
+    // gtag is already loaded, but we need to wait for user consent
+    const initTracker = () => {
+        if (typeof gtag === 'function') {
+            sectionVisibilityTracker();
+        }
+    };
 
-        window.addEventListener('load', initTracker);
-        window.addEventListener('gtagLoaded', initTracker);
+    // Listen for consent granted event from cookie-consent.js
+    window.addEventListener('consentGranted', initTracker);
+
+    // Also initialize immediately if consent was already given (returning user)
+    // Check if analytics_storage is granted by checking if GA cookies exist
+    if (document.cookie.includes('_ga')) {
+        initTracker();
     }
 });

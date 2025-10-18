@@ -47,13 +47,34 @@
     <!-- Devicons for technology icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 
-    <!-- Google Analytics placeholder - will be initialized after consent -->
+    <!-- Google Analytics with Consent Mode -->
     <script>
-        // Set up a placeholder gtag function until consent is given
+        // Define dataLayer and gtag function
         window.dataLayer = window.dataLayer || [];
-        window.gtag = function(){window.dataLayer.push(arguments);}
-        window.gtag('js', new Date());
-        // Actual configuration will happen after consent
+        function gtag(){dataLayer.push(arguments);}
+
+        // Set default consent to 'denied' as a placeholder
+        // This will be updated by cookie-consent.js based on user region and choice
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied',
+            'wait_for_update': 500
+        });
+
+        // Initialize gtag
+        gtag('js', new Date());
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KV6961LE0F"></script>
+    <script>
+        // Configure Google Analytics
+        gtag('config', 'G-KV6961LE0F', {
+            'send_page_view': true,
+            'cookie_flags': 'max-age=7200;secure;samesite=none'
+        });
     </script>
     
     <!-- JavaScript Libraries -->

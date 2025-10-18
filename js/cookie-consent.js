@@ -211,50 +211,33 @@ class CookieConsentManager {
     }
     
     initializeAnalytics() {
+        // Update consent to 'granted' for analytics
+        // gtag is already loaded and configured in index.html
         if (typeof gtag === 'function') {
-            // Configure analytics with enhanced measurement
-            gtag('config', 'G-KV6961LE0F', {
-                'send_page_view': true,
-                'cookie_flags': 'max-age=7200;secure;samesite=none',
-                'custom_map': {
-                    'dimension1': 'section_name',
-                    'dimension2': 'scroll_depth'
-                }
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted',
+                'ad_storage': 'granted',
+                'ad_user_data': 'granted',
+                'ad_personalization': 'granted'
             });
-        } else {
-            // Need to load Google Analytics
-            this.loadAnalyticsScript();
+
+            // Dispatch custom event to notify analytics.js that consent is granted
+            window.dispatchEvent(new Event('consentGranted'));
         }
     }
     
-    loadAnalyticsScript() {
-        // Create Google Analytics script
-        const gtagScript = document.createElement('script');
-        gtagScript.async = true;
-        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-KV6961LE0F';
-        document.head.appendChild(gtagScript);
-
-        // Initialize gtag globally
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function() { window.dataLayer.push(arguments); }
-        window.gtag('js', new Date());
-
-        // Configure with enhanced measurement
-        window.gtag('config', 'G-KV6961LE0F', {
-            'send_page_view': true,
-            'cookie_flags': 'max-age=7200;secure;samesite=none',
-            'custom_map': {
-                'dimension1': 'section_name',
-                'dimension2': 'scroll_depth'
-            }
-        });
-
-        // Dispatch custom event to notify analytics.js that gtag is ready
-        window.dispatchEvent(new Event('gtagLoaded'));
-    }
-    
     disableAnalytics() {
-        // Disable Google Analytics tracking
+        // Update consent to 'denied' - keep analytics disabled
+        if (typeof gtag === 'function') {
+            gtag('consent', 'update', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied'
+            });
+        }
+
+        // Also set the disable flag as additional safety
         window['ga-disable-G-KV6961LE0F'] = true;
     }
 }
