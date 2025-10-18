@@ -37,11 +37,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <!-- CSS Files -->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/timeline.css">
-    <link rel="stylesheet" href="css/cookie-consent.css">
     
     <!-- Animate On Scroll Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -53,19 +48,12 @@
     <script>
         // Set up a placeholder gtag function until consent is given
         window.dataLayer = window.dataLayer || [];
-        function gtag(){window.dataLayer.push(arguments);}
-        gtag('js', new Date());
+        window.gtag = function(){window.dataLayer.push(arguments);}
+        window.gtag('js', new Date());
         // Actual configuration will happen after consent
     </script>
     
     <!-- JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
     
     <!-- JSON-LD for structured data -->
     <script type="application/ld+json">
@@ -87,362 +75,244 @@
     }
     </script>
     
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+
     <!-- Added smooth scroll behavior -->
     <style>
         html {
             scroll-behavior: smooth;
         }
     </style>
-    
-    <!-- Add GSAP Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 </head>
 <body>
-    <!-- Fixed Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">DR</a>
-            <div class="nav-links">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#hobbies" class="nav-link">Hobbies</a>
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="cookie-consent">
+        <div class="cookie-consent-content">
+            <div class="cookie-consent-text">
+                <h3>Cookie Consent</h3>
+                <p>We use cookies to enhance your experience and analyze site traffic. By continuing to use this site, you agree to our use of cookies.</p>
             </div>
-            
-            <!-- Theme toggle moved to navigation -->
-            <div class="theme-switch-wrapper">
-                <label class="theme-switch" for="theme-toggle">
-                    <input type="checkbox" id="theme-toggle" />
-                    <span class="slider round"></span>
-                </label>
+            <div class="cookie-consent-buttons">
+                <button id="decline-cookies" class="btn btn-secondary">Decline</button>
+                <button id="accept-cookies" class="btn btn-primary">Accept</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#home" class="navbar-logo">
+                <span class="logo-text">DR</span>
+            </a>
+
+            <div class="navbar-center">
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i><span>Home</span></a></li>
+                    <li><a href="#experience" class="nav-link"><i class="fas fa-briefcase"></i><span>Experience</span></a></li>
+                    <li><a href="#skills" class="nav-link"><i class="fas fa-code"></i><span>Skills</span></a></li>
+                    <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i><span>Contact</span></a></li>
+                </ul>
+            </div>
+
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
     </nav>
-    
-    <!-- Page indicators -->
-    <div class="page-indicators">
-        <a href="#home" class="indicator active" data-section="home"></a>
-        <a href="#experience" class="indicator" data-section="experience"></a>
-        <a href="#projects" class="indicator" data-section="projects"></a>
-        <a href="#hobbies" class="indicator" data-section="hobbies"></a>
-    </div>
-    
-    <!-- Enhanced Space-Themed Hero Section -->
-    <header id="home" class="section-full hero-section">
-        <!-- Space Animation Canvas -->
-        <canvas id="space-animation" class="space-canvas"></canvas>
-        
-        <!-- Daytime elements for light mode -->
-        <div class="daytime-elements">
-            <div class="sun"></div>
-            <div class="mountains">
-                <div class="mountain-layer-1"></div>
-                <div class="mountain-layer-2"></div>
-                <div class="mountain-layer-3"></div>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <!-- Animated Background -->
+        <div class="hero-background">
+            <!-- Dark Mode: Interstellar Space -->
+            <div class="hero-bg-dark">
+                <div class="stars"></div>
+                <div class="stars2"></div>
+                <div class="stars3"></div>
+                <div class="nebula"></div>
             </div>
-            <div class="land-field">
-                <div class="rice-terraces">
-                    <div class="terrace terrace-1"></div>
-                    <div class="terrace terrace-2"></div>
-                    <div class="terrace terrace-3"></div>
-                    <div class="terrace terrace-4"></div>
-                </div>
-            </div>
-            <div class="bird-container">
-                <div class="bird-group" style="top: 35%;">
-                    <div class="bird bird-1"><div class="bird-shape"></div></div>
-                    <div class="bird bird-2"><div class="bird-shape"></div></div>
-                    <div class="bird bird-3"><div class="bird-shape"></div></div>
-                    <div class="bird bird-4"><div class="bird-shape"></div></div>
-                    <div class="bird bird-5"><div class="bird-shape"></div></div>
-                </div>
-                <div class="bird-group" style="top: 45%; animation-delay: 5s;">
-                    <div class="bird bird-1"><div class="bird-shape"></div></div>
-                    <div class="bird bird-2"><div class="bird-shape"></div></div>
-                    <div class="bird bird-3"><div class="bird-shape"></div></div>
-                </div>
+
+            <!-- Light Mode: Morning Sky & Mountains -->
+            <div class="hero-bg-light">
+                <div class="sky-gradient"></div>
+                <div class="clouds"></div>
+                <div class="mountains mountain-far"></div>
+                <div class="mountains mountain-mid"></div>
+                <div class="mountains mountain-near"></div>
+                <div class="sun"></div>
             </div>
         </div>
-        
-        <!-- Hero Content with Enhanced Visual Hierarchy -->
-        <div class="hero-container">
-            <div class="hero-text-container">
-                <div class="hero-greeting">Hello, I'm</div>
-                <h1 class="hero-name">Dhanial Rizky</h1>
-                <div class="hero-title-wrapper">
-                    <span class="hero-title-prefix">I build </span>
-                    <span class="hero-title-dynamic" id="dynamic-text">web applications</span>
-                </div>
-                <p class="hero-description">
-                    Product-minded Full-Stack Developer with 7+ years of experience crafting elegant solutions to complex problems.
-                    Specializing in creating scalable applications with modern technologies.
-                </p>
-                
-                <div class="hero-cta-group">
-                    <a href="#projects" class="cta-button primary">View My Work</a>
-                    <a href="mailto:palest-amoebic-5d@icloud.com" class="cta-button outline">Contact Me</a>
-                </div>
-                
-                <div class="hero-tech-stack">
-                    <div class="tech-label">Tech Stack</div>
-                    <div class="tech-icons">
-                        <!-- Frontend -->
-                        <i class="fab fa-react" title="React"></i>
-                        <i class="fab fa-vuejs" title="Vue.js"></i>
-                        <i class="fab fa-js" title="JavaScript"></i>
-                        <i class="fab fa-html5" title="HTML5"></i>
-                        <i class="fab fa-css3-alt" title="CSS3"></i>
-                        
-                        <!-- Backend -->
-                        <i class="fab fa-node-js" title="Node.js"></i>
-                        <i class="fa-brands fa-golang" title="Golang"></i>
-                        <i class="fab fa-python" title="Python"></i>
-                        <i class="fab fa-microsoft" title=".NET C#"></i>
-                        <i class="fab fa-php" title="PHP"></i>
-                        
-                        <!-- Database -->
-                        <span class="tech-icon-text" title="PostgreSQL">
-                            <i class="fas fa-database"></i>
-                            <span>Pg</span>
-                        </span>
-                        <span class="tech-icon-text" title="MySQL">
-                            <i class="fas fa-database"></i>
-                            <span>My</span>
-                        </span>
-                        <span class="tech-icon-text" title="MongoDB">
-                            <i class="fas fa-database"></i>
-                            <span>Mo</span>
-                        </span>
-                        
-                        <!-- DevOps & Tools -->
-                        <i class="fab fa-aws" title="AWS"></i>
-                        <i class="fab fa-docker" title="Docker"></i>
-                        <i class="fab fa-git-alt" title="Git"></i>
-                    </div>
-                </div>
-                <div class="scroll-indicator">
-                    <a href="#experience" aria-label="Scroll to Experience section">
-                        <span>Explore My Journey</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </a>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Dhanial Rizky Wira Putra</h1>
+                <p class="hero-subtitle">Full-Stack Developer & Product-Minded Engineer</p>
+                <p class="hero-description" id="hero-description">Building scalable applications and leading technical teams across multiple continents</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary btn-lg">Get In Touch</a>
                 </div>
             </div>
-            
             <div class="hero-visual">
-                <div class="orbit-container">
-                    <div class="orbit-circle"></div>
-                    <div class="orbit-planet planet-1"></div>
-                    <div class="orbit-planet planet-2"></div>
-                    <div class="orbit-planet planet-3"></div>
+                <div class="glass-card hero-card">
+                    <div class="card-content">
+                        <div class="stat">
+                            <span class="stat-number" id="stat-years">-</span>
+                            <span class="stat-label">Years Experience</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="stat-projects">-</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="stat-skills">-</span>
+                            <span class="stat-label">Skills</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
-    
-    <section id="experience" class="section-full">
+
+    <!-- Work Experience Section -->
+    <section id="experience" class="experience">
         <div class="section-container">
-            <h2 class="section-title" data-aos="fade-up">Experience Timeline</h2>
-            <p class="timeline-intro" data-aos="fade-up" data-aos-delay="100">
-                Scroll horizontally to explore my professional journey.
-                <span><i class="fas fa-long-arrow-alt-right"></i></span>
-            </p>
-            <div class="timeline">
-                <!-- Timeline items will be dynamically generated -->
+            <div class="section-header">
+                <h2>Professional Experience</h2>
+                <p>A journey through diverse industries and technologies</p>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <a href="#projects">
-                <span>Continue</span>
-                <i class="fas fa-chevron-down"></i>
-            </a>
+            <div class="timeline"></div>
         </div>
     </section>
-    
-    <section id="projects" class="section-full">
-        <div class="projects-coming-soon">
-            <h3 class="coming-soon-title">Projects Coming Soon</h3>
-            <p class="coming-soon-description">I'm working on something exciting! Stay tuned for my latest projects.</p>
-            
-            <div class="rocket-launch-container">
-                <div class="starry-sky"></div>
-                
-                <!-- Cape Canaveral beach scene for light mode -->
-                <div class="cape-canaveral-scene">
-                    <div class="morning-sky"></div>
-                    <div class="morning-sun"></div>
-                    
-                    <div class="clouds">
-                        <div class="cloud cloud-1"></div>
-                        <div class="cloud cloud-2"></div>
-                        <div class="cloud cloud-3"></div>
-                        <div class="cloud cloud-4"></div>
-                    </div>
-                    
-                    <div class="ocean">
-                        <div class="wave wave-1"></div>
-                        <div class="wave wave-2"></div>
-                        <div class="wave wave-3"></div>
-                    </div>
-                    
-                    <div class="beach"></div>
-                    <div class="launch-area"></div>
-                    
-                    <div class="palm-tree palm-tree-1">
-                        <div class="palm-trunk"></div>
-                        <div class="palm-leaves palm-leaf-1"></div>
-                        <div class="palm-leaves palm-leaf-2"></div>
-                        <div class="palm-leaves palm-leaf-3"></div>
-                        <div class="palm-leaves palm-leaf-4"></div>
-                        <div class="palm-leaves palm-leaf-5"></div>
-                    </div>
-                    
-                    <div class="palm-tree palm-tree-2">
-                        <div class="palm-trunk"></div>
-                        <div class="palm-leaves palm-leaf-1"></div>
-                        <div class="palm-leaves palm-leaf-2"></div>
-                        <div class="palm-leaves palm-leaf-3"></div>
-                        <div class="palm-leaves palm-leaf-4"></div>
-                        <div class="palm-leaves palm-leaf-5"></div>
-                    </div>
-                </div>
-                
-                <div class="launch-scene">
-                    <div class="skybox">
-                        <div class="space-station">
-                            <div class="station-body"></div>
-                            <div class="solar-panels">
-                                <div class="panel left"></div>
-                                <div class="panel right"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="land">
-                        <div class="launch-platform"></div>
-                        <div class="launch-supports">
-                            <div class="support left"></div>
-                            <div class="support right"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="rocket">
-                    <div class="rocket-body">
-                        <div class="rocket-window"></div>
-                    </div>
-                    <div class="rocket-fins">
-                        <div class="fin left"></div>
-                        <div class="fin right"></div>
-                    </div>
-                    <div class="rocket-nose"></div>
-                    <div class="rocket-exhaust">
-                        <div class="exhaust-flame"></div>
-                    </div>
-                </div>
-                
-                <div class="particle-container"></div>
-                
-                <button id="launch-button" class="cta-button primary">
-                    <i class="fas fa-rocket"></i> Launch Rocket
-                </button>
-                
-                <div class="launch-status">
-                    <div class="countdown hidden">T-<span id="countdown-timer">10</span></div>
-                    <div class="launch-message hidden"></div>
-                </div>
-            </div>
+
+    <!-- Timeline Modal / Bottom Sheet -->
+    <div class="timeline-modal-backdrop" id="timeline-modal-backdrop"></div>
+    <div class="timeline-modal" id="timeline-modal">
+        <div class="timeline-modal-header">
+            <h2 class="timeline-modal-title" id="modal-title">Experience Title</h2>
+            <button class="timeline-modal-close" id="modal-close" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-    </section>
-    
-    <section id="hobbies" class="section-full hobbies-section">
-    <div class="hobbies-container">
-        <div class="hobbies-column hobbies-info">
-            <h2 class="section-title" data-aos="fade-up">Hobbies</h2>
-            
-            <div class="hobby-content-container">
-                <div class="hobby-content active" data-hobby="football">
-                    <h3>Football</h3>
-                    <p>Passionate about playing and watching football. Always up for a match with friends or cheering for my favorite team.</p>
+        <div class="timeline-modal-content">
+            <div id="modal-type-badge"></div>
+            <h3 class="timeline-modal-subtitle" id="modal-company">Company Name</h3>
+
+            <div class="timeline-modal-meta">
+                <div class="timeline-modal-meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span id="modal-date">Date Range</span>
                 </div>
-                
-                <div class="hobby-content" data-hobby="gaming">
-                    <h3>Gaming</h3>
-                    <p>Enjoy immersing myself in video games, exploring virtual worlds, and connecting with friends through online gaming.</p>
-                </div>
-                
-                <div class="hobby-content" data-hobby="jogging">
-                    <h3>Jogging</h3>
-                    <p>Love starting my day with a refreshing jog, keeping fit while enjoying the outdoors and clearing my mind.</p>
+                <div class="timeline-modal-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="modal-location">Location</span>
                 </div>
             </div>
-            
-            <div class="hobby-nav">
-                <button class="hobby-nav-btn active" data-hobby="football">
-                    <i class="fas fa-futbol"></i>
-                    <span class="hobby-tooltip">Football</span>
-                </button>
-                <button class="hobby-nav-btn" data-hobby="gaming">
-                    <i class="fas fa-gamepad"></i>
-                    <span class="hobby-tooltip">Gaming</span>
-                </button>
-                <button class="hobby-nav-btn" data-hobby="jogging">
-                    <i class="fas fa-running"></i>
-                    <span class="hobby-tooltip">Jogging</span>
-                </button>
+
+            <p class="timeline-modal-description" id="modal-description">Description</p>
+
+            <div id="modal-skills-section" style="display: none;">
+                <h4 class="timeline-modal-section-title">Skills & Technologies</h4>
+                <div class="timeline-modal-skills" id="modal-skills"></div>
             </div>
-        </div>
-        
-        <div class="hobbies-column hobbies-visual">
-            <div class="hobby-display">
-                <div class="hobby-panel active" id="football-hobby">
-                    <div class="hobby-bg" id="football-bg"></div>
-                    <div class="hobby-animation-container" id="football-animation"></div>
-                </div>
-                
-                <div class="hobby-panel" id="gaming-hobby">
-                    <div class="hobby-bg" id="gaming-bg"></div>
-                    <div class="hobby-animation-container" id="gaming-animation"></div>
-                </div>
-                
-                <div class="hobby-panel" id="jogging-hobby">
-                    <div class="hobby-bg" id="jogging-bg"></div>
-                    <div class="hobby-animation-container" id="jogging-animation"></div>
-                </div>
+
+            <div id="modal-highlights-section" style="display: none;">
+                <h4 class="timeline-modal-section-title">Key Highlights</h4>
+                <ul class="timeline-modal-highlights" id="modal-highlights"></ul>
             </div>
         </div>
     </div>
-</section>
 
-    <!-- Cookie Consent Banner -->
-    <div id="cookie-consent" class="cookie-consent">
-        <div class="cookie-text">
-            <h3 class="cookie-title">Cookie Consent</h3>
-            <p class="cookie-description">
-                This site uses Google Analytics to understand visitor interactions and improve your experience.
-                No personal data is collected. Analytics helps make this site better for everyone.
-                You can decline if you prefer not to be counted in site statistics.
-            </p>
+    <!-- Skill Projects Modal / Bottom Sheet -->
+    <div class="skill-modal-backdrop" id="skill-modal-backdrop"></div>
+    <div class="skill-modal" id="skill-modal">
+        <div class="skill-modal-header">
+            <div class="skill-modal-title-wrapper">
+                <i class="skill-modal-icon" id="skill-modal-icon"></i>
+                <h2 class="skill-modal-title" id="skill-modal-title">Skill Name</h2>
+            </div>
+            <button class="skill-modal-close" id="skill-modal-close" aria-label="Close modal">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-        <div class="cookie-buttons">
-            <button id="accept-cookies" class="cookie-btn cookie-btn-accept">
-                <i class="fas fa-check-circle"></i> Accept
-            </button>
-            <button id="decline-cookies" class="cookie-btn cookie-btn-decline">
-                <i class="fas fa-times-circle"></i> Decline
-            </button>
+        <div class="skill-modal-content">
+            <p class="skill-modal-subtitle" id="skill-modal-subtitle">Projects using this technology</p>
+            <div class="skill-modal-projects" id="skill-modal-projects"></div>
         </div>
     </div>
 
-    <script src="js/main.js"></script>
-    <script src="js/particles.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/projects.js"></script>
-    <script src="js/dark-mode.js"></script>
-    <script src="js/timeline.js"></script>
-    <script src="js/hobbies.js"></script>
-    <script src="js/rocket-launch.js"></script>
-    <script src="js/space-animation.js"></script>
-    <script src="js/analytics.js"></script>
+    <!-- Skills & Projects Section -->
+    <section id="skills" class="skills">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Skills & Technologies</h2>
+                <p>Technologies I've mastered through real-world projects</p>
+            </div>
+            <div class="skills-grid" id="skills-grid"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Let's Connect</h2>
+                <p>Interested in collaborating? Reach out to me</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-card glass-card">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <a href="mailto:palest-amoebic-5d@icloud.com">palest-amoebic-5d@icloud.com</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-card glass-card">
+                    <div class="contact-item">
+                        <i class="fas fa-linkedin"></i>
+                        <div>
+                            <h3>LinkedIn</h3>
+                            <a href="https://linkedin.com/in/dhamanutd" target="_blank" rel="noopener noreferrer">linkedin.com/in/dhamanutd</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-card glass-card">
+                    <div class="contact-item">
+                        <i class="fas fa-github"></i>
+                        <div>
+                            <h3>GitHub</h3>
+                            <a href="https://github.com/dhamanutd" target="_blank" rel="noopener noreferrer">github.com/dhamanutd</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; <span id="current-year"></span> Dhanial Rizky Wira Putra. All rights reserved.</p>
+            <button id="cookie-settings" class="cookie-settings-btn">Cookie Settings</button>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
     <script src="js/cookie-consent.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/stats.js"></script>
+    <script src="js/timeline.js"></script>
+    <script src="js/skills.js"></script>
+
+    <!-- Set current year in footer -->
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

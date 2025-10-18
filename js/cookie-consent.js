@@ -22,7 +22,7 @@ class CookieConsentManager {
     async initWithRegion() {
         // Check if we've already determined region compliance
         const storedRegionCompliance = localStorage.getItem('region_requires_consent');
-        
+
         if (storedRegionCompliance !== null) {
             this.handleConsentBasedOnRegion(storedRegionCompliance === 'true');
         } else {
@@ -36,8 +36,6 @@ class CookieConsentManager {
                 this.handleConsentBasedOnRegion(true);
             }
         }
-        
-        this.bindEvents();
     }
     
     async checkIfRegionRequiresConsent() {
@@ -235,14 +233,14 @@ class CookieConsentManager {
         gtagScript.async = true;
         gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-KV6961LE0F';
         document.head.appendChild(gtagScript);
-        
-        // Initialize gtag
+
+        // Initialize gtag globally
         window.dataLayer = window.dataLayer || [];
-        function gtag() { window.dataLayer.push(arguments); }
-        gtag('js', new Date());
-        
+        window.gtag = function() { window.dataLayer.push(arguments); }
+        window.gtag('js', new Date());
+
         // Configure with enhanced measurement
-        gtag('config', 'G-KV6961LE0F', {
+        window.gtag('config', 'G-KV6961LE0F', {
             'send_page_view': true,
             'cookie_flags': 'max-age=7200;secure;samesite=none',
             'custom_map': {
@@ -250,6 +248,9 @@ class CookieConsentManager {
                 'dimension2': 'scroll_depth'
             }
         });
+
+        // Dispatch custom event to notify analytics.js that gtag is ready
+        window.dispatchEvent(new Event('gtagLoaded'));
     }
     
     disableAnalytics() {

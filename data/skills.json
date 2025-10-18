@@ -1,0 +1,277 @@
+{
+    "categories": {
+        "Frontend": {
+            "icon": "fas fa-laptop-code",
+            "color": "#61DAFB",
+            "description": "Web interfaces & user experiences"
+        },
+        "Mobile": {
+            "icon": "fas fa-mobile-alt",
+            "color": "#34A853",
+            "description": "iOS & Android applications"
+        },
+        "Backend": {
+            "icon": "fas fa-server",
+            "color": "#6366F1",
+            "description": "Server-side & APIs"
+        },
+        "Data": {
+            "icon": "fas fa-database",
+            "color": "#F59E0B",
+            "description": "Databases & data processing"
+        },
+        "DevOps": {
+            "icon": "fas fa-cloud",
+            "color": "#EC4899",
+            "description": "Infrastructure & deployment"
+        },
+        "Management": {
+            "icon": "fas fa-users-cog",
+            "color": "#10B981",
+            "description": "Leadership & project management"
+        }
+    },
+    "skills": [
+        {
+            "name": "React.js",
+            "category": "Frontend",
+            "icon": "fab fa-react",
+            "isTechnical": true
+        },
+        {
+            "name": "Vue.js",
+            "category": "Frontend",
+            "icon": "fab fa-vuejs",
+            "isTechnical": true
+        },
+        {
+            "name": "Next.js",
+            "category": "Frontend",
+            "icon": "fas fa-code",
+            "isTechnical": true
+        },
+        {
+            "name": "Blazor",
+            "category": "Frontend",
+            "icon": "fas fa-code",
+            "isTechnical": true
+        },
+        {
+            "name": "Flutter",
+            "category": "Mobile",
+            "icon": "fas fa-mobile-alt",
+            "isTechnical": true
+        },
+        {
+            "name": "React Native",
+            "category": "Mobile",
+            "icon": "fab fa-react",
+            "isTechnical": true
+        },
+        {
+            "name": "Swift",
+            "category": "Mobile",
+            "icon": "fab fa-swift",
+            "isTechnical": true
+        },
+        {
+            "name": "Kotlin",
+            "category": "Mobile",
+            "icon": "fas fa-code",
+            "isTechnical": true
+        },
+        {
+            "name": "Lead Mobile Engineer",
+            "category": "Mobile",
+            "icon": "fas fa-mobile-alt",
+            "isTechnical": false
+        },
+        {
+            "name": "Node.js",
+            "category": "Backend",
+            "icon": "fab fa-node-js",
+            "isTechnical": true
+        },
+        {
+            "name": "Golang",
+            "category": "Backend",
+            "icon": "fas fa-code",
+            "isTechnical": true
+        },
+        {
+            "name": "PHP",
+            "category": "Backend",
+            "icon": "fab fa-php",
+            "isTechnical": true
+        },
+        {
+            "name": "NestJS",
+            "category": "Backend",
+            "icon": "fas fa-code",
+            "isTechnical": true
+        },
+        {
+            "name": "C#",
+            "category": "Backend",
+            "icon": "fas fa-code",
+            "isTechnical": true
+        },
+        {
+            "name": "Python",
+            "category": "Backend",
+            "icon": "fab fa-python",
+            "isTechnical": true
+        },
+        {
+            "name": ".Net",
+            "category": "Backend",
+            "icon": "fas fa-code",
+            "isTechnical": true
+        },
+        {
+            "name": "PostgreSQL",
+            "category": "Data",
+            "icon": "fas fa-database",
+            "isTechnical": true
+        },
+        {
+            "name": "MySQL",
+            "category": "Data",
+            "icon": "fas fa-database",
+            "isTechnical": true
+        },
+        {
+            "name": "MongoDB",
+            "category": "Data",
+            "icon": "fas fa-database",
+            "isTechnical": true
+        },
+        {
+            "name": "Redis",
+            "category": "Data",
+            "icon": "fas fa-database",
+            "isTechnical": true
+        },
+        {
+            "name": "BigQuery",
+            "category": "Data",
+            "icon": "fas fa-database",
+            "isTechnical": true
+        },
+        {
+            "name": "Database Design",
+            "category": "Data",
+            "icon": "fas fa-database",
+            "isTechnical": false
+        },
+        {
+            "name": "RabbitMQ",
+            "category": "Data",
+            "icon": "fas fa-database",
+            "isTechnical": true
+        },
+        {
+            "name": "AWS",
+            "category": "DevOps",
+            "icon": "fab fa-aws",
+            "isTechnical": true
+        },
+        {
+            "name": "GCP",
+            "category": "DevOps",
+            "icon": "fab fa-google",
+            "isTechnical": true
+        },
+        {
+            "name": "Azure",
+            "category": "DevOps",
+            "icon": "fab fa-microsoft",
+            "isTechnical": true
+        },
+        {
+            "name": "AWS Amplify",
+            "category": "DevOps",
+            "icon": "fab fa-aws",
+            "isTechnical": true
+        },
+        {
+            "name": "AWS Lambda",
+            "category": "DevOps",
+            "icon": "fab fa-aws",
+            "isTechnical": true
+        },
+        {
+            "name": "AWS SQS",
+            "category": "DevOps",
+            "icon": "fab fa-aws",
+            "isTechnical": true
+        },
+        {
+            "name": "AWS SNS",
+            "category": "DevOps",
+            "icon": "fab fa-aws",
+            "isTechnical": true
+        },
+        {
+            "name": "AWS CloudFormation",
+            "category": "DevOps",
+            "icon": "fab fa-aws",
+            "isTechnical": true
+        },
+        {
+            "name": "Google PubSub",
+            "category": "DevOps",
+            "icon": "fab fa-google",
+            "isTechnical": true
+        },
+        {
+            "name": "K2 Workflow",
+            "category": "DevOps",
+            "icon": "fas fa-code",
+            "isTechnical": true
+        },
+        {
+            "name": "Zapier",
+            "category": "DevOps",
+            "icon": "fas fa-bolt",
+            "isTechnical": true
+        },
+        {
+            "name": "Magento",
+            "category": "DevOps",
+            "icon": "fas fa-shopping-cart",
+            "isTechnical": true
+        },
+        {
+            "name": "Project Management",
+            "category": "Management",
+            "icon": "fas fa-tasks",
+            "isTechnical": false
+        },
+        {
+            "name": "Team Leadership",
+            "category": "Management",
+            "icon": "fas fa-users",
+            "isTechnical": false
+        },
+        {
+            "name": "Technology Assessment",
+            "category": "Management",
+            "icon": "fas fa-clipboard-check",
+            "isTechnical": false
+        },
+        {
+            "name": "Full-stack Development",
+            "category": "Management",
+            "icon": "fas fa-layer-group",
+            "isTechnical": false
+        },
+        {
+            "name": "Prompt Engineering",
+            "category": "Management",
+            "icon": "fas fa-brain",
+            "isTechnical": false
+        }
+    ]
+}
+
