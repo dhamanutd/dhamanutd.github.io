@@ -47,19 +47,19 @@
         {
             "name": "Next.js",
             "category": "Frontend",
-            "icon": "fas fa-code",
+            "icon": "devicon-nextjs-plain",
             "isTechnical": true
         },
         {
             "name": "Blazor",
             "category": "Frontend",
-            "icon": "fas fa-code",
+            "icon": "devicon-dotnetcore-plain",
             "isTechnical": true
         },
         {
             "name": "Flutter",
             "category": "Mobile",
-            "icon": "fas fa-mobile-alt",
+            "icon": "devicon-flutter-plain",
             "isTechnical": true
         },
         {
@@ -71,13 +71,13 @@
         {
             "name": "Swift",
             "category": "Mobile",
-            "icon": "fab fa-swift",
+            "icon": "devicon-swift-plain",
             "isTechnical": true
         },
         {
             "name": "Kotlin",
             "category": "Mobile",
-            "icon": "fas fa-code",
+            "icon": "devicon-kotlin-plain",
             "isTechnical": true
         },
         {
@@ -95,61 +95,61 @@
         {
             "name": "Golang",
             "category": "Backend",
-            "icon": "fas fa-code",
+            "icon": "devicon-go-original-wordmark",
             "isTechnical": true
         },
         {
             "name": "PHP",
             "category": "Backend",
-            "icon": "fab fa-php",
+            "icon": "devicon-php-plain",
             "isTechnical": true
         },
         {
             "name": "NestJS",
             "category": "Backend",
-            "icon": "fas fa-code",
+            "icon": "devicon-nestjs-plain",
             "isTechnical": true
         },
         {
             "name": "C#",
             "category": "Backend",
-            "icon": "fas fa-code",
+            "icon": "devicon-csharp-plain",
             "isTechnical": true
         },
         {
             "name": "Python",
             "category": "Backend",
-            "icon": "fab fa-python",
+            "icon": "devicon-python-plain",
             "isTechnical": true
         },
         {
             "name": ".Net",
             "category": "Backend",
-            "icon": "fas fa-code",
+            "icon": "devicon-dotnetcore-plain",
             "isTechnical": true
         },
         {
             "name": "PostgreSQL",
             "category": "Data",
-            "icon": "fas fa-database",
+            "icon": "devicon-postgresql-plain",
             "isTechnical": true
         },
         {
             "name": "MySQL",
             "category": "Data",
-            "icon": "fas fa-database",
+            "icon": "devicon-mysql-plain",
             "isTechnical": true
         },
         {
             "name": "MongoDB",
             "category": "Data",
-            "icon": "fas fa-database",
+            "icon": "devicon-mongodb-plain",
             "isTechnical": true
         },
         {
             "name": "Redis",
             "category": "Data",
-            "icon": "fas fa-database",
+            "icon": "devicon-redis-plain",
             "isTechnical": true
         },
         {

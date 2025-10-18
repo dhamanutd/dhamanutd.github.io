@@ -1888,7 +1888,8 @@ html.light-mode .skill-modal-header {
     gap: var(--spacing-md);
 }
 
-.skill-modal-icon {
+.skill-modal-icon,
+[class*="devicon-"].skill-modal-icon {
     font-size: var(--font-size-2xl);
     color: var(--primary-color);
 }
@@ -2203,7 +2204,8 @@ html.light-mode .skill-pill-clickable:hover {
     background: rgba(0, 0, 0, 0.05);
 }
 
-.skill-pill i {
+.skill-pill i,
+.skill-pill [class*="devicon-"] {
     color: var(--category-color);
     font-size: var(--font-size-base);
 }
@@ -2283,6 +2285,13 @@ html.light-mode .skill-pill-clickable:hover {
     display: flex;
     align-items: center;
     gap: var(--spacing-lg);
+}
+
+.contact-item i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    min-width: 40px;
+    text-align: center;
 }
 
 .contact-item h3 {
