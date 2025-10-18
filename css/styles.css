@@ -264,7 +264,7 @@ html.light-mode .glass-card:hover {
 }
 
 /* ============================================
-   NAVIGATION - Modern Liquid Glass Design
+   NAVIGATION - Apple Liquid Glass Design
    ============================================ */
 
 .navbar {
@@ -278,27 +278,71 @@ html.light-mode .glass-card:hover {
     transition: all var(--transition-base);
 }
 
+/* ========== GLASS CONTAINER ========== */
+.navbar .glass-container {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    background: transparent;
+    border-radius: 100px;
+    overflow: hidden;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+}
+
+/* ========== GLASS LAYERS ========== */
+.navbar .glass-filter {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    backdrop-filter: blur(0px);
+    filter: url(#lg-dist);
+    isolation: isolate;
+}
+
+.navbar .glass-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+html.light-mode .navbar .glass-overlay {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.navbar .glass-specular {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    overflow: hidden;
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.75),
+                inset 0 0 5px rgba(255, 255, 255, 0.75);
+}
+
+html.light-mode .navbar .glass-specular {
+    box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+                inset 0 0 5px rgba(255, 255, 255, 0.9);
+}
+
+.navbar .glass-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+}
+
 .navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--spacing-md);
     padding: var(--spacing-xs) var(--spacing-sm);
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 100px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    background: transparent;
     flex-wrap: nowrap;
-}
-
-html.light-mode .navbar-container {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    width: 100%;
 }
 
 /* Logo */
@@ -340,15 +384,10 @@ html.light-mode .navbar-container {
     display: flex;
     list-style: none;
     gap: var(--spacing-xs);
-    background: rgba(255, 255, 255, 0.03);
+    background: transparent;
     padding: var(--spacing-xs);
     border-radius: 100px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-html.light-mode .nav-menu {
-    background: rgba(0, 0, 0, 0.02);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: none;
 }
 
 .nav-link {
@@ -357,7 +396,7 @@ html.light-mode .nav-menu {
     gap: var(--spacing-xs);
     padding: var(--spacing-xs) var(--spacing-md);
     border-radius: 100px;
-    color: var(--text-secondary);
+    color: #ffffff;
     font-weight: 500;
     font-size: var(--font-size-sm);
     transition: all var(--transition-base);
@@ -365,10 +404,12 @@ html.light-mode .nav-menu {
     overflow: hidden;
     white-space: nowrap;
     flex-shrink: 0;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 
-html.dark-mode .nav-link {
-    color: rgba(255, 255, 255, 0.7);
+html.light-mode .nav-link {
+    color: #333333;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
 }
 
 .nav-link i {
@@ -383,14 +424,17 @@ html.dark-mode .nav-link {
 /* Active and Hover States */
 .nav-link.active,
 .nav-link:hover {
-    background: rgba(99, 102, 241, 0.15);
-    color: var(--primary-color);
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 0 5px rgba(99, 102, 241, 0.8);
 }
 
 html.light-mode .nav-link.active,
 html.light-mode .nav-link:hover {
-    background: rgba(99, 102, 241, 0.1);
+    background: rgba(255, 255, 255, 0.4);
+    color: #000000;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 1);
 }
 
 .nav-link.active {
@@ -408,32 +452,25 @@ html.light-mode .nav-link:hover {
     justify-content: center;
     width: 44px;
     height: 44px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: none;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--text-primary);
+    background: transparent;
+    color: #ffffff;
     cursor: pointer;
     transition: all var(--transition-base);
     font-size: var(--font-size-base);
-    backdrop-filter: blur(10px);
     flex-shrink: 0;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 
 html.light-mode .theme-toggle {
-    background: rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-html.dark-mode .theme-toggle {
-    color: var(--text-light);
+    color: #333333;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.8);
 }
 
 .theme-toggle:hover {
-    background: var(--primary-color);
-    border-color: var(--primary-color);
-    color: white;
-    transform: scale(1.05) rotate(15deg);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transform: scale(1.15) rotate(15deg);
+    text-shadow: 0 0 8px rgba(99, 102, 241, 0.8);
 }
 
 .theme-toggle:active {
