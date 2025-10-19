@@ -74,13 +74,6 @@ class ThemeManager {
         const currentTheme = this.getTheme();
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         this.applyTheme(newTheme);
-        
-        // Trigger AOS refresh if available
-        if (typeof AOS !== 'undefined') {
-            setTimeout(() => {
-                AOS.refresh();
-            }, 300);
-        }
     }
 
     /**

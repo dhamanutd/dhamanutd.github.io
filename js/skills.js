@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (categorySkills.length === 0) return '';
 
             return `
-                <div class="skill-category" data-aos="fade-up" data-aos-duration="600" data-aos-delay="${catIndex * 100}" style="--category-color: ${categoryConfig.color}">
+                <div class="skill-category" style="--category-color: ${categoryConfig.color}; animation-delay: ${catIndex * 0.1}s;">
                     <div class="skill-category-header">
                         <div class="skill-category-icon">
                             <i class="${categoryConfig.icon}"></i>
@@ -96,11 +96,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </div>
             `;
         }).join('');
-
-        // Reinitialize AOS
-        if (typeof AOS !== 'undefined') {
-            AOS.refresh();
-        }
 
         // Add click handlers to skill pills
         addSkillClickHandlers();

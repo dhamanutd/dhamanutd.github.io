@@ -61,25 +61,31 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const years = Array.from(allYears).sort((a, b) => b - a); // Descending order (newest first)
 
+        // Create timeline controls
+        const timelineControls = document.createElement('div');
+        timelineControls.className = 'timeline-controls';
+
+        const collapseAllBtn = document.createElement('button');
+        collapseAllBtn.className = 'timeline-control-btn';
+        collapseAllBtn.innerHTML = '<i class="fas fa-compress-alt"></i> <span>Collapse All</span>';
+
+        const expandAllBtn = document.createElement('button');
+        expandAllBtn.className = 'timeline-control-btn';
+        expandAllBtn.innerHTML = '<i class="fas fa-expand-alt"></i> <span>Expand All</span>';
+
+        timelineControls.appendChild(collapseAllBtn);
+        timelineControls.appendChild(expandAllBtn);
+        timelineContainer.appendChild(timelineControls);
+
         // Create vertical timeline structure
         const timelineVertical = document.createElement('div');
         timelineVertical.className = 'timeline-vertical';
 
-        years.forEach((year, yearIndex) => {
+        years.forEach((year) => {
             const yearSection = document.createElement('div');
             yearSection.className = 'timeline-year-section';
-            yearSection.setAttribute('data-aos', 'fade-up');
-            yearSection.setAttribute('data-aos-duration', '600');
-            yearSection.setAttribute('data-aos-delay', `${yearIndex * 50}`);
-
-            // Year label on the left
-            const yearLabel = document.createElement('div');
-            yearLabel.className = 'timeline-year-label';
-            yearLabel.textContent = year;
-
-            // Items container on the right
-            const itemsContainer = document.createElement('div');
-            itemsContainer.className = 'timeline-year-items';
+            // Remove AOS from year sections to prevent lazy loading issues with collapse
+            // All sections are now rendered immediately for proper collapse/expand functionality
 
             // Find all items that include this year
             const itemsForYear = timelineData.filter(item => {
@@ -88,18 +94,52 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return item.startYear <= year && endYear >= year;
             });
 
+            // Count items that start in this year
+            const startItemsCount = itemsForYear.filter(item => item.startYear === year).length;
+
+            // Year header with toggle button
+            const yearHeader = document.createElement('div');
+            yearHeader.className = 'timeline-year-header';
+
+            const yearLabel = document.createElement('div');
+            yearLabel.className = 'timeline-year-label';
+
+            const yearToggle = document.createElement('button');
+            yearToggle.className = 'timeline-year-toggle';
+            yearToggle.setAttribute('aria-label', `Toggle ${year} timeline`);
+            yearToggle.innerHTML = `
+                <span class="year-text">${year}</span>
+                <span class="year-count">${startItemsCount}</span>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            `;
+
+            yearLabel.appendChild(yearToggle);
+            yearHeader.appendChild(yearLabel);
+
+            // Items container on the right
+            const itemsContainer = document.createElement('div');
+            itemsContainer.className = 'timeline-year-items';
+
             // Add items for this year
-            itemsForYear.forEach((item, itemIndex) => {
+            itemsForYear.forEach((item) => {
                 const timelineItem = document.createElement('div');
                 timelineItem.className = 'timeline-item';
+
+                // Get icon based on type
+                const getTypeIcon = (type) => {
+                    const icons = {
+                        study: 'fa-graduation-cap',
+                        work: 'fa-briefcase',
+                        project: 'fa-code'
+                    };
+                    return icons[type] || icons.work;
+                };
 
                 // Only show full card if this is the start year
                 if (item.startYear === year) {
                     timelineItem.classList.add('timeline-item-start');
-                    timelineItem.style.setProperty('--timeline-marker-color', item.timelineColor || '#6366F1');
 
                     timelineItem.innerHTML = `
-                        <div class="timeline-item-marker"></div>
                         <div class="timeline-content" data-index="${timelineData.indexOf(item)}">
                             <div class="timeline-item-header">
                                 ${getTypeBadge(item.type)}
@@ -115,14 +155,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 ${item.skills.length > 3 ? `<span class="skill-tag-more">+${item.skills.length - 3}</span>` : ''}
                             </div>
                         </div>
+                        <div class="timeline-item-chip" data-index="${timelineData.indexOf(item)}">
+                            <i class="fas ${getTypeIcon(item.type)} timeline-item-chip-icon"></i>
+                            <span class="timeline-item-chip-text">${item.company}</span>
+                        </div>
                     `;
                 } else {
                     // Show continuation indicator for ongoing items
                     timelineItem.classList.add('timeline-item-continue');
-                    timelineItem.style.setProperty('--timeline-marker-color', item.timelineColor || '#6366F1');
 
                     timelineItem.innerHTML = `
-                        <div class="timeline-item-marker"></div>
                         <div class="timeline-content-continue" data-index="${timelineData.indexOf(item)}">
                             <div class="timeline-continue-info">
                                 <span class="timeline-continue-label">${item.company}</span>
@@ -130,30 +172,82 @@ document.addEventListener('DOMContentLoaded', async () => {
                             </div>
                             <i class="fas fa-eye timeline-continue-icon"></i>
                         </div>
+                        <div class="timeline-item-chip" data-index="${timelineData.indexOf(item)}">
+                            <i class="fas ${getTypeIcon(item.type)} timeline-item-chip-icon"></i>
+                            <span class="timeline-item-chip-text">${item.company}</span>
+                        </div>
                     `;
                 }
 
                 itemsContainer.appendChild(timelineItem);
             });
 
-            yearSection.appendChild(yearLabel);
+            yearSection.appendChild(yearHeader);
             yearSection.appendChild(itemsContainer);
             timelineVertical.appendChild(yearSection);
+
+            // Add toggle functionality
+            yearToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                yearSection.classList.toggle('collapsed');
+
+                // Update icon
+                const icon = yearToggle.querySelector('.toggle-icon');
+                if (yearSection.classList.contains('collapsed')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-right');
+                } else {
+                    icon.classList.remove('fa-chevron-right');
+                    icon.classList.add('fa-chevron-down');
+
+                    // When expanding, ensure items are visible and trigger any animations
+                    setTimeout(() => {
+                        const items = itemsContainer.querySelectorAll('.timeline-item');
+                        items.forEach((item, idx) => {
+                            item.style.animationDelay = `${idx * 0.05}s`;
+                        });
+                    }, 50);
+                }
+            });
         });
 
         timelineContainer.appendChild(timelineVertical);
 
-        // Initialize AOS
-        if (typeof AOS !== 'undefined') {
-            AOS.init({
-                duration: 600,
-                once: true,
-                offset: 50
+        // Add collapse/expand all functionality
+        collapseAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.timeline-year-section').forEach(section => {
+                if (!section.classList.contains('collapsed')) {
+                    section.classList.add('collapsed');
+                    const icon = section.querySelector('.toggle-icon');
+                    if (icon) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-right');
+                    }
+                }
             });
-        }
+        });
+
+        expandAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('.timeline-year-section').forEach(section => {
+                if (section.classList.contains('collapsed')) {
+                    section.classList.remove('collapsed');
+                    const icon = section.querySelector('.toggle-icon');
+                    if (icon) {
+                        icon.classList.remove('fa-chevron-right');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                }
+            });
+        });
+
+        // Add staggered fade-in animation to year sections using CSS
+        document.querySelectorAll('.timeline-year-section').forEach((section, index) => {
+            section.style.animationDelay = `${index * 0.1}s`;
+        });
 
         // Add click handlers to open modal
-        document.querySelectorAll('.timeline-content, .timeline-content-continue').forEach(content => {
+        document.querySelectorAll('.timeline-content, .timeline-content-continue, .timeline-item-chip').forEach(content => {
             content.addEventListener('click', () => {
                 const index = parseInt(content.getAttribute('data-index'));
                 openModal(timelineData[index]);
@@ -232,23 +326,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     renderTimeline();
-
-    // Re-initialize on theme change (if theme toggle exists)
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-        themeToggle.addEventListener('change', () => {
-            setTimeout(() => {
-                if (typeof AOS !== 'undefined') {
-                    AOS.refresh();
-                }
-            }, 300);
-        });
-    }
-
-    // Add window resize handler for responsive adjustments
-    window.addEventListener('resize', () => {
-        if (typeof AOS !== 'undefined') {
-            AOS.refresh();
-        }
-    });
 });
