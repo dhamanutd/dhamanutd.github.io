@@ -216,7 +216,9 @@
         "location": "Austin, Texas",
         "description": "Rejoined to continue work on reporting and notification systems with enhanced features.",
         "skills": [
+            "React.js",
             "Next.js",
+            "Node.js",
             "NestJS",
             "PHP",
             "Redis",

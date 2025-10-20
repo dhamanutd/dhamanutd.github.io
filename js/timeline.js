@@ -83,9 +83,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         years.forEach((year) => {
             const yearSection = document.createElement('div');
-            yearSection.className = 'timeline-year-section';
+            yearSection.className = 'timeline-year-section collapsed';
             // Remove AOS from year sections to prevent lazy loading issues with collapse
             // All sections are now rendered immediately for proper collapse/expand functionality
+            // Default state is collapsed
 
             // Find all items that include this year
             const itemsForYear = timelineData.filter(item => {
@@ -110,7 +111,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             yearToggle.innerHTML = `
                 <span class="year-text">${year}</span>
                 <span class="year-count">${startItemsCount}</span>
-                <i class="fas fa-chevron-down toggle-icon"></i>
+                <i class="fas fa-chevron-right toggle-icon"></i>
             `;
 
             yearLabel.appendChild(yearToggle);
