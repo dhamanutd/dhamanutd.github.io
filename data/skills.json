@@ -262,9 +262,9 @@
         },
         {
             "name": "Full-stack Development",
-            "category": "Management",
+            "category": "Backend",
             "icon": "fas fa-layer-group",
-            "isTechnical": false
+            "isTechnical": true
         },
         {
             "name": "Prompt Engineering",
