@@ -40,7 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetSection = document.getElementById(targetId);
             
             if (targetSection) {
-                const navbarHeight = 100; // Approximate navbar height + spacing
+                // Full-viewport sections (e.g. the experience chapter deck) must land
+                // flush with the top of the screen, not offset under the navbar.
+                const isFullViewportSection = targetSection.classList.contains('experience-deck');
+                const navbarHeight = isFullViewportSection ? 0 : 100; // Approximate navbar height + spacing
                 const targetPosition = targetSection.offsetTop - navbarHeight;
                 
                 window.scrollTo({

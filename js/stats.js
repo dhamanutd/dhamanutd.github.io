@@ -3,8 +3,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Fetch timeline data
         const response = await fetch('data/timeline.json');
-        const timelineData = await response.json();
-        
+        const timelineEntries = await response.json();
+
+        // Flatten nested client projects (delivered under a parent employer) alongside
+        // top-level entries so stats still reflect every engagement, not just parents.
+        const timelineData = timelineEntries.flatMap(item => [item, ...(item.projects || [])]);
+
         // Calculate years of experience
         const calculateYearsOfExperience = () => {
             const currentYear = new Date().getFullYear();

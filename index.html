@@ -211,15 +211,17 @@
         </div>
     </header>
 
-    <!-- Work Experience Section -->
-    <section id="experience" class="experience">
-        <div class="section-container">
-            <div class="section-header">
-                <h2>Professional Experience</h2>
-                <p>A journey through diverse industries and technologies</p>
-            </div>
-            <div class="timeline"></div>
+    <!-- Work Experience Section: presented as a scrollable chapter deck -->
+    <section id="experience" class="experience-deck">
+        <div class="chapters-viewport" id="chapters-viewport" tabindex="0" aria-label="Career chapters. Scroll or use arrow keys to move between chapters.">
+            <!-- Chapters injected by timeline.js -->
         </div>
+        <div class="chapter-nav" id="chapter-nav">
+            <button type="button" class="chapter-nav-arrow" id="chapter-prev" aria-label="Previous chapter"><i class="fas fa-chevron-up"></i></button>
+            <div class="chapter-dots" id="chapter-dots"></div>
+            <button type="button" class="chapter-nav-arrow" id="chapter-next" aria-label="Next chapter"><i class="fas fa-chevron-down"></i></button>
+        </div>
+        <div class="chapter-counter" id="chapter-counter">01 / 01</div>
     </section>
 
     <!-- Timeline Modal / Bottom Sheet -->
@@ -234,6 +236,9 @@
         <div class="timeline-modal-content">
             <div id="modal-type-badge"></div>
             <h3 class="timeline-modal-subtitle" id="modal-company">Company Name</h3>
+            <span class="timeline-modal-flagship-badge" id="modal-flagship-badge" style="display: none;"><i class="fas fa-star"></i> Notable Client</span>
+            <p class="timeline-modal-industry" id="modal-industry" style="display: none;"></p>
+            <p class="timeline-modal-parent" id="modal-parent" style="display: none;"></p>
 
             <div class="timeline-modal-meta">
                 <div class="timeline-modal-meta-item">
@@ -246,6 +251,7 @@
                 </div>
             </div>
 
+            <p class="timeline-modal-impact" id="modal-impact" style="display: none;"></p>
             <p class="timeline-modal-description" id="modal-description">Description</p>
 
             <div id="modal-skills-section" style="display: none;">

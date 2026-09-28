@@ -6,6 +6,7 @@
         "position": "Bachelor's Degree in System Information",
         "location": "Yogyakarta, Indonesia",
         "description": "Formal education in information systems and computer science.",
+        "impact": "Built the systems-analysis and database foundations behind a decade of engineering work.",
         "skills": [
             "System Analysis",
             "Programming",
@@ -25,6 +26,7 @@
         "position": "Senior Principal",
         "location": "Sleman, Yogyakarta, Indonesia",
         "description": "Leading software development projects from assessment to delivery, with focus on technology stack selection and team management.",
+        "impact": "Led technology strategy and delivery for 20+ client engagements as Senior Principal, spanning fintech, logistics, healthcare and telco.",
         "skills": [
             "Project Management",
             "Team Leadership",
@@ -37,436 +39,500 @@
             "Managing team performance and adapting plans to ensure project success"
         ],
         "type": "work",
-        "timelineColor": "#4285F4"
-    },
-    {
-        "startYear": 2018,
-        "endYear": 2019,
-        "company": "Atenda",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Led development of human resources software system.",
-        "skills": [
-            "Node.js",
-            "Vue.js",
-            "React Native"
-        ],
-        "highlights": [
-            "Led HR Software System development using Node.js, Vue.js, React Native"
-        ],
-        "type": "project",
-        "timelineColor": "#FBBC05"
-    },
-    {
-        "startYear": 2018,
-        "endYear": 2019,
-        "company": "Yabaik",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Led development of Islamic financial technology solution.",
-        "skills": [
-            "Golang",
-            "React.js",
-            "React Native"
-        ],
-        "highlights": [
-            "Led White Label Syariah E-Wallet development using Golang, React.js, React Native"
-        ],
-        "type": "project",
-        "timelineColor": "#EA4335"
-    },
-    {
-        "startYear": 2019,
-        "endYear": 2020,
-        "company": "Keller Williams",
-        "position": "Software Engineer",
-        "location": "Austin, Texas",
-        "description": "Developing goals and reports for agent performance, developing task automation integration for agent leads and contacts",
-        "skills": [
-            "Next.js",
-            "PHP",
-            "Redis",
-            "GCP",
-            "Google PubSub",
-            "Zapier"
-        ],
-        "highlights": [
-            "Developing Zapier integration for Keller Williams Agents and building goals and reporting system"
-        ],
-        "type": "project",
-        "timelineColor": "#34A853"
-    },
-    {
-        "startYear": 2019,
-        "endYear": 2020,
-        "company": "Berlian Sistem Informasi",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Developed mobile applications and management systems for automotive industry.",
-        "skills": [
-            "Flutter",
-            "Vue.js",
-            "C#",
-            ".Net",
-            "Azure"
-        ],
-        "highlights": [
-            "Developed Mitsubishi Sales Agent App using C#, Flutter & Vue.js"
-        ],
-        "type": "project",
-        "timelineColor": "#FBBC05"
-    },
-    {
-        "startYear": 2019,
-        "endYear": 2020,
-        "company": "Telkomsel",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Built chat systems for one of Telkomsel business products",
-        "skills": [
-            "Kotlin"
-        ],
-        "highlights": [
-            "Developed Dunia Games Chat System (like Discord) using Kotlin"
-        ],
-        "type": "project",
-        "timelineColor": "#EA4335"
-    },
-    {
-        "startYear": 2020,
-        "endYear": 2021,
-        "company": "Lionparcel",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Developed logistics software for a major Indonesian delivery service.",
-        "skills": [
-            "Golang",
-            "Vue.js"
-        ],
-        "highlights": [
-            "Developed Agent Software System for Logistics using Golang & Vue.js",
-            "Integrated core systems with partners like Indomaret"
-        ],
-        "type": "project",
-        "timelineColor": "#4285F4"
-    },
-    {
-        "startYear": 2020,
-        "endYear": 2021,
-        "company": "Lauretta",
-        "position": "Software Engineer",
-        "location": "Singapore",
-        "description": "Developed AI-powered security and monitoring solutions.",
-        "skills": [
-            "React.js",
-            "Node.js",
-            "Python",
-            "GCP"
-        ],
-        "highlights": [
-            "Developed AI-powered CCTV monitoring & analytics using React, Node.js, Python",
-            "Core team member for software system initialization"
-        ],
-        "type": "project",
-        "timelineColor": "#34A853"
-    },
-    {
-        "startYear": 2021,
-        "endYear": 2022,
-        "company": "E-Sidig",
-        "position": "Lead Principal",
-        "location": "Jakarta, Indonesia",
-        "description": "Led planning and execution of government applications.",
-        "skills": [
-            "Project Management",
-            "Team Leadership"
-        ],
-        "highlights": [
-            "Led Government Application Planning & Execution without direct coding"
-        ],
-        "type": "project",
-        "timelineColor": "#4285F4"
-    },
-    {
-        "startYear": 2021,
-        "endYear": 2022,
-        "company": "MNC",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Led development of travel services.",
-        "skills": [
-            "Node.js",
-            "Vue.js",
-            "MySQL",
-            "AWS",
-            "AWS Amplify",
-            "AWS Lambda"
-        ],
-        "highlights": [
-            "Led MisterAladin Explore & B2B service development of new features on existing system"
-        ],
-        "type": "project",
-        "timelineColor": "#FBBC05"
-    },
-    {
-        "startYear": 2021,
-        "endYear": 2023,
-        "company": "Keller Williams",
-        "position": "Software Engineer",
-        "location": "Austin, Texas",
-        "description": "Rejoined to continue work on reporting and notification systems with enhanced features.",
-        "skills": [
-            "React.js",
-            "Next.js",
-            "Node.js",
-            "NestJS",
-            "PHP",
-            "Redis",
-            "GCP",
-            "Google PubSub",
-            "BigQuery",
-            "MongoDB"
-        ],
-        "highlights": [
-            "Further improved Agent's Reporting System and Legacy Notification Service",
-            "Implemented new features and system optimizations",
-            "Data aggregating and reporting for Keller Williams Agents"
-        ],
-        "type": "project",
-        "timelineColor": "#34A853"
-    },
-    {
-        "startYear": 2022,
-        "endYear": 2023,
-        "company": "IDN Media",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Developed mobile application focused on food content and community.",
-        "skills": [
-            "Flutter"
-        ],
-        "highlights": [
-            "Developed Cooking & Recipe Sharing Mobile App using Flutter"
-        ],
-        "type": "project",
-        "timelineColor": "#EA4335"
-    },
-    {
-        "startYear": 2022,
-        "endYear": 2023,
-        "company": "Biofarma",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Core team member for national healthcare digitalization initiative.",
-        "skills": [
-            "Swift",
-            "Kotlin",
-            "Lead Mobile Engineer"
-        ],
-        "highlights": [
-            "Core team for Indonesia Healthcare System Digitalization",
-            "Led Mediverse mobile development (Swift, Kotlin)"
-        ],
-        "type": "project",
-        "timelineColor": "#34A853"
-    },
-    {
-        "startYear": 2022,
-        "endYear": 2023,
-        "company": "Telkomsel",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Rejoined to expand and enhance telecommunications systems.",
-        "skills": [
-            "Node.js",
-            "React.js",
-            "RabbitMQ",
-            "Redis",
-            "AWS SQS",
-            "AWS SNS"
-        ],
-        "highlights": [
-            "Develop enterprise data package management solutions for Indonesia's largest telecommunications provider.",
-            "Implemented system improvements for Enterprise Data Package Management",
-            "Applying High Availability architecture"
-        ],
-        "type": "project",
-        "timelineColor": "#EA4335"
-    },
-    {
-        "startYear": 2023,
-        "endYear": 2023,
-        "company": "MNC",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Rejoined to support big migration of the e-commerce system.",
-        "skills": [
-            "React.js",
-            "Golang",
-            "Next.js",
-            "PostgreSQL",
-            "MySQL",
-            "Magento"
-        ],
-        "highlights": [
-            "Migrated ETL & technology stack from MySQL (EAV) to PostgreSQL, PHP Magento to Golang & Next.js",
-            "Enhanced MisterAladin platform with new functionalities",
-            "Optimized performance of previously migrated systems"
-        ],
-        "type": "project",
-        "timelineColor": "#FBBC05"
-    },
-    {
-        "startYear": 2023,
-        "endYear": 2023,
-        "company": "MulaiKelola",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Rapid development of procurement system MVP.",
-        "skills": [
-            "Golang",
-            "Next.js",
-            "Kubernetes",
-            "Docker",
-            "PostgreSQL"
-        ],
-        "highlights": [
-            "Developed E-Procurement MVP in 1 month using Golang & Next.js"
-        ],
-        "type": "project",
-        "timelineColor": "#34A853"
-    },
-    {
-        "startYear": 2023,
-        "endYear": 2024,
-        "company": "Gaya Motor",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Led development of procurement systems using Microsoft technologies.",
-        "skills": [
-            "C#",
-            ".Net",
-            "Blazor"
-        ],
-        "highlights": [
-            "Led E-Procurement System Development using C# .Net & Blazor"
-        ],
-        "type": "project",
-        "timelineColor": "#4285F4"
-    },
-    {
-        "startYear": 2023,
-        "endYear": 2024,
-        "company": "Berlian Sistem Informasi",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Rejoined to develop on the old systems.",
-        "skills": [
-            "C#",
-            ".Net",
-            "K2 Workflow",
-            "React.js"
-        ],
-        "highlights": [
-            "Created Approval Management System using C# & K2 Workflow",
-            "Developed Car Pool Management System using React.js"
-        ],
-        "type": "project",
-        "timelineColor": "#FBBC05"
-    },
-    {
-        "startYear": 2023,
-        "endYear": 2024,
-        "company": "Lauretta",
-        "position": "Software Engineer",
-        "location": "Singapore",
-        "description": "Rejoined to advance AI-powered security solutions with improved algorithms.",
-        "skills": [
-            "React.js",
-            "Node.js",
-            "Python"
-        ],
-        "highlights": [
-            "Enhanced AI capabilities for CCTV monitoring with advanced analytics",
-            "Implemented new machine learning models for improved detection accuracy"
-        ],
-        "type": "project",
-        "timelineColor": "#34A853"
-    },
-    {
-        "startYear": 2024,
-        "endYear": 2024,
-        "company": "WTF",
-        "position": "Software Engineer",
-        "location": "Singapore",
-        "description": "Led development of food-sharing application with AI capabilities.",
-        "skills": [
-            "Golang",
-            "React.js",
-            "Flutter",
-            "Python"
-        ],
-        "highlights": [
-            "Led MVP development for food-sharing & AI suggestions using Golang, React.js, Flutter, Python"
-        ],
-        "type": "project",
-        "timelineColor": "#FBBC05"
-    },
-    {
-        "startYear": 2024,
-        "endYear": 2024,
-        "company": "Paper Indonesia",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Developed white label financial technology solution.",
-        "skills": [
-            "Golang"
-        ],
-        "highlights": [
-            "Developed White Label E-Wallet Application using Golang"
-        ],
-        "type": "project",
-        "timelineColor": "#EA4335"
-    },
-    {
-        "startYear": 2024,
-        "endYear": 2024,
-        "company": "Cellcast",
-        "position": "Software Engineer",
-        "location": "Melbourne, Australia",
-        "description": "Develop text messaging platform for broadcasting and blasting messages.",
-        "skills": [
-            "Golang",
-            "Node.js",
-            "React.js",
-            "AWS",
-            "AWS Lambda",
-            "AWS CloudFormation"
-        ],
-        "highlights": [
-            "Migrating existing system from Node.js to Golang and deploy it to AWS Lambda for the serverless architecture. To achieve millions processes in lower budget"
-        ],
-        "type": "project",
-        "timelineColor": "#3898ec"
-    },
-    {
-        "startYear": 2024,
-        "endYear": 2024,
-        "company": "Berlian Sistem Informasi",
-        "position": "Software Engineer",
-        "location": "Jakarta, Indonesia",
-        "description": "Rejoined to join initiator team for the R&D division to building an AI assistance platform.",
-        "skills": [
-            "Flutter",
-            "C#",
-            ".Net",
-            "Prompt Engineering"
-        ],
-        "highlights": [
-            "Development eye-catchy UI for the AI assistance platform using Flutter, tweak and tuning prompt engineering to achieve the best result"
-        ],
-        "type": "project",
-        "timelineColor": "#FBBC05"
+        "timelineColor": "#4285F4",
+        "projects": [
+            {
+                "startYear": 2018,
+                "endYear": 2019,
+                "company": "Atenda",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Led development of human resources software system.",
+                "impact": "Delivered a full HR management system spanning web and mobile.",
+                "skills": [
+                    "Node.js",
+                    "Vue.js",
+                    "React Native"
+                ],
+                "highlights": [
+                    "Led HR Software System development using Node.js, Vue.js, React Native"
+                ],
+                "type": "project",
+                "timelineColor": "#FBBC05"
+            },
+            {
+                "startYear": 2018,
+                "endYear": 2019,
+                "company": "Yabaik",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Led development of Islamic financial technology solution.",
+                "impact": "Shipped a white-label Sharia e-wallet used across web and mobile.",
+                "skills": [
+                    "Golang",
+                    "React.js",
+                    "React Native"
+                ],
+                "highlights": [
+                    "Led White Label Syariah E-Wallet development using Golang, React.js, React Native"
+                ],
+                "type": "project",
+                "timelineColor": "#EA4335"
+            },
+            {
+                "startYear": 2019,
+                "endYear": 2020,
+                "company": "Keller Williams",
+                "position": "Software Engineer",
+                "location": "Austin, Texas",
+                "description": "Developing goals and reports for agent performance, developing task automation integration for agent leads and contacts",
+                "impact": "Automated agent workflows and built a real-time goals & reporting system.",
+                "skills": [
+                    "Next.js",
+                    "PHP",
+                    "Redis",
+                    "GCP",
+                    "Google PubSub",
+                    "Zapier"
+                ],
+                "highlights": [
+                    "Developing Zapier integration for Keller Williams Agents and building goals and reporting system"
+                ],
+                "type": "project",
+                "timelineColor": "#34A853",
+                "flagship": true,
+                "industry": "Real Estate Technology",
+                "country": "United States"
+            },
+            {
+                "startYear": 2019,
+                "endYear": 2020,
+                "company": "Berlian Sistem Informasi",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Developed mobile applications and management systems for automotive industry.",
+                "impact": "Delivered Mitsubishi's sales agent app across mobile, web and backend.",
+                "skills": [
+                    "Flutter",
+                    "Vue.js",
+                    "C#",
+                    ".Net",
+                    "Azure"
+                ],
+                "highlights": [
+                    "Developed Mitsubishi Sales Agent App using C#, Flutter & Vue.js"
+                ],
+                "type": "project",
+                "timelineColor": "#FBBC05",
+                "flagship": true,
+                "brandLabel": "Mitsubishi",
+                "industry": "Automotive",
+                "country": "Indonesia"
+            },
+            {
+                "startYear": 2019,
+                "endYear": 2020,
+                "company": "Telkomsel",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Built chat systems for one of Telkomsel business products",
+                "impact": "Built a Discord-style chat system for Telkomsel's Dunia Games platform.",
+                "skills": [
+                    "Kotlin"
+                ],
+                "highlights": [
+                    "Developed Dunia Games Chat System (like Discord) using Kotlin"
+                ],
+                "type": "project",
+                "timelineColor": "#EA4335",
+                "flagship": true,
+                "industry": "Telecommunications",
+                "country": "Indonesia"
+            },
+            {
+                "startYear": 2020,
+                "endYear": 2021,
+                "company": "Lionparcel",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Developed logistics software for a major Indonesian delivery service.",
+                "impact": "Built the agent platform powering Lionparcel's logistics network, integrated with partners like Indomaret.",
+                "skills": [
+                    "Golang",
+                    "Vue.js"
+                ],
+                "highlights": [
+                    "Developed Agent Software System for Logistics using Golang & Vue.js",
+                    "Integrated core systems with partners like Indomaret"
+                ],
+                "type": "project",
+                "timelineColor": "#4285F4",
+                "flagship": true,
+                "industry": "Logistics",
+                "country": "Indonesia"
+            },
+            {
+                "startYear": 2020,
+                "endYear": 2021,
+                "company": "Lauretta",
+                "position": "Software Engineer",
+                "location": "Singapore",
+                "description": "Developed AI-powered security and monitoring solutions.",
+                "impact": "Co-founded the engineering of an AI-powered CCTV monitoring platform from the ground up.",
+                "skills": [
+                    "React.js",
+                    "Node.js",
+                    "Python",
+                    "GCP"
+                ],
+                "highlights": [
+                    "Developed AI-powered CCTV monitoring & analytics using React, Node.js, Python",
+                    "Core team member for software system initialization"
+                ],
+                "type": "project",
+                "timelineColor": "#34A853"
+            },
+            {
+                "startYear": 2021,
+                "endYear": 2022,
+                "company": "E-Sidig",
+                "position": "Lead Principal",
+                "location": "Jakarta, Indonesia",
+                "description": "Led planning and execution of government applications.",
+                "impact": "Directed planning and delivery of a government application as lead, without writing code directly.",
+                "skills": [
+                    "Project Management",
+                    "Team Leadership"
+                ],
+                "highlights": [
+                    "Led Government Application Planning & Execution without direct coding"
+                ],
+                "type": "project",
+                "timelineColor": "#4285F4",
+                "flagship": true,
+                "industry": "Government / Public Sector",
+                "country": "Indonesia"
+            },
+            {
+                "startYear": 2021,
+                "endYear": 2022,
+                "company": "MNC",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Led development of travel services.",
+                "impact": "Extended MisterAladin's travel platform with new B2B and Explore features.",
+                "skills": [
+                    "Node.js",
+                    "Vue.js",
+                    "MySQL",
+                    "AWS",
+                    "AWS Amplify",
+                    "AWS Lambda"
+                ],
+                "highlights": [
+                    "Led MisterAladin Explore & B2B service development of new features on existing system"
+                ],
+                "type": "project",
+                "timelineColor": "#FBBC05",
+                "flagship": true,
+                "industry": "Media & Entertainment",
+                "country": "Indonesia"
+            },
+            {
+                "startYear": 2021,
+                "endYear": 2023,
+                "company": "Keller Williams",
+                "position": "Software Engineer",
+                "location": "Austin, Texas",
+                "description": "Rejoined to continue work on reporting and notification systems with enhanced features.",
+                "impact": "Rejoined to modernize agent reporting and notification systems at scale.",
+                "skills": [
+                    "React.js",
+                    "Next.js",
+                    "Node.js",
+                    "NestJS",
+                    "PHP",
+                    "Redis",
+                    "GCP",
+                    "Google PubSub",
+                    "BigQuery",
+                    "MongoDB"
+                ],
+                "highlights": [
+                    "Further improved Agent's Reporting System and Legacy Notification Service",
+                    "Implemented new features and system optimizations",
+                    "Data aggregating and reporting for Keller Williams Agents"
+                ],
+                "type": "project",
+                "timelineColor": "#34A853",
+                "flagship": true,
+                "industry": "Real Estate Technology",
+                "country": "United States"
+            },
+            {
+                "startYear": 2022,
+                "endYear": 2023,
+                "company": "IDN Media",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Developed mobile application focused on food content and community.",
+                "impact": "Built a cooking & recipe-sharing mobile app for a food-focused community.",
+                "skills": [
+                    "Flutter"
+                ],
+                "highlights": [
+                    "Developed Cooking & Recipe Sharing Mobile App using Flutter"
+                ],
+                "type": "project",
+                "timelineColor": "#EA4335",
+                "flagship": true,
+                "industry": "Digital Media",
+                "country": "Indonesia"
+            },
+            {
+                "startYear": 2022,
+                "endYear": 2023,
+                "company": "Biofarma",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Core team member for national healthcare digitalization initiative.",
+                "impact": "Led mobile engineering for Indonesia's national healthcare digitalization initiative.",
+                "skills": [
+                    "Swift",
+                    "Kotlin",
+                    "Lead Mobile Engineer"
+                ],
+                "highlights": [
+                    "Core team for Indonesia Healthcare System Digitalization",
+                    "Led Mediverse mobile development (Swift, Kotlin)"
+                ],
+                "type": "project",
+                "timelineColor": "#34A853",
+                "flagship": true,
+                "industry": "State-Owned Pharmaceutical (BUMN)",
+                "country": "Indonesia"
+            },
+            {
+                "startYear": 2022,
+                "endYear": 2023,
+                "company": "Telkomsel",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Rejoined to expand and enhance telecommunications systems.",
+                "impact": "Rebuilt enterprise data package management with high-availability architecture.",
+                "skills": [
+                    "Node.js",
+                    "React.js",
+                    "RabbitMQ",
+                    "Redis",
+                    "AWS SQS",
+                    "AWS SNS"
+                ],
+                "highlights": [
+                    "Develop enterprise data package management solutions for Indonesia's largest telecommunications provider.",
+                    "Implemented system improvements for Enterprise Data Package Management",
+                    "Applying High Availability architecture"
+                ],
+                "type": "project",
+                "timelineColor": "#EA4335",
+                "flagship": true,
+                "industry": "Telecommunications",
+                "country": "Indonesia"
+            },
+            {
+                "startYear": 2023,
+                "endYear": 2023,
+                "company": "MNC",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Rejoined to support big migration of the e-commerce system.",
+                "impact": "Migrated MisterAladin's core stack from MySQL/Magento to PostgreSQL, Golang and Next.js.",
+                "skills": [
+                    "React.js",
+                    "Golang",
+                    "Next.js",
+                    "PostgreSQL",
+                    "MySQL",
+                    "Magento"
+                ],
+                "highlights": [
+                    "Migrated ETL & technology stack from MySQL (EAV) to PostgreSQL, PHP Magento to Golang & Next.js",
+                    "Enhanced MisterAladin platform with new functionalities",
+                    "Optimized performance of previously migrated systems"
+                ],
+                "type": "project",
+                "timelineColor": "#FBBC05",
+                "flagship": true,
+                "industry": "Media & Entertainment",
+                "country": "Indonesia"
+            },
+            {
+                "startYear": 2023,
+                "endYear": 2023,
+                "company": "MulaiKelola",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Rapid development of procurement system MVP.",
+                "impact": "Built an e-procurement MVP from scratch in a single month.",
+                "skills": [
+                    "Golang",
+                    "Next.js",
+                    "Kubernetes",
+                    "Docker",
+                    "PostgreSQL"
+                ],
+                "highlights": [
+                    "Developed E-Procurement MVP in 1 month using Golang & Next.js"
+                ],
+                "type": "project",
+                "timelineColor": "#34A853"
+            },
+            {
+                "startYear": 2023,
+                "endYear": 2024,
+                "company": "Gaya Motor",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Led development of procurement systems using Microsoft technologies.",
+                "impact": "Led delivery of a procurement system on the Microsoft stack (C#, .NET, Blazor).",
+                "skills": [
+                    "C#",
+                    ".Net",
+                    "Blazor"
+                ],
+                "highlights": [
+                    "Led E-Procurement System Development using C# .Net & Blazor"
+                ],
+                "type": "project",
+                "timelineColor": "#4285F4",
+                "flagship": true,
+                "industry": "Automotive Manufacturing (Astra Group)",
+                "country": "Indonesia"
+            },
+            {
+                "startYear": 2023,
+                "endYear": 2024,
+                "company": "Berlian Sistem Informasi",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Rejoined to develop on the old systems.",
+                "impact": "Rejoined to build approval workflow and car pool management systems.",
+                "skills": [
+                    "C#",
+                    ".Net",
+                    "K2 Workflow",
+                    "React.js"
+                ],
+                "highlights": [
+                    "Created Approval Management System using C# & K2 Workflow",
+                    "Developed Car Pool Management System using React.js"
+                ],
+                "type": "project",
+                "timelineColor": "#FBBC05"
+            },
+            {
+                "startYear": 2023,
+                "endYear": 2024,
+                "company": "Lauretta",
+                "position": "Software Engineer",
+                "location": "Singapore",
+                "description": "Rejoined to advance AI-powered security solutions with improved algorithms.",
+                "impact": "Advanced CCTV monitoring with new machine learning detection models.",
+                "skills": [
+                    "React.js",
+                    "Node.js",
+                    "Python"
+                ],
+                "highlights": [
+                    "Enhanced AI capabilities for CCTV monitoring with advanced analytics",
+                    "Implemented new machine learning models for improved detection accuracy"
+                ],
+                "type": "project",
+                "timelineColor": "#34A853"
+            },
+            {
+                "startYear": 2024,
+                "endYear": 2024,
+                "company": "WTF",
+                "position": "Software Engineer",
+                "location": "Singapore",
+                "description": "Led development of food-sharing application with AI capabilities.",
+                "impact": "Led MVP development for an AI-powered food-sharing app.",
+                "skills": [
+                    "Golang",
+                    "React.js",
+                    "Flutter",
+                    "Python"
+                ],
+                "highlights": [
+                    "Led MVP development for food-sharing & AI suggestions using Golang, React.js, Flutter, Python"
+                ],
+                "type": "project",
+                "timelineColor": "#FBBC05"
+            },
+            {
+                "startYear": 2024,
+                "endYear": 2024,
+                "company": "Paper Indonesia",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Developed white label financial technology solution.",
+                "impact": "Built a white-label e-wallet application in Golang.",
+                "skills": [
+                    "Golang"
+                ],
+                "highlights": [
+                    "Developed White Label E-Wallet Application using Golang"
+                ],
+                "type": "project",
+                "timelineColor": "#EA4335"
+            },
+            {
+                "startYear": 2024,
+                "endYear": 2024,
+                "company": "Cellcast",
+                "position": "Software Engineer",
+                "location": "Melbourne, Australia",
+                "description": "Develop text messaging platform for broadcasting and blasting messages.",
+                "impact": "Migrated a messaging platform to serverless Golang on AWS Lambda for millions of lower-cost message sends.",
+                "skills": [
+                    "Golang",
+                    "Node.js",
+                    "React.js",
+                    "AWS",
+                    "AWS Lambda",
+                    "AWS CloudFormation"
+                ],
+                "highlights": [
+                    "Migrating existing system from Node.js to Golang and deploy it to AWS Lambda for the serverless architecture. To achieve millions processes in lower budget"
+                ],
+                "type": "project",
+                "timelineColor": "#3898ec",
+                "flagship": true,
+                "industry": "Business Messaging",
+                "country": "Australia"
+            },
+            {
+                "startYear": 2024,
+                "endYear": 2024,
+                "company": "Berlian Sistem Informasi",
+                "position": "Software Engineer",
+                "location": "Jakarta, Indonesia",
+                "description": "Rejoined to join initiator team for the R&D division to building an AI assistance platform.",
+                "impact": "Kickstarted R&D on an AI assistance platform, tuning prompts and building its Flutter UI.",
+                "skills": [
+                    "Flutter",
+                    "C#",
+                    ".Net",
+                    "Prompt Engineering"
+                ],
+                "highlights": [
+                    "Development eye-catchy UI for the AI assistance platform using Flutter, tweak and tuning prompt engineering to achieve the best result"
+                ],
+                "type": "project",
+                "timelineColor": "#FBBC05"
+            }
+        ]
     },
     {
         "startYear": 2024,
@@ -475,6 +541,7 @@
         "position": "Software Engineer",
         "location": "Dusseldorf, Germany",
         "description": "Developing mobile application for the fashion retail industry.",
+        "impact": "Built the fashion retail mobile experience end-to-end, from Flutter UI to Kotlin backend services.",
         "skills": [
             "Flutter",
             "Kotlin"
@@ -484,7 +551,10 @@
             "Developing backend service using Kotlin"
         ],
         "type": "work",
-        "timelineColor": "#333333"
+        "timelineColor": "#333333",
+        "flagship": true,
+        "industry": "Fashion Retail",
+        "country": "Germany"
     },
     {
         "startYear": 2026,
@@ -493,6 +563,7 @@
         "position": "Software Developer",
         "location": "Sleman, Yogyakarta, Indonesia",
         "description": "As staff member",
+        "impact": "Staff engineer delivering full-stack projects for enterprise clients.",
         "skills": [
             "Full-stack Development"
         ],
@@ -500,29 +571,35 @@
             "Working as a staff member in the software development team"
         ],
         "type": "work",
-        "timelineColor": "#10405A"
-    },
-    {
-        "startYear": 2026,
-        "endYear": null,
-        "company": "Aspen Medical",
-        "position": "Senior Fullstack Engineer",
-        "location": "Canberra, Australia",
-        "description": "Developing employee wellbeing application.",
-        "skills": [
-            "C#",
-            ".Net",
-            "React.js",
-            "Strapi",
-            "AWS CloudFormation",
-            "AWS Bedrock"
-        ],
-        "highlights": [
-            "Developing employee wellbeing application using React.js and Strapi",
-            "Maintain and managing infrastructure using AWS",
-            "Developing AI chat features using AWS Bedrock"
-        ],
-        "type": "project",
-        "timelineColor": "#163f42"
+        "timelineColor": "#10405A",
+        "projects": [
+            {
+                "startYear": 2026,
+                "endYear": null,
+                "company": "Aspen Medical",
+                "position": "Senior Fullstack Engineer",
+                "location": "Canberra, Australia",
+                "description": "Developing employee wellbeing application.",
+                "impact": "Building an employee wellbeing app with React/Strapi and AI chat powered by AWS Bedrock.",
+                "skills": [
+                    "C#",
+                    ".Net",
+                    "React.js",
+                    "Strapi",
+                    "AWS CloudFormation",
+                    "AWS Bedrock"
+                ],
+                "highlights": [
+                    "Developing employee wellbeing application using React.js and Strapi",
+                    "Maintain and managing infrastructure using AWS",
+                    "Developing AI chat features using AWS Bedrock"
+                ],
+                "type": "project",
+                "timelineColor": "#163f42",
+                "flagship": true,
+                "industry": "Healthcare Services",
+                "country": "Australia"
+            }
+        ]
     }
 ]

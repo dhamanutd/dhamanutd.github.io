@@ -61,7 +61,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const extractSkillsFromTimeline = async () => {
         try {
             const response = await fetch('data/timeline.json');
-            timelineData = await response.json();
+            const timelineEntries = await response.json();
+            // Flatten nested client projects (delivered under a parent employer) so
+            // skill counts/experience reflect every engagement, not just parents.
+            timelineData = timelineEntries.flatMap(item => [item, ...(item.projects || [])]);
             const skillsMap = {};
 
             timelineData.forEach(item => {

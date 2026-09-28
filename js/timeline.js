@@ -42,217 +42,196 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    // Flat lookup so nested client projects can still be opened in the modal by id
+    const itemsById = new Map();
+    timelineData.forEach((item, i) => {
+        const id = `e${i}`;
+        itemsById.set(id, item);
+        (item.projects || []).forEach((project, j) => {
+            itemsById.set(`${id}-p${j}`, { ...project, parentCompany: item.company });
+        });
+    });
+
+    const escapeHtml = (str) => String(str).replace(/[&<>"']/g, (c) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+
+    // Big-name clients worth "flexing" upfront, deduped by display name (e.g. Keller Williams
+    // appears across two separate engagements but should only get one marquee badge).
+    const buildFlagshipClients = () => {
+        const flat = timelineData.flatMap((item) => [item, ...(item.projects || [])]);
+        const seen = new Set();
+        return flat
+            .filter((item) => item.flagship)
+            .filter((item) => {
+                const name = item.brandLabel || item.company;
+                if (seen.has(name)) return false;
+                seen.add(name);
+                return true;
+            });
+    };
+
+    const buildClientsMarquee = () => {
+        const clients = buildFlagshipClients();
+        if (clients.length === 0) return '';
+
+        const badge = (client) => `
+            <div class="client-badge" style="--client-color: ${client.timelineColor || 'var(--primary-color)'}">
+                <span class="client-badge-name">${escapeHtml(client.brandLabel || client.company)}</span>
+                <span class="client-badge-meta">${escapeHtml([client.industry, client.country].filter(Boolean).join(' · '))}</span>
+            </div>
+        `;
+
+        // Render the list twice back-to-back so the CSS marquee can loop seamlessly
+        const track = clients.map(badge).join('') + clients.map(badge).join('');
+
+        return `
+            <div class="clients-marquee">
+                <div class="clients-marquee-label">Trusted by teams at</div>
+                <div class="clients-marquee-track">${track}</div>
+            </div>
+        `;
+    };
+
+    // Build the markup for one career chapter slide, including its nested client projects filmstrip
+    const buildChapterSlide = (item, index) => {
+        const id = `e${index}`;
+        const projects = item.projects || [];
+        const topSkills = item.skills.slice(0, 5);
+        const extraSkills = item.skills.length - topSkills.length;
+
+        const filmstrip = projects.length > 0 ? `
+            <div class="chapter-projects">
+                <span class="chapter-projects-label"><i class="fas fa-diagram-project"></i> ${projects.length} client project${projects.length > 1 ? 's' : ''}</span>
+                <div class="chapter-projects-filmstrip">
+                    ${projects
+                        .map((project, projectIndex) => ({ project, projectIndex }))
+                        .sort((a, b) => (b.project.flagship ? 1 : 0) - (a.project.flagship ? 1 : 0) || b.project.startYear - a.project.startYear)
+                        .map(({ project, projectIndex }) => `
+                            <button type="button" class="chapter-project-card${project.flagship ? ' is-flagship' : ''}" data-id="${id}-p${projectIndex}">
+                                ${project.flagship ? `<span class="chapter-project-flagship-tag"><i class="fas fa-star"></i> Notable client</span>` : ''}
+                                <span class="chapter-project-company">${escapeHtml(project.brandLabel || project.company)}</span>
+                                <span class="chapter-project-duration">${formatDateRange(project.startYear, project.endYear)}</span>
+                                ${project.flagship
+                                    ? `<span class="chapter-project-meta">${escapeHtml([project.industry, project.country].filter(Boolean).join(' · '))}</span>`
+                                    : `<span class="chapter-project-impact">${escapeHtml(project.impact || project.description)}</span>`}
+                            </button>
+                        `)
+                        .join('')}
+                </div>
+            </div>
+        ` : '';
+
+        return `
+            <article class="chapter" data-chapter-id="${id}" style="--chapter-color: ${item.timelineColor || 'var(--primary-color)'}">
+                <div class="chapter-content">
+                    <div class="chapter-kicker">
+                        <span class="chapter-index-label">Chapter ${String(index + 1).padStart(2, '0')}</span>
+                        ${getTypeBadge(item.type)}
+                        <span class="chapter-duration">${formatDateRange(item.startYear, item.endYear)}</span>
+                        ${item.flagship ? `<span class="chapter-flagship-badge"><i class="fas fa-star"></i> Notable client</span>` : ''}
+                    </div>
+                    <h3 class="chapter-title">${escapeHtml(item.position)}</h3>
+                    <p class="chapter-subtitle">
+                        ${escapeHtml(item.company)}
+                        <span class="chapter-location"><i class="fas fa-map-marker-alt"></i>${escapeHtml(item.location)}</span>
+                    </p>
+                    ${item.impact ? `<p class="chapter-impact">&ldquo;${escapeHtml(item.impact)}&rdquo;</p>` : ''}
+                    <div class="chapter-skills">
+                        ${topSkills.map(skill => `<span class="skill-tag">${escapeHtml(skill)}</span>`).join('')}
+                        ${extraSkills > 0 ? `<span class="skill-tag-more">+${extraSkills}</span>` : ''}
+                    </div>
+                    ${filmstrip}
+                    <button type="button" class="chapter-details-btn" data-id="${id}">
+                        Full story <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </article>
+        `;
+    };
+
     const renderTimeline = () => {
-        const timelineContainer = document.querySelector('.timeline');
-        if (!timelineContainer) return;
+        const chaptersViewport = document.getElementById('chapters-viewport');
+        const dotsContainer = document.getElementById('chapter-dots');
+        const counterEl = document.getElementById('chapter-counter');
+        const prevBtn = document.getElementById('chapter-prev');
+        const nextBtn = document.getElementById('chapter-next');
+        if (!chaptersViewport) return;
 
-        // Clear the container
-        timelineContainer.innerHTML = '';
+        const introSlide = `
+            <section class="chapter chapter-intro" data-chapter-id="intro">
+                <div class="chapter-content">
+                    <span class="chapter-eyebrow">My Career</span>
+                    <h2 class="chapter-title">A Journey, Chapter by Chapter</h2>
+                    <p class="chapter-lede">From a computer science classroom to engineering teams across four continents. Scroll or use the arrows to explore.</p>
+                    ${buildClientsMarquee()}
+                    <div class="chapter-scroll-cue"><i class="fas fa-chevron-down"></i></div>
+                </div>
+            </section>
+        `;
 
-        // Get all unique years from timeline data
-        const allYears = new Set();
-        timelineData.forEach(item => {
-            const currentYear = new Date().getFullYear();
-            const endYear = item.endYear || currentYear;
-            for (let year = item.startYear; year <= endYear; year++) {
-                allYears.add(year);
+        chaptersViewport.innerHTML = introSlide + timelineData.map(buildChapterSlide).join('');
+
+        const slides = Array.from(chaptersViewport.querySelectorAll('.chapter'));
+        const total = slides.length;
+
+        // Build dot navigation, one dot per slide (intro + each chapter)
+        dotsContainer.innerHTML = slides.map((slide, i) => {
+            const label = i === 0 ? 'Introduction' : timelineData[i - 1].company;
+            return `<button type="button" class="chapter-dot" data-slide-index="${i}" aria-label="Go to ${escapeHtml(label)}"></button>`;
+        }).join('');
+        const dots = Array.from(dotsContainer.querySelectorAll('.chapter-dot'));
+
+        let activeIndex = 0;
+
+        const setActive = (index) => {
+            activeIndex = index;
+            slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+            counterEl.textContent = `${String(index + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === total - 1;
+        };
+
+        const scrollToSlide = (index) => {
+            const target = slides[Math.max(0, Math.min(index, total - 1))];
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+
+        // Track which slide is dominant on screen as the user scrolls/swipes
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+                    setActive(slides.indexOf(entry.target));
+                }
+            });
+        }, { root: chaptersViewport, threshold: [0.6] });
+
+        slides.forEach((slide) => observer.observe(slide));
+
+        setActive(0);
+
+        dots.forEach((dot, i) => dot.addEventListener('click', () => scrollToSlide(i)));
+        prevBtn.addEventListener('click', () => scrollToSlide(activeIndex - 1));
+        nextBtn.addEventListener('click', () => scrollToSlide(activeIndex + 1));
+
+        // Keyboard navigation while the deck has focus
+        chaptersViewport.addEventListener('keydown', (e) => {
+            if (['ArrowDown', 'ArrowRight', 'PageDown'].includes(e.key)) {
+                e.preventDefault();
+                scrollToSlide(activeIndex + 1);
+            } else if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(e.key)) {
+                e.preventDefault();
+                scrollToSlide(activeIndex - 1);
             }
         });
 
-        const years = Array.from(allYears).sort((a, b) => b - a); // Descending order (newest first)
-
-        // Create timeline controls
-        const timelineControls = document.createElement('div');
-        timelineControls.className = 'timeline-controls';
-
-        const collapseAllBtn = document.createElement('button');
-        collapseAllBtn.className = 'timeline-control-btn';
-        collapseAllBtn.innerHTML = '<i class="fas fa-compress-alt"></i> <span>Collapse All</span>';
-
-        const expandAllBtn = document.createElement('button');
-        expandAllBtn.className = 'timeline-control-btn';
-        expandAllBtn.innerHTML = '<i class="fas fa-expand-alt"></i> <span>Expand All</span>';
-
-        timelineControls.appendChild(collapseAllBtn);
-        timelineControls.appendChild(expandAllBtn);
-        timelineContainer.appendChild(timelineControls);
-
-        // Create vertical timeline structure
-        const timelineVertical = document.createElement('div');
-        timelineVertical.className = 'timeline-vertical';
-
-        years.forEach((year) => {
-            const yearSection = document.createElement('div');
-            yearSection.className = 'timeline-year-section collapsed';
-            // Remove AOS from year sections to prevent lazy loading issues with collapse
-            // All sections are now rendered immediately for proper collapse/expand functionality
-            // Default state is collapsed
-
-            // Find all items that include this year
-            const itemsForYear = timelineData.filter(item => {
-                const currentYear = new Date().getFullYear();
-                const endYear = item.endYear || currentYear;
-                return item.startYear <= year && endYear >= year;
-            });
-
-            // Count items that start in this year
-            const startItemsCount = itemsForYear.filter(item => item.startYear === year).length;
-
-            // Year header with toggle button
-            const yearHeader = document.createElement('div');
-            yearHeader.className = 'timeline-year-header';
-
-            const yearLabel = document.createElement('div');
-            yearLabel.className = 'timeline-year-label';
-
-            const yearToggle = document.createElement('button');
-            yearToggle.className = 'timeline-year-toggle';
-            yearToggle.setAttribute('aria-label', `Toggle ${year} timeline`);
-            yearToggle.innerHTML = `
-                <span class="year-text">${year}</span>
-                <span class="year-count">${startItemsCount}</span>
-                <i class="fas fa-chevron-right toggle-icon"></i>
-            `;
-
-            yearLabel.appendChild(yearToggle);
-            yearHeader.appendChild(yearLabel);
-
-            // Items container on the right
-            const itemsContainer = document.createElement('div');
-            itemsContainer.className = 'timeline-year-items';
-
-            // Add items for this year
-            itemsForYear.forEach((item) => {
-                const timelineItem = document.createElement('div');
-                timelineItem.className = 'timeline-item';
-
-                // Get icon based on type
-                const getTypeIcon = (type) => {
-                    const icons = {
-                        study: 'fa-graduation-cap',
-                        work: 'fa-briefcase',
-                        project: 'fa-code'
-                    };
-                    return icons[type] || icons.work;
-                };
-
-                // Only show full card if this is the start year
-                if (item.startYear === year) {
-                    timelineItem.classList.add('timeline-item-start');
-
-                    timelineItem.innerHTML = `
-                        <div class="timeline-content" data-index="${timelineData.indexOf(item)}">
-                            <div class="timeline-item-header">
-                                ${getTypeBadge(item.type)}
-                                <span class="timeline-item-duration">${formatDateRange(item.startYear, item.endYear)}</span>
-                            </div>
-                            <h3 class="timeline-item-title">${item.position}</h3>
-                            <h4 class="timeline-item-company">${item.company}</h4>
-                            <div class="timeline-item-location">
-                                <i class="fas fa-map-marker-alt"></i> ${item.location}
-                            </div>
-                            <div class="timeline-skills">
-                                ${item.skills.slice(0, 3).map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
-                                ${item.skills.length > 3 ? `<span class="skill-tag-more">+${item.skills.length - 3}</span>` : ''}
-                            </div>
-                        </div>
-                        <div class="timeline-item-chip" data-index="${timelineData.indexOf(item)}">
-                            <i class="fas ${getTypeIcon(item.type)} timeline-item-chip-icon"></i>
-                            <span class="timeline-item-chip-text">${item.company}</span>
-                        </div>
-                    `;
-                } else {
-                    // Show continuation indicator for ongoing items
-                    timelineItem.classList.add('timeline-item-continue');
-
-                    timelineItem.innerHTML = `
-                        <div class="timeline-content-continue" data-index="${timelineData.indexOf(item)}">
-                            <div class="timeline-continue-info">
-                                <span class="timeline-continue-label">${item.company}</span>
-                                <span class="timeline-continue-duration">${formatDateRange(item.startYear, item.endYear)}</span>
-                            </div>
-                            <i class="fas fa-eye timeline-continue-icon"></i>
-                        </div>
-                        <div class="timeline-item-chip" data-index="${timelineData.indexOf(item)}">
-                            <i class="fas ${getTypeIcon(item.type)} timeline-item-chip-icon"></i>
-                            <span class="timeline-item-chip-text">${item.company}</span>
-                        </div>
-                    `;
-                }
-
-                itemsContainer.appendChild(timelineItem);
-            });
-
-            yearSection.appendChild(yearHeader);
-            yearSection.appendChild(itemsContainer);
-            timelineVertical.appendChild(yearSection);
-
-            // Add toggle functionality
-            yearToggle.addEventListener('click', (e) => {
-                e.stopPropagation();
-
-                yearSection.classList.toggle('collapsed');
-
-                // Update icon
-                const icon = yearToggle.querySelector('.toggle-icon');
-                if (yearSection.classList.contains('collapsed')) {
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-right');
-                } else {
-                    icon.classList.remove('fa-chevron-right');
-                    icon.classList.add('fa-chevron-down');
-
-                    // When expanding, ensure items are visible and trigger any animations
-                    setTimeout(() => {
-                        const items = itemsContainer.querySelectorAll('.timeline-item');
-                        items.forEach((item, idx) => {
-                            item.style.animationDelay = `${idx * 0.05}s`;
-                        });
-                    }, 50);
-                }
-            });
-        });
-
-        timelineContainer.appendChild(timelineVertical);
-
-        // Add collapse/expand all functionality
-        collapseAllBtn.addEventListener('click', () => {
-            document.querySelectorAll('.timeline-year-section').forEach(section => {
-                if (!section.classList.contains('collapsed')) {
-                    section.classList.add('collapsed');
-                    const icon = section.querySelector('.toggle-icon');
-                    if (icon) {
-                        icon.classList.remove('fa-chevron-down');
-                        icon.classList.add('fa-chevron-right');
-                    }
-                }
-            });
-        });
-
-        expandAllBtn.addEventListener('click', () => {
-            document.querySelectorAll('.timeline-year-section').forEach(section => {
-                if (section.classList.contains('collapsed')) {
-                    section.classList.remove('collapsed');
-                    const icon = section.querySelector('.toggle-icon');
-                    if (icon) {
-                        icon.classList.remove('fa-chevron-right');
-                        icon.classList.add('fa-chevron-down');
-                    }
-                }
-            });
-        });
-
-        // Add staggered fade-in animation to year sections using CSS
-        document.querySelectorAll('.timeline-year-section').forEach((section, index) => {
-            section.style.animationDelay = `${index * 0.1}s`;
-        });
-
-        // Add click handlers to open modal
-        document.querySelectorAll('.timeline-content, .timeline-content-continue, .timeline-item-chip').forEach(content => {
-            content.addEventListener('click', () => {
-                const index = parseInt(content.getAttribute('data-index'));
-                openModal(timelineData[index]);
-            });
+        // Open the detail modal from a chapter's "Full story" button or a project filmstrip card
+        chaptersViewport.addEventListener('click', (e) => {
+            const trigger = e.target.closest('[data-id]');
+            if (!trigger) return;
+            const item = itemsById.get(trigger.getAttribute('data-id'));
+            if (item) openModal(item);
         });
     };
 
@@ -263,7 +242,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const openModal = (item) => {
         document.getElementById('modal-title').textContent = item.position;
-        document.getElementById('modal-company').textContent = item.company;
+        document.getElementById('modal-company').textContent = item.brandLabel || item.company;
         document.getElementById('modal-date').textContent = formatDateRange(item.startYear, item.endYear);
         document.getElementById('modal-location').textContent = item.location;
         document.getElementById('modal-description').textContent = item.description;
@@ -272,6 +251,37 @@ document.addEventListener('DOMContentLoaded', async () => {
         const typeBadgeContainer = document.getElementById('modal-type-badge');
         if (typeBadgeContainer && item.type) {
             typeBadgeContainer.innerHTML = getTypeBadge(item.type);
+        }
+
+        // Flagship badge + industry/country, for big-name clients worth flexing
+        const flagshipBadge = document.getElementById('modal-flagship-badge');
+        flagshipBadge.style.display = item.flagship ? 'inline-flex' : 'none';
+
+        const industryEl = document.getElementById('modal-industry');
+        const industryText = [item.industry, item.country].filter(Boolean).join(' · ');
+        if (industryText) {
+            industryEl.textContent = industryText;
+            industryEl.style.display = 'block';
+        } else {
+            industryEl.style.display = 'none';
+        }
+
+        // Breadcrumb for client projects delivered through a parent engagement
+        const parentEl = document.getElementById('modal-parent');
+        if (item.parentCompany) {
+            parentEl.textContent = `Delivered via ${item.parentCompany}`;
+            parentEl.style.display = 'block';
+        } else {
+            parentEl.style.display = 'none';
+        }
+
+        // Impact callout
+        const impactEl = document.getElementById('modal-impact');
+        if (item.impact) {
+            impactEl.textContent = item.impact;
+            impactEl.style.display = 'block';
+        } else {
+            impactEl.style.display = 'none';
         }
 
         // Handle skills
@@ -328,3 +338,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     renderTimeline();
 });
+
