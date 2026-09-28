@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let skillsData = [];
     let categories = {};
     let timelineData = [];
+    let skillExperienceMap = {};
 
     try {
         const response = await fetch('data/skills.json');
@@ -13,6 +14,48 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error loading skills data:', error);
         return;
     }
+
+    // Merge overlapping/touching year ranges so concurrent projects don't inflate experience
+    const mergeYearRanges = (ranges) => {
+        const sorted = [...ranges].sort((a, b) => a[0] - b[0]);
+        const merged = [];
+
+        sorted.forEach(([start, end]) => {
+            const last = merged[merged.length - 1];
+            if (last && start <= last[1]) {
+                last[1] = Math.max(last[1], end);
+            } else {
+                merged.push([start, end]);
+            }
+        });
+
+        return merged;
+    };
+
+    // Compute years of experience per skill from merged timeline year ranges
+    const computeSkillExperience = () => {
+        const currentYear = new Date().getFullYear();
+        const rangesBySkill = {};
+
+        timelineData.forEach(item => {
+            if (!item.skills || !Array.isArray(item.skills)) return;
+            const start = item.startYear;
+            const end = item.endYear || currentYear;
+
+            item.skills.forEach(skill => {
+                if (!rangesBySkill[skill]) rangesBySkill[skill] = [];
+                rangesBySkill[skill].push([start, end]);
+            });
+        });
+
+        const experienceMap = {};
+        Object.keys(rangesBySkill).forEach(skill => {
+            const merged = mergeYearRanges(rangesBySkill[skill]);
+            experienceMap[skill] = merged.reduce((total, [start, end]) => total + Math.max(end - start, 1), 0);
+        });
+
+        return experienceMap;
+    };
 
     // Load timeline data and extract skills
     const extractSkillsFromTimeline = async () => {
@@ -29,12 +72,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
 
+            skillExperienceMap = computeSkillExperience();
+
             return skillsMap;
         } catch (error) {
             console.error('Error loading timeline data for skills:', error);
             return {};
         }
     };
+
+    const formatYears = (years) => `${years} ${years === 1 ? 'yr' : 'yrs'}`;
 
     // Render skills by category
     const renderSkills = async () => {
@@ -44,10 +91,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Load skills from timeline data
         const skillsMap = await extractSkillsFromTimeline();
 
-        // Add project counts to skills
+        // Add project counts and years of experience to skills
         const enrichedSkills = skillsData.map(skill => ({
             ...skill,
-            count: skillsMap[skill.name] || 0
+            count: skillsMap[skill.name] || 0,
+            years: skillExperienceMap[skill.name] || 0
         }));
 
         // Group skills by category
@@ -59,9 +107,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             groupedSkills[skill.category].push(skill);
         });
 
-        // Sort skills within each category by count
+        // Sort skills within each category by years of experience, then project count
         Object.keys(groupedSkills).forEach(category => {
-            groupedSkills[category].sort((a, b) => b.count - a.count);
+            groupedSkills[category].sort((a, b) => b.years - a.years || b.count - a.count);
         });
 
         // Render as simple grid
@@ -89,6 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <div class="skill-pill ${skill.count > 0 ? 'skill-pill-clickable' : ''}" data-skill-name="${skill.name}" data-skill-icon="${skill.icon}">
                                 <i class="${skill.icon}"></i>
                                 <span class="skill-pill-name">${skill.name}</span>
+                                ${skill.years > 0 ? `<span class="skill-pill-years" title="${formatYears(skill.years)} of experience">${formatYears(skill.years)}</span>` : ''}
                                 ${skill.count > 0 ? `<span class="skill-pill-badge" title="${skill.count} projects">${skill.count} proj</span>` : ''}
                             </div>
                         `).join('')}
@@ -134,8 +183,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Update modal content
         document.getElementById('skill-modal-title').textContent = skillName;
         document.getElementById('skill-modal-icon').className = `skill-modal-icon ${skillIcon}`;
+        const years = skillExperienceMap[skillName] || 0;
+        const subtitleParts = [`${projectsWithSkill.length} ${projectsWithSkill.length === 1 ? 'project' : 'projects'}`];
+        if (years > 0) subtitleParts.push(`${formatYears(years)} of experience`);
         document.getElementById('skill-modal-subtitle').textContent =
-            `${projectsWithSkill.length} ${projectsWithSkill.length === 1 ? 'project' : 'projects'} using this technology`;
+            `${subtitleParts.join(' · ')} using this technology`;
 
         // Render projects
         const projectsContainer = document.getElementById('skill-modal-projects');

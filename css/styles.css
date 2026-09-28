@@ -2535,6 +2535,18 @@ html.light-mode .skill-pill-clickable:hover {
     white-space: nowrap;
 }
 
+.skill-pill-years {
+    background: transparent;
+    color: var(--category-color);
+    border: 1px solid var(--category-color);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    margin-left: var(--spacing-xs);
+    white-space: nowrap;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .skills-grid {

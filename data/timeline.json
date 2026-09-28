@@ -469,8 +469,8 @@
         "timelineColor": "#FBBC05"
     },
     {
-        "startYear": 2025,
-        "endYear": null,
+        "startYear": 2024,
+        "endYear": 2025,
         "company": "Peek & Cloppenburg",
         "position": "Software Engineer",
         "location": "Dusseldorf, Germany",
@@ -485,5 +485,44 @@
         ],
         "type": "work",
         "timelineColor": "#333333"
+    },
+    {
+        "startYear": 2026,
+        "endYear": null,
+        "company": "Software Seni",
+        "position": "Software Developer",
+        "location": "Sleman, Yogyakarta, Indonesia",
+        "description": "As staff member",
+        "skills": [
+            "Full-stack Development"
+        ],
+        "highlights": [
+            "Working as a staff member in the software development team"
+        ],
+        "type": "work",
+        "timelineColor": "#10405A"
+    },
+    {
+        "startYear": 2026,
+        "endYear": null,
+        "company": "Aspen Medical",
+        "position": "Senior Fullstack Engineer",
+        "location": "Canberra, Australia",
+        "description": "Developing employee wellbeing application.",
+        "skills": [
+            "C#",
+            ".Net",
+            "React.js",
+            "Strapi",
+            "AWS CloudFormation",
+            "AWS Bedrock"
+        ],
+        "highlights": [
+            "Developing employee wellbeing application using React.js and Strapi",
+            "Maintain and managing infrastructure using AWS",
+            "Developing AI chat features using AWS Bedrock"
+        ],
+        "type": "project",
+        "timelineColor": "#163f42"
     }
 ]
