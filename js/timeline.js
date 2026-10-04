@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         return `
             <div class="clients-marquee">
-                <div class="clients-marquee-label">Trusted by teams at</div>
+                <div class="clients-marquee-label">Collaborated with teams at</div>
                 <div class="clients-marquee-track">${track}</div>
             </div>
         `;
